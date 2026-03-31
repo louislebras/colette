@@ -1,4 +1,4 @@
-const { google } = require("googleapis");
+import { google } from "googleapis";
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID;
 
@@ -11,7 +11,6 @@ function getAuth() {
   );
 }
 
-// Créneaux fixes par jour : matin 9h-12h, après-midi 14h-18h
 function getSlots(dateStr) {
   return [
     {
@@ -29,8 +28,7 @@ function getSlots(dateStr) {
   ];
 }
 
-module.exports = async function handler(req, res) {
-  // CORS pour le dev local
+export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET");
 
@@ -42,7 +40,6 @@ module.exports = async function handler(req, res) {
     const auth = getAuth();
     const calendar = google.calendar({ version: "v3", auth });
 
-    // On regarde les 4 prochains jours
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -51,7 +48,6 @@ module.exports = async function handler(req, res) {
       today.getTime() + 4 * 24 * 60 * 60 * 1000,
     ).toISOString();
 
-    // Récupère tous les événements existants sur la période
     const { data } = await calendar.events.list({
       calendarId: CALENDAR_ID,
       timeMin,
@@ -61,8 +57,6 @@ module.exports = async function handler(req, res) {
     });
 
     const existingEvents = data.items || [];
-
-    // Pour chaque jour, vérifie quels créneaux sont occupés
     const result = {};
 
     for (let i = 0; i < 4; i++) {
@@ -74,7 +68,6 @@ module.exports = async function handler(req, res) {
         const slotStart = new Date(slot.start).getTime();
         const slotEnd = new Date(slot.end).getTime();
 
-        // Un créneau est occupé si un événement existant chevauche sa plage horaire
         const busy = existingEvents.some((event) => {
           const evStart = new Date(
             event.start.dateTime || event.start.date,
@@ -102,4 +95,4 @@ module.exports = async function handler(req, res) {
       .status(500)
       .json({ error: "Impossible de récupérer les créneaux" });
   }
-};
+}

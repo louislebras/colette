@@ -1,8 +1,7 @@
-const Stripe = require("stripe");
+import Stripe from "stripe";
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// ── SOURCE DE VÉRITÉ TARIFAIRE (même barème que le frontend) ──
 const PRIX = {
   surface: { 30: 179, 45: 259, 60: 329, 80: 399 },
   offre: { basique: 0, hygiene: 120, edl: 150 },
@@ -52,7 +51,6 @@ function calculerTotal(body) {
     (sum, k) => sum + (PRIX.extras[k] ?? 0),
     0,
   );
-
   return base + offre + urgence + options + extras;
 }
 
@@ -71,7 +69,7 @@ function buildDescription(body) {
   return `${niveaux[body.offre] || body.offre} · ${surfaces[body.surface] || body.surface + " m²"}`;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -83,19 +81,13 @@ module.exports = async function handler(req, res) {
   try {
     const body = req.body;
 
-    // Validation minimale
     if (!body.offre || !body.surface || !body.creneau || !body.client?.email) {
       return res.status(400).json({ error: "Données manquantes" });
     }
 
-    // Recalcul serveur — le prix frontend n'est jamais utilisé
     const total = calculerTotal(body);
+    if (total <= 0) return res.status(400).json({ error: "Montant invalide" });
 
-    if (total <= 0) {
-      return res.status(400).json({ error: "Montant invalide" });
-    }
-
-    // Génère un order_id simple
     const orderId = `COL-${Date.now()}`;
     const baseUrl = "https://www.colettelabaule.com";
 
@@ -107,7 +99,7 @@ module.exports = async function handler(req, res) {
         {
           price_data: {
             currency: "eur",
-            unit_amount: total * 100, // Stripe veut des centimes
+            unit_amount: total * 100,
             product_data: {
               name: "Prestation Colette",
               description: buildDescription(body),
@@ -127,7 +119,7 @@ module.exports = async function handler(req, res) {
         adresse: body.client.adresse || "",
         extras: (body.extras || []).join(","),
       },
-      success_url: `${baseUrl}/confirmation?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${baseUrl}/confirmation/?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/configurer/`,
     });
 
@@ -138,4 +130,4 @@ module.exports = async function handler(req, res) {
       .status(500)
       .json({ error: "Erreur lors de la création du paiement" });
   }
-};
+}
