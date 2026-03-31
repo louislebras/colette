@@ -740,138 +740,60 @@
     </div>
 
     <script>
-
-
-
-
         const PRIX = {
-            surface: {
-                30: 179,
-                45: 259,
-                60: 329,
-                80: 399,
-            },
-            offre: {
-                basique: 0,
-                hygiene: 120,
-                edl: 150,
-            },
-            urgence: {
-                '48h': 0,
-                demain: 39,
-                jour: 79,
-            },
-            salissure: {
-                normal: 0,
-                sale: 39,
-                'tres-sale': 149,
-            },
-            rangement: {
-                normal: 0,
-                encombre: 29,
-                desordre: 49,
-            },
-            meuble: {
-                meuble: 0,
-                vide: -29,
-            },
-            occup: {
-                vide: 0,
-                occupe: 19,
-            },
-            animaux: {
-                non: 0,
-                poils: 29,
-                beaucoup: 49,
-            },
-            vitres: {
-                standard: 0,
-                '2baies': 80,
-                '3baies': 160,
-            },
-            sdb: {
-                1: 0,
-                2: 89,
-                3: 209,
-            },
-            wc: {
-                1: 0,
-                2: 39,
-            },
-            cuisine: {
-                standard: 0,
-                familiale: 29,
-            },
+            surface: { 30: 179, 45: 259, 60: 329, 80: 399 },
+            offre: { basique: 0, hygiene: 120, edl: 150 },
+            urgence: { '48h': 0, demain: 39, jour: 79 },
+            salissure: { normal: 0, sale: 39, 'tres-sale': 149 },
+            rangement: { normal: 0, encombre: 29, desordre: 49 },
+            meuble: { meuble: 0, vide: -29 },
+            occup: { vide: 0, occupe: 19 },
+            animaux: { non: 0, poils: 29, beaucoup: 49 },
+            vitres: { standard: 0, '2baies': 80, '3baies': 160 },
+            sdb: { 1: 0, 2: 89, 3: 209 },
+            wc: { 1: 0, 2: 39 },
+            cuisine: { standard: 0, familiale: 29 },
             extras: {
-                four: 59,
-                frigo: 49,
-                hotte: 29,
-                plaques: 29,
-                matelas: 89,
-                fauteuil: 99,
-                canape2: 99,
-                canape3: 129,
-                poussiere: 49,
-                traces: 49,
-                brillance: 39,
-                degraissage: 29,
-                desinfection: 49,
+                four: 59, frigo: 49, hotte: 29, plaques: 29,
+                matelas: 89, fauteuil: 99, canape2: 99, canape3: 129,
+                poussiere: 49, traces: 49, brillance: 39,
+                degraissage: 29, desinfection: 49,
             },
         };
 
 
-
-
-
-
         function injectPrixHTML() {
-
-
             document.querySelectorAll('[data-group="offre"][data-val]').forEach(el => {
-                const val = el.dataset.val;
-                const montant = PRIX.offre[val];
+                const montant = PRIX.offre[el.dataset.val];
                 if (montant === undefined) return;
                 el.dataset.uplift = montant;
-                const priceEl = el.querySelector('.config-option-price');
-                if (priceEl) priceEl.textContent = montant === 0 ? 'inclus' : (montant > 0 ? '+' + montant + '€' : montant + '€');
+                const p = el.querySelector('.config-option-price');
+                if (p) p.textContent = montant === 0 ? 'inclus' : (montant > 0 ? '+' + montant + '€' : montant + '€');
             });
-
-
             document.querySelectorAll('[data-group="surface"][data-val]').forEach(el => {
-                const val = parseInt(el.dataset.val);
-                const montant = PRIX.surface[val];
+                const montant = PRIX.surface[parseInt(el.dataset.val)];
                 if (montant === undefined) return;
                 el.dataset.base = montant;
-                const priceEl = el.querySelector('.config-option-price');
-                if (priceEl) priceEl.textContent = montant + '€';
+                const p = el.querySelector('.config-option-price');
+                if (p) p.textContent = montant + '€';
             });
-
-
-            const radioGroupes = ['urgence', 'salissure', 'rangement', 'meuble', 'occup', 'animaux', 'vitres', 'sdb', 'wc', 'cuisine'];
-            radioGroupes.forEach(group => {
+            ['urgence', 'salissure', 'rangement', 'meuble', 'occup', 'animaux', 'vitres', 'sdb', 'wc', 'cuisine'].forEach(group => {
                 document.querySelectorAll(`[data-group="${group}"][data-val]`).forEach(el => {
-                    const val = el.dataset.val;
-                    const montant = PRIX[group] ? PRIX[group][val] : undefined;
+                    const montant = PRIX[group]?.[el.dataset.val];
                     if (montant === undefined) return;
                     el.dataset.add = montant;
-                    const priceEl = el.querySelector('.config-option-price');
-                    if (priceEl) priceEl.textContent = montant === 0 ? 'inclus' : (montant > 0 ? '+' + montant + '€' : montant + '€');
+                    const p = el.querySelector('.config-option-price');
+                    if (p) p.textContent = montant === 0 ? 'inclus' : (montant > 0 ? '+' + montant + '€' : montant + '€');
                 });
             });
-
-
             document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.dataset.key;
-                const montant = PRIX.extras[key];
+                const montant = PRIX.extras[el.dataset.key];
                 if (montant === undefined) return;
                 el.dataset.add = montant;
-                const priceEl = el.querySelector('.config-option-price');
-                if (priceEl) priceEl.textContent = '+' + montant + '€';
+                const p = el.querySelector('.config-option-price');
+                if (p) p.textContent = '+' + montant + '€';
             });
         }
-
-
-
 
 
         function navigate(page) {
@@ -891,9 +813,6 @@
         }
 
 
-
-
-
         const words = ['nettoyage ?', 'ménage ?', 'état des lieux ?', 'remise en état ?'];
         let wi = 0;
         setInterval(() => {
@@ -904,14 +823,7 @@
             setTimeout(() => { el.textContent = words[wi]; el.style.opacity = '1'; }, 300);
         }, 2500);
 
-
-
-
-
         function toggleFaq(el) { el.classList.toggle('open'); }
-
-
-
 
 
         const cfgState = {
@@ -930,10 +842,6 @@
             extras: {}
         };
 
-
-
-
-
         function selectRadio(el, group) {
             document.querySelectorAll(`[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
             el.classList.add('selected');
@@ -946,10 +854,6 @@
             }
             updatePrice();
         }
-
-
-
-
 
         function toggleCheck(el) {
             el.classList.toggle('selected');
@@ -965,11 +869,8 @@
         }
 
 
-
-
-
         const offreLabels = { basique: 'Reset Minimal', hygiene: 'Reset Hygiène', edl: 'État des lieux' };
-        const surfaceLabels = { 30: '0–30 m2', 45: '30–45 m2', 60: '45–60 m2', 80: '60–80 m2', 100: '80–100 m2' };
+        const surfaceLabels = { 30: '0–30 m²', 45: '30–45 m²', 60: '45–60 m²', 80: '60–80 m²' };
         const optLabels = {
             urgence: { demain: 'Urgence demain', jour: 'Urgence jour même' },
             salissure: { sale: 'Saleté +', 'tres-sale': 'Saleté ++' },
@@ -988,9 +889,6 @@
             poussiere: 'Poussière détailing', traces: 'Traces murs', brillance: 'Brillance',
             degraissage: 'Dégraissage renforcé', desinfection: 'Désinfection ++'
         };
-
-
-
 
 
         function updatePrice() {
@@ -1044,9 +942,6 @@
         }
 
 
-
-
-
         function openDrawer() {
             updatePrice();
             const drawerCta = document.getElementById('drawer-cta');
@@ -1054,19 +949,13 @@
             document.getElementById('drawer-overlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
-
         function closeDrawer() {
             document.getElementById('drawer-overlay').classList.remove('open');
             document.body.style.overflow = '';
         }
-
         function closeDrawerOnOverlay(e) {
             if (e.target === document.getElementById('drawer-overlay')) closeDrawer();
         }
-
-
-
-
 
         function goToConfig(offre) {
             document.querySelectorAll('[data-group="offre"]').forEach(el => el.classList.remove('selected'));
@@ -1080,15 +969,11 @@
         }
 
 
-
-
-
         function getFrenchDay(date) {
             const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
             const months = ['janvier', 'févr.', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
             return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()];
         }
-
         function addDays(date, n) {
             const d = new Date(date);
             d.setDate(d.getDate() + n);
@@ -1096,28 +981,18 @@
         }
 
 
-
-
-
         function initUrgenceLabels() {
             const today = new Date();
             const tomorrow = addDays(today, 1);
             const d2 = addDays(today, 2);
             const d3 = addDays(today, 3);
-
-            const lbl48 = document.getElementById('urgence-label-48h');
-            const desc48 = document.getElementById('urgence-desc-48h');
-            const lblDemain = document.getElementById('urgence-label-demain');
-            const descDemain = document.getElementById('urgence-desc-demain');
-            const lblJour = document.getElementById('urgence-label-jour');
-            const descJour = document.getElementById('urgence-desc-jour');
-
-            if (lbl48) lbl48.textContent = 'Dans les 48–72h';
-            if (desc48) desc48.textContent = getFrenchDay(d2) + ' ou ' + getFrenchDay(d3);
-            if (lblDemain) lblDemain.textContent = 'Demain';
-            if (descDemain) descDemain.textContent = getFrenchDay(tomorrow);
-            if (lblJour) lblJour.textContent = 'Dans la journée';
-            if (descJour) descJour.textContent = getFrenchDay(today) + ' — sous réserve de disponibilité';
+            const set = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+            set('urgence-label-48h', 'Dans les 48–72h');
+            set('urgence-desc-48h', getFrenchDay(d2) + ' ou ' + getFrenchDay(d3));
+            set('urgence-label-demain', 'Demain');
+            set('urgence-desc-demain', getFrenchDay(tomorrow));
+            set('urgence-label-jour', 'Dans la journée');
+            set('urgence-desc-jour', getFrenchDay(today) + ' — sous réserve de disponibilité');
         }
 
         function getUrgenceDisplayLabel() {
@@ -1126,14 +1001,11 @@
             const d2 = addDays(today, 2);
             const d3 = addDays(today, 3);
             const val = cfgState.urgence ? cfgState.urgence.val : '48h';
-            if (val === '48h') return 'Dans les 48–72h<br> <span class="color-grey">(' + getFrenchDay(d2) + '/' + getFrenchDay(d3) + ')</span>';
+            if (val === '48h') return 'Dans les 48–72h<br><span class="color-grey">(' + getFrenchDay(d2) + '/' + getFrenchDay(d3) + ')</span>';
             if (val === 'demain') return 'Demain — ' + getFrenchDay(tomorrow);
             if (val === 'jour') return "Aujourd'hui — " + getFrenchDay(today);
             return 'Dans les 48–72h';
         }
-
-
-
 
 
         let currentStep = 1;
@@ -1145,7 +1017,7 @@
             if (n === 3 && selectedSlot) { goToStep(3); return; }
         }
 
-        function goToStep(n) {
+        async function goToStep(n) {
             document.querySelectorAll('.funnel-step').forEach(s => s.classList.remove('active'));
             document.getElementById('funnel-step-' + n).classList.add('active');
             currentStep = n;
@@ -1158,21 +1030,18 @@
                 dot.classList.remove('active', 'done');
                 if (i < n) dot.classList.add('done');
                 else if (i === n) dot.classList.add('active');
-                if (line) {
-                    line.classList.remove('done');
-                    if (i < n) line.classList.add('done');
-                }
+                if (line) { line.classList.remove('done'); if (i < n) line.classList.add('done'); }
             }
 
-            if (n === 2) buildStep2();
+            if (n === 2) await buildStep2();
             if (n === 3) buildStep3();
 
             const mbbCta = document.getElementById('mbb-cta');
             const mbbStep2 = document.getElementById('mbb-step2-confirm');
+            const mbbStep3 = document.getElementById('mbb-step3-pay');
             const drawerCta = document.getElementById('drawer-cta');
             const drawerConfirm = document.getElementById('drawer-step2-confirm');
             const mbbTop = document.querySelector('.mbb-top');
-            const mbbStep3 = document.getElementById('mbb-step3-pay');
             if (mbbCta) mbbCta.style.display = n === 1 ? 'block' : 'none';
             if (mbbStep2) mbbStep2.style.display = n === 2 ? 'block' : 'none';
             if (mbbStep3) mbbStep3.style.display = n === 3 ? 'block' : 'none';
@@ -1181,25 +1050,24 @@
             if (mbbTop) mbbTop.style.marginBottom = '10px';
         }
 
-        function mbbCtaClick() {
-            if (currentStep === 1) goToStep(2);
-        }
+        function mbbCtaClick() { if (currentStep === 1) goToStep(2); }
 
 
-
-
-
-        function buildStep2() {
+        async function buildStep2() {
             const urgenceVal = cfgState.urgence ? cfgState.urgence.val : '48h';
             const today = new Date();
             today.setHours(0, 0, 0, 0);
 
             const allDays = [
-                { date: new Date(today), relLabel: "Aujourd'hui", tag: urgenceVal === 'jour' ? 'Votre choix' : null, urgenceIfPicked: 'jour', addIfPicked: PRIX.urgence.jour },
-                { date: addDays(today, 1), relLabel: 'Demain', tag: urgenceVal === 'demain' ? 'Votre choix' : null, urgenceIfPicked: 'demain', addIfPicked: PRIX.urgence.demain },
-                { date: addDays(today, 2), relLabel: 'Après-demain', tag: urgenceVal === '48h' ? 'Votre choix' : null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
-                { date: addDays(today, 3), relLabel: null, tag: null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+                { date: new Date(today), relLabel: "Aujourd'hui", urgenceIfPicked: 'jour', addIfPicked: PRIX.urgence.jour },
+                { date: addDays(today, 1), relLabel: 'Demain', urgenceIfPicked: 'demain', addIfPicked: PRIX.urgence.demain },
+                { date: addDays(today, 2), relLabel: 'Après-demain', urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+                { date: addDays(today, 3), relLabel: null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
             ];
+
+
+            const choixIdx = { jour: 0, demain: 1, '48h': 2 }[urgenceVal] ?? 2;
+            window._choixDayIndex = choixIdx;
 
             const sub = document.getElementById('step2-sub');
             if (sub) {
@@ -1214,73 +1082,95 @@
             if (lines2) lines2.innerHTML = document.getElementById('ps-lines').innerHTML;
             if (total2) total2.textContent = document.getElementById('ps-total').textContent;
 
-            const notice = document.getElementById('step2-notice');
-            const urgenceAdd = cfgState.urgence ? cfgState.urgence.add : 0;
-            if (notice) notice.textContent = urgenceAdd > 0 ? `Majoration de +${urgenceAdd}€ appliquée pour ce délai.` : 'Aucune majoration pour ce délai.';
-
             const container = document.getElementById('step2-days');
             if (!container) return;
-            container.innerHTML = '';
+
+
+            container.innerHTML = '<div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--ink-faint);font-size:14px;">Chargement des créneaux…</div>';
             selectedSlot = null;
             updateStep2Confirm();
 
-            const now = new Date();
-            window._choixDayIndex = allDays.findIndex(d => d.tag !== null);
 
-            allDays.forEach(({ date, relLabel, tag, urgenceIfPicked, addIfPicked }, dayIndex) => {
+            let calSlots = {};
+            try {
+                const res = await fetch('/api/creneaux');
+                const data = await res.json();
+                calSlots = data.slots || {};
+            } catch (err) {
+                console.warn('Impossible de charger les créneaux depuis l\'API, affichage statique.', err);
+            }
+
+            container.innerHTML = '';
+            const now = new Date();
+
+            allDays.forEach(({ date, relLabel, urgenceIfPicked, addIfPicked }, dayIndex) => {
                 const col = document.createElement('div');
                 col.className = 'cal-col';
 
+
                 const head = document.createElement('div');
                 head.className = 'cal-col-head';
-                const dayName = getFrenchDay(date).split(' ')[0];
-                const dayNum = date.getDate();
                 const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'jun', 'jul', 'aoû', 'sep', 'oct', 'nov', 'déc'];
-                const mon = months[date.getMonth()];
-
                 let headHTML = '';
                 if (relLabel) headHTML += `<div class="cal-col-rel">${relLabel}</div>`;
-                headHTML += `<div class="cal-col-day">${dayName} ${dayNum} ${mon}</div>`;
+                headHTML += `<div class="cal-col-day">${getFrenchDay(date).split(' ')[0]} ${date.getDate()} ${months[date.getMonth()]}</div>`;
                 head.innerHTML = headHTML;
                 col.appendChild(head);
 
+                const dateStr = date.toISOString().slice(0, 10);
                 const isToday = date.getTime() === today.getTime();
-                const slots = [
-                    { id: date.toISOString().slice(0, 10) + '-matin', time: '9h–12h', label: 'Matin', available: !(isToday && now.getHours() >= 11) },
-                    { id: date.toISOString().slice(0, 10) + '-soir', time: '14h–18h', label: 'Après-midi', available: !(isToday && now.getHours() >= 16) },
+                const apiSlots = calSlots[dateStr] || [];
+
+                const slotDefs = [
+                    { id: dateStr + '-matin', time: '9h–12h', label: 'Matin', isoStart: dateStr + 'T09:00:00', isoEnd: dateStr + 'T12:00:00' },
+                    { id: dateStr + '-apres-midi', time: '14h–18h', label: 'Après-midi', isoStart: dateStr + 'T14:00:00', isoEnd: dateStr + 'T18:00:00' },
                 ];
 
                 const currentAdd = cfgState.urgence ? cfgState.urgence.add : 0;
                 const isUpsell = addIfPicked > currentAdd;
                 const isDownsell = addIfPicked < currentAdd;
 
-                slots.forEach(slot => {
+                slotDefs.forEach(slot => {
+
+                    const pastToday = isToday && (
+                        slot.id.includes('matin') ? now.getHours() >= 11 :
+                            slot.id.includes('apres-midi') ? now.getHours() >= 16 : false
+                    );
+
+
+                    const apiSlot = apiSlots.find(s =>
+                        s.id === slot.id ||
+                        (s.start && s.start.slice(0, 16) === slot.isoStart.slice(0, 16))
+                    );
+                    const calBusy = apiSlot ? !apiSlot.available : false;
+
+                    const available = !pastToday && !calBusy;
+
                     const slotEl = document.createElement('div');
-                    slotEl.className = 'cal-slot-v2' + (slot.available ? '' : ' unavailable');
+                    slotEl.className = 'cal-slot-v2' + (available ? '' : ' unavailable');
 
                     let priceTag = '';
-                    if (slot.available) {
+                    if (available) {
                         if (isUpsell) priceTag = `<div class="slot-upsell">+${addIfPicked - currentAdd}€</div>`;
-                        else if (isDownsell) priceTag = `<div class="slot-downsell">-${currentAdd - addIfPicked}€</div>`;
+                        if (isDownsell) priceTag = `<div class="slot-downsell">-${currentAdd - addIfPicked}€</div>`;
                     }
 
                     slotEl.innerHTML = `
                         <div class="slot-v2-time">${slot.time}</div>
-                        <div class="slot-v2-label">${slot.available ? slot.label : 'Complet'}</div>
+                        <div class="slot-v2-label">${available ? slot.label : 'Complet'}</div>
                         ${priceTag}
                     `;
 
-                    if (slot.available) {
+                    if (available) {
                         slotEl.onclick = () => {
+
                             if (urgenceIfPicked !== cfgState.urgence.val) {
                                 cfgState.urgence = { val: urgenceIfPicked, add: addIfPicked };
                                 updatePrice();
-                                const lines2 = document.getElementById('ps-lines-2');
-                                const total2 = document.getElementById('ps-total-2');
-                                if (lines2) lines2.innerHTML = document.getElementById('ps-lines').innerHTML;
-                                if (total2) total2.textContent = document.getElementById('ps-total').textContent;
-                                const notice = document.getElementById('step2-notice');
-                                if (notice) notice.textContent = addIfPicked > 0 ? `Majoration de +${addIfPicked}€ appliquée.` : 'Aucune majoration.';
+                                const l2 = document.getElementById('ps-lines-2');
+                                const t2 = document.getElementById('ps-total-2');
+                                if (l2) l2.innerHTML = document.getElementById('ps-lines').innerHTML;
+                                if (t2) t2.textContent = document.getElementById('ps-total').textContent;
                                 window._choixDayIndex = dayIndex;
                                 buildChoixRow(dayIndex);
                             }
@@ -1289,12 +1179,13 @@
                             selectedSlot = {
                                 date: (relLabel ? relLabel + ' — ' : '') + getFrenchDay(date),
                                 time: slot.time,
-                                start: slot.id.slice(0, 10) + (slot.id.includes('matin') ? 'T09:00:00' : 'T14:00:00'),
-                                end: slot.id.slice(0, 10) + (slot.id.includes('matin') ? 'T12:00:00' : 'T18:00:00'),
+                                start: slot.isoStart,
+                                end: slot.isoEnd,
                             };
                             updateStep2Confirm();
                         };
                     }
+
                     col.appendChild(slotEl);
                 });
 
@@ -1320,8 +1211,8 @@
         function updateStep2Confirm() {
             const btn = document.getElementById('step2-confirm');
             const drawerBtn = document.getElementById('drawer-step2-confirm');
-            if (!btn) return;
             const mbbStep2 = document.getElementById('mbb-step2-confirm');
+            if (!btn) return;
             if (selectedSlot) {
                 btn.style.opacity = '1'; btn.style.cursor = 'pointer';
                 if (drawerBtn) { drawerBtn.style.opacity = '1'; drawerBtn.style.cursor = 'pointer'; }
@@ -1332,9 +1223,6 @@
                 if (mbbStep2) { mbbStep2.style.opacity = '0.4'; mbbStep2.style.cursor = 'not-allowed'; }
             }
         }
-
-
-
 
 
         function buildStep3() {
@@ -1348,8 +1236,8 @@
             if (slotRecap) slotRecap.textContent = selectedSlot.date + ' · ' + selectedSlot.time;
         }
 
-        async function handlePayment() {
 
+        async function handlePayment() {
             const inputs = document.querySelectorAll('#funnel-step-3 input');
             const prenom = inputs[0]?.value?.trim();
             const nom = inputs[1]?.value?.trim();
@@ -1357,21 +1245,14 @@
             const tel = inputs[3]?.value?.trim();
             const adresse = inputs[4]?.value?.trim();
 
-
             if (!prenom || !nom || !email || !adresse) {
                 alert('Merci de remplir tous les champs obligatoires.');
                 return;
             }
-
             if (!selectedSlot) {
-                alert('Merci de sélectionner un créneau à l\'étape 2.');
+                alert("Merci de sélectionner un créneau à l'étape 2.");
                 return;
             }
-
-
-            const creneauDate = selectedSlot.rawDate;
-            const creneauStart = selectedSlot.start;
-            const creneauEnd = selectedSlot.end;
 
             const payload = {
                 offre: cfgState.offre.val,
@@ -1388,13 +1269,12 @@
                 cuisine: cfgState.cuisine.val,
                 extras: Object.keys(cfgState.extras),
                 creneau: {
-                    start: creneauStart,
-                    end: creneauEnd,
+                    start: selectedSlot.start,
+                    end: selectedSlot.end,
                     label: selectedSlot.time,
                 },
                 client: { prenom, nom, email, tel, adresse },
             };
-
 
             const btn = document.querySelector('.pay-confirm-btn');
             if (btn) { btn.textContent = 'Redirection...'; btn.disabled = true; }
@@ -1406,7 +1286,6 @@
                     body: JSON.stringify(payload),
                 });
                 const data = await res.json();
-
                 if (data.url) {
                     window.location.href = data.url;
                 } else {
@@ -1418,9 +1297,6 @@
                 if (btn) { btn.textContent = 'Payer →'; btn.disabled = false; }
             }
         }
-
-
-
 
 
         function resetSimulation() {
@@ -1440,25 +1316,19 @@
             };
             Object.assign(cfgState, defaults);
             cfgState.extras = {};
-
             Object.keys(defaults).forEach(group => {
                 document.querySelectorAll('[data-group="' + group + '"]').forEach(el => el.classList.remove('selected'));
                 const def = document.querySelector('[data-group="' + group + '"][data-val="' + defaults[group].val + '"]');
                 if (def) def.classList.add('selected');
             });
-
             document.querySelectorAll('[data-key]').forEach(el => {
                 el.classList.remove('selected');
                 const cb = el.querySelector('.config-checkbox');
                 if (cb) cb.textContent = '';
             });
-
             if (currentStep !== 1) goToStep(1);
             updatePrice();
         }
-
-
-
 
 
         window.addEventListener('resize', () => {
@@ -1468,13 +1338,9 @@
         });
 
 
-
-
-
         injectPrixHTML();
         navigate('config');
         updatePrice();
         requestAnimationFrame(() => updatePrice());
-
     </script>
 </main>
