@@ -103,8 +103,11 @@ const OPT_KEYS = [
 // ── Génère les lignes HTML du récap prestation ──
 function buildPrestationRows(metadata) {
   const rows = OPT_KEYS.map((k) => {
-    const val = metadata[k];
-    const label = LABELS[k]?.[val] || val;
+    // sdb et wc sont stockés comme strings dans Stripe metadata ("1","2","3")
+    // les autres clés sont des strings normales
+    const rawVal = metadata[k];
+    const val = k === "sdb" || k === "wc" ? rawVal : rawVal;
+    const label = LABELS[k]?.[val] || LABELS[k]?.[parseInt(val)] || val;
     const key =
       {
         offre: "Niveau",
@@ -181,8 +184,8 @@ async function createCalendarEvent(metadata, total) {
     `Occupation : ${LABELS.occup[metadata.occup]?.split(" —")[0] || metadata.occup}`,
     `Animaux : ${LABELS.animaux[metadata.animaux]?.split(" —")[0] || metadata.animaux}`,
     `Vitres : ${LABELS.vitres[metadata.vitres]?.split(" —")[0] || metadata.vitres}`,
-    `SDB : ${LABELS.sdb[metadata.sdb] || metadata.sdb}`,
-    `WC : ${LABELS.wc[metadata.wc] || metadata.wc}`,
+    `SDB : ${LABELS.sdb[metadata.sdb] || LABELS.sdb[parseInt(metadata.sdb)] || metadata.sdb}`,
+    `WC : ${LABELS.wc[metadata.wc] || LABELS.wc[parseInt(metadata.wc)] || metadata.wc}`,
     `Cuisine : ${LABELS.cuisine[metadata.cuisine] || metadata.cuisine}`,
     extrasText,
     ``,

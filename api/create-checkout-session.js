@@ -70,7 +70,7 @@ const LABELS = {
 };
 
 // Image publique affichée dans Stripe Checkout — adapte l'URL si besoin
-const PRODUCT_IMAGE = "https://www.colettelabaule.com/assets/cover.png/";
+const PRODUCT_IMAGE = "https://www.colettelabaule.com/images/og-image.jpg";
 
 function buildLineItems(body) {
   const items = [];
@@ -178,17 +178,29 @@ export default async function handler(req, res) {
       line_items: lineItems,
       metadata: {
         order_id: orderId,
+        // Prestation
         offre: body.offre,
         surface: String(body.surface),
         urgence: body.urgence,
+        salissure: body.salissure || "normal",
+        rangement: body.rangement || "normal",
+        meuble: body.meuble || "meuble",
+        occup: body.occup || "vide",
+        animaux: body.animaux || "non",
+        vitres: body.vitres || "standard",
+        sdb: String(body.sdb || "1"),
+        wc: String(body.wc || "1"),
+        cuisine: body.cuisine || "standard",
+        extras: (body.extras || []).join(","),
+        // Créneau
         creneau: JSON.stringify(body.creneau),
+        // Client
         client_name: `${body.client.prenom} ${body.client.nom}`,
         client_tel: body.client.tel || "",
         adresse: body.client.adresse || "",
-        extras: (body.extras || []).join(","),
       },
-      success_url: `${baseUrl}/confirmation/?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/configurer/`,
+      success_url: `${baseUrl}/pages/confirmation.html?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/pages/configurer.html`,
     });
 
     return res.status(200).json({ url: session.url });
