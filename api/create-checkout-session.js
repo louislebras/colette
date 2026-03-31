@@ -70,7 +70,7 @@ const LABELS = {
 };
 
 // Image publique affichée dans Stripe Checkout — adapte l'URL si besoin
-const PRODUCT_IMAGE = "https://www.colettelabaule.com/images/og-image.jpg";
+const PRODUCT_IMAGE = "https://www.colettelabaule.com/assets/cover.png";
 
 function buildLineItems(body) {
   const items = [];
@@ -199,8 +199,8 @@ export default async function handler(req, res) {
         client_tel: body.client.tel || "",
         adresse: body.client.adresse || "",
       },
-      success_url: `${baseUrl}/pages/confirmation.html?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/pages/configurer.html`,
+      success_url: `${baseUrl}/confirmation/?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/configurer/`,
     });
 
     return res.status(200).json({ url: session.url });
