@@ -1138,10 +1138,7 @@
                     );
 
 
-                    const apiSlot = apiSlots.find(s =>
-                        s.id === slot.id ||
-                        (s.start && s.start.slice(0, 16) === slot.isoStart.slice(0, 16))
-                    );
+                    const apiSlot = apiSlots.find(s => s.id === slot.id);
                     const calBusy = apiSlot ? !apiSlot.available : false;
 
                     const available = !pastToday && !calBusy;
