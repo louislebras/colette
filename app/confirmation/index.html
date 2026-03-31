@@ -243,59 +243,33 @@
     </div>
 
     <script>
-        // Récupère les paramètres URL
         const params = new URLSearchParams(window.location.search);
         const orderId = params.get('order_id');
         const sessionId = params.get('session_id');
-
         const card = document.getElementById('confirmation-card');
 
-        if (!orderId || !sessionId) {
-            card.innerHTML = `
-          <div class="card-body" style="text-align:center;padding:60px 40px">
-            <p style="color:#9A9A96;font-size:14px">Aucune confirmation trouvée.<br>Si vous venez de payer, vérifiez votre email.</p>
-            <a href="/" style="display:inline-block;margin-top:20px;color:#2D4A2D;font-size:14px">← Retour à l'accueil</a>
-          </div>
-        `;
-        } else {
-            // Décode les infos depuis l'order_id et affiche la confirmation
-            // Les données complètes arrivent par email — ici on affiche le minimum
-            card.innerHTML = `
-          <div class="card-header">
-            <div class="check-circle">✓</div>
-            <div>
-              <h1>Réservation confirmée</h1>
-              <p>Un email de confirmation vous a été envoyé</p>
-            </div>
-          </div>
-          <div class="card-body">
-     
-            <div class="next-steps">
-              <div class="next-steps-title">Prochaines étapes</div>
-              <div class="next-step-item">
-                <div class="step-num">1</div>
-                <div>Vous recevez un <strong>email de confirmation</strong> avec le récapitulatif complet de votre prestation.</div>
-              </div>
-              <div class="next-step-item">
-                <div class="step-num">2</div>
-                <div>Nous vous contactons par <strong>SMS la veille</strong> pour confirmer l'heure exacte d'arrivée.</div>
-              </div>
-              <div class="next-step-item">
-                <div class="step-num">3</div>
-                <div>Le jour J, nous intervenons selon exactement ce que vous avez sélectionné.</div>
-              </div>
-            </div>
-     
-            <div style="background:#F2F2EE;border-radius:8px;padding:18px 24px;margin-bottom:24px;font-size:13px;color:#4A4A46;line-height:1.7">
-              Une question ? Écrivez-nous à
-              <a href="mailto:bonjour@colettelabaule.com" style="color:#2D4A2D;font-weight:500">bonjour@colettelabaule.com</a>
-              ou par SMS/WhatsApp directement.
-            </div>
-     
-            <a href="/" class="btn-home">Retour à l'accueil</a>
-            <div class="order-ref">Référence : ${orderId}</div>
-          </div>
-        `;
-        }
+
+        card.innerHTML = `
+  <div class="card-header">
+    <div class="check-circle">✓</div>
+    <div>
+      <h1>Réservation confirmée</h1>
+      <p>Un email de confirmation vous a été envoyé</p>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="next-steps">
+      <div class="next-steps-title">Prochaines étapes</div>
+      <div class="next-step-item"><div class="step-num">1</div><div>Vous recevez un <strong>email de confirmation</strong> avec le récapitulatif complet.</div></div>
+      <div class="next-step-item"><div class="step-num">2</div><div>Nous vous contactons par <strong>SMS la veille</strong> pour confirmer l'heure d'arrivée.</div></div>
+      <div class="next-step-item"><div class="step-num">3</div><div>Le jour J, nous intervenons selon exactement ce que vous avez sélectionné.</div></div>
+    </div>
+    <div style="background:#F2F2EE;border-radius:8px;padding:18px 24px;margin-bottom:24px;font-size:13px;color:#4A4A46;line-height:1.7">
+      Une question ? <a href="mailto:bonjour@colettelabaule.com" style="color:#2D4A2D;font-weight:500">bonjour@colettelabaule.com</a>
+    </div>
+    <a href="/" class="btn-home">Retour à l'accueil</a>
+    <div class="order-ref">Référence : ${orderId || 'N/A'}</div>
+  </div>
+`;
     </script>
 </main>
