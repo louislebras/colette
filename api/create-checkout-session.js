@@ -32,11 +32,69 @@ const PRIX = {
   },
 };
 
-function calculerTotal(body) {
-  const base = PRIX.surface[parseInt(body.surface)] ?? 0;
-  const offre = PRIX.offre[body.offre] ?? 0;
-  const urgence = PRIX.urgence[body.urgence] ?? 0;
-  const options = [
+const LABELS = {
+  offre: {
+    basique: "Reset Minimal",
+    hygiene: "Reset Hygiène",
+    edl: "État des lieux",
+  },
+  surface: { 30: "0–30 m²", 45: "30–45 m²", 60: "45–60 m²", 80: "60–80 m²" },
+  urgence: { demain: "Urgence — demain", jour: "Urgence — jour même" },
+  salissure: { sale: "Saleté modérée", "tres-sale": "Saleté importante" },
+  rangement: { encombre: "Logement encombré", desordre: "Désordre important" },
+  meuble: { vide: "Logement vide" },
+  occup: { occupe: "Présence pendant intervention" },
+  animaux: {
+    poils: "Animaux — poils",
+    beaucoup: "Animaux — présence importante",
+  },
+  vitres: { "2baies": "2 baies vitrées", "3baies": "3 baies vitrées ou plus" },
+  sdb: { 2: "2 salles de bain", 3: "3 salles de bain" },
+  wc: { 2: "WC supplémentaire" },
+  cuisine: { familiale: "Cuisine familiale" },
+  extras: {
+    four: "Four",
+    frigo: "Réfrigérateur",
+    hotte: "Hotte",
+    plaques: "Plaques brillantes",
+    matelas: "Matelas",
+    fauteuil: "Fauteuil",
+    canape2: "Canapé 2 places",
+    canape3: "Canapé 3 places",
+    poussiere: "Poussière détailing",
+    traces: "Traces & marques légères",
+    brillance: "Brillance cuisine & salle de bain",
+    degraissage: "Dégraissage renforcé",
+    desinfection: "Désinfection ++",
+  },
+};
+
+// Image publique affichée dans Stripe Checkout — adapte l'URL si besoin
+const PRODUCT_IMAGE = "https://www.colettelabaule.com/assets/cover.png/";
+
+function buildLineItems(body) {
+  const items = [];
+
+  // ── 1. Ligne principale : offre + surface ──
+  const basePrice =
+    (PRIX.surface[parseInt(body.surface)] ?? 0) + (PRIX.offre[body.offre] ?? 0);
+  items.push({
+    price_data: {
+      currency: "eur",
+      unit_amount: basePrice * 100,
+      product_data: {
+        name: `${LABELS.offre[body.offre] || body.offre} — ${LABELS.surface[body.surface] || body.surface + " m²"}`,
+        description:
+          "Nettoyage à domicile · La Baule / Pornichet / Le Pouliguen",
+        images: [PRODUCT_IMAGE],
+      },
+    },
+    quantity: 1,
+  });
+
+  // ── 2. Options avec surcoût ──
+  const optKeys = [
+    "urgence",
     "salissure",
     "rangement",
     "meuble",
@@ -46,27 +104,46 @@ function calculerTotal(body) {
     "sdb",
     "wc",
     "cuisine",
-  ].reduce((sum, k) => sum + (PRIX[k]?.[body[k]] ?? 0), 0);
-  const extras = (body.extras || []).reduce(
-    (sum, k) => sum + (PRIX.extras[k] ?? 0),
-    0,
-  );
-  return base + offre + urgence + options + extras;
+  ];
+  for (const k of optKeys) {
+    const val = body[k];
+    const prix = PRIX[k]?.[val] ?? 0;
+    const label = LABELS[k]?.[val];
+    if (prix !== 0 && label) {
+      items.push({
+        price_data: {
+          currency: "eur",
+          unit_amount: Math.round(prix * 100),
+          product_data: { name: label },
+        },
+        quantity: 1,
+      });
+    }
+  }
+
+  // ── 3. Extras ──
+  for (const key of body.extras || []) {
+    const prix = PRIX.extras[key] ?? 0;
+    const label = LABELS.extras[key];
+    if (prix > 0 && label) {
+      items.push({
+        price_data: {
+          currency: "eur",
+          unit_amount: prix * 100,
+          product_data: { name: label },
+        },
+        quantity: 1,
+      });
+    }
+  }
+
+  return items;
 }
 
-function buildDescription(body) {
-  const niveaux = {
-    basique: "Reset Minimal",
-    hygiene: "Reset Hygiène",
-    edl: "État des lieux",
-  };
-  const surfaces = {
-    30: "0–30 m²",
-    45: "30–45 m²",
-    60: "45–60 m²",
-    80: "60–80 m²",
-  };
-  return `${niveaux[body.offre] || body.offre} · ${surfaces[body.surface] || body.surface + " m²"}`;
+function calculerTotal(lineItems) {
+  return (
+    lineItems.reduce((sum, item) => sum + item.price_data.unit_amount, 0) / 100
+  );
 }
 
 export default async function handler(req, res) {
@@ -85,7 +162,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Données manquantes" });
     }
 
-    const total = calculerTotal(body);
+    const lineItems = buildLineItems(body);
+    const total = calculerTotal(lineItems);
+
     if (total <= 0) return res.status(400).json({ error: "Montant invalide" });
 
     const orderId = `COL-${Date.now()}`;
@@ -93,21 +172,10 @@ export default async function handler(req, res) {
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      allow_promotion_codes: true, // ← codes de réduction activés
       payment_method_types: ["card"],
       customer_email: body.client.email,
-      line_items: [
-        {
-          price_data: {
-            currency: "eur",
-            unit_amount: total * 100,
-            product_data: {
-              name: "Prestation Colette",
-              description: buildDescription(body),
-            },
-          },
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       metadata: {
         order_id: orderId,
         offre: body.offre,
