@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/pages/home.css">
+
+<main>
+    <section class="hero">
+        <div class="logo-hero-section">
+            <img class="img-hero-colette" src="/assets/logo-light-hero.svg" alt="Logo Light Hero">
+            <p class="uppercase color-1-invert c-bold xs-size">La Baule</p>
+        </div>
+    </section>
+
+
+
+
+</main>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const header = document.querySelector(".header");
+        let threshold = window.innerHeight * 0.87;
+
+        function updateThreshold() {
+            threshold = window.innerHeight * 0.87;
+        }
+
+        function handleScroll() {
+            const shouldHaveClass = window.scrollY <= threshold;
+            header.classList.toggle("color-text-header-hero", shouldHaveClass);
+        }
+
+        header.classList.add("color-text-header-hero");
+
+        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", updateThreshold);
+    });
+</script>

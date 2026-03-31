@@ -1,0 +1,78 @@
+html,
+body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  // padding: 10px 10px;
+  padding-top: 0px;
+}
+
+@media (max-width: 850px) {
+  body {
+    padding: 10px 10px;
+    padding-top: 0;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+#pageContent {
+  transition: opacity 0.3s ease;
+}
+
+.only-mobile {
+  display: none !important;
+}
+@media (max-width: 850px) {
+  .no-mobile {
+    display: none !important;
+  }
+
+  .only-mobile {
+    display: flex !important;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.z15 {
+  z-index: 15;
+}
+
+.margin15 {
+  margin-top: 15vh;
+}
+
+.margin20 {
+  margin-top: 20vh;
+}
+
+.margin25 {
+  margin-top: 25vh;
+}
+
+.margin15px {
+  margin-top: 15px;
+}
+
+/* Cacher scrollbar sur Webkit (Chrome, Safari, Edge Chromium, Opera) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cacher scrollbar sur Firefox */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE et Edge Legacy */
+}

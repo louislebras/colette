@@ -1,0 +1,39 @@
+:root {
+  --color-100: #edeae2;
+  --color-300: #e3e1d4;
+  --color-grey: #98968b;
+  --color-x: #012d18;
+  --color-x2: #005d41;
+  --color-x-pale: #eef0e3;
+  --color-x-mid: #dddbd3;
+  --color-back-selector: #f0eee6;
+}
+
+#pageContent {
+  background-color: var(--color-100);
+  color: var(--color-900);
+}
+
+.bg-1 {
+  background-color: var(--color-100);
+}
+
+.bg-grey {
+  background-color: var(--color-300);
+}
+
+.color-1 {
+  color: var(--color-x);
+}
+
+.color-2 {
+  color: var(--color-x2);
+}
+
+.color-1-invert {
+  color: var(--color-100);
+}
+
+.color-grey {
+  color: var(--color-grey);
+}

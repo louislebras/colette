@@ -1,0 +1,50 @@
+<title>{{HomeTitle}}</title>
+<meta name="description" content="{{HomeDescription}}">
+
+<!-- Canonical -->
+<link rel="canonical" href="{{og:url}}">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{HomeTitle}}">
+<meta property="og:description" content="{{HomeDescription}}">
+<meta property="og:image" content="{{HomeImage}}">
+<meta property="og:url" content="{{og:url}}">
+<meta property="og:site_name" content="{{HomeSiteName}}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{HomeTitle}}">
+<meta name="twitter:description" content="{{HomeDescription}}">
+<meta name="twitter:image" content="{{HomeImage}}">
+<meta name="twitter:site" content="{{HomeTwitterSite}}">
+<meta name="twitter:creator" content="{{HomeTwitterCreator}}">
+
+<!-- Author / Copyright -->
+<meta name="author" content="{{HomeAuthor}}">
+<meta name="copyright" content="{{HomeCopyright}}">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{HomeSiteName}}",
+  "url": "{{og:url}}",
+  "description": "{{HomeDescription}}",
+  "image": "{{HomeImage}}",
+  "author": {
+    "@type": "Person",
+    "name": "{{HomeAuthor}}",
+    "url": "https://louislebras.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{HomeSiteName}}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{HomeLogo}}"
+    }
+  }
+}
+</script>

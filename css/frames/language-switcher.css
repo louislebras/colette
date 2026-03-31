@@ -1,0 +1,51 @@
+@charset "UTF-8";
+.language-menu {
+  position: fixed;
+  display: inline-block;
+  bottom: 10px;
+  right: 15px;
+  background: none; /* pas de fond ici sinon le blur derrière le popup est masqué */
+  border: none;
+}
+
+.language-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: none;
+  border-radius: 14px;
+  padding: 10px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.language-button img {
+  width: 15px !important;
+  margin-left: 5px;
+}
+
+.language-popup {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  margin-top: 5px;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  min-width: 120px;
+  border-radius: 17px;
+  padding: 10px;
+}
+
+.language-popup.visible {
+  display: block;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.language-option {
+  padding: 15px;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 10px;
+}

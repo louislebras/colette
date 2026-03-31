@@ -1,0 +1,97 @@
+:root {
+  --color-100: #edeae2;
+  --color-300: #e3e1d4;
+  --color-grey: #98968b;
+  --color-x: #012d18;
+  --color-x2: #005d41;
+  --color-x-pale: #eef0e3;
+  --color-x-mid: #dddbd3;
+  --color-back-selector: #f0eee6;
+}
+
+#pageContent {
+  background-color: var(--color-100);
+  color: var(--color-900);
+}
+
+.bg-1 {
+  background-color: var(--color-100);
+}
+
+.bg-grey {
+  background-color: var(--color-300);
+}
+
+.color-1 {
+  color: var(--color-x);
+}
+
+.color-2 {
+  color: var(--color-x2);
+}
+
+.color-1-invert {
+  color: var(--color-100);
+}
+
+.color-grey {
+  color: var(--color-grey);
+}
+
+.cta-indic-color-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    display: flex;
+    gap: 10px;
+    padding: 4px 4px;
+    padding-right: 14px;
+    border-radius: 1000px;
+    width: fit-content;
+    align-items: center;
+  }
+  .color-indic-cta {
+    padding: 7px 12px;
+    border-radius: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.hero-section {
+  text-align: center;
+  padding: 50px;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  //   color: var(--primary-color);
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.features {
+  padding: 30px;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 2rem;
+}

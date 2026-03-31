@@ -1,0 +1,88 @@
+@charset "UTF-8";
+.widget-component {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 11;
+}
+
+@media (max-width: 850px) {
+  .widget-component {
+    bottom: 15px;
+  }
+}
+.wrapper-widget {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding: 4px;
+  padding-left: 14px;
+  border-radius: 3000px;
+}
+
+.button-night-mode {
+  padding: 4px;
+  cursor: pointer;
+}
+.button-night-mode img {
+  width: 14px;
+}
+
+.language-menu {
+  position: relative;
+  display: inline-block;
+  background: none; /* pas de fond ici sinon le blur derrière le popup est masqué */
+  border: none;
+}
+
+.language-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 140px;
+  padding: 12px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: none;
+  width: 35px;
+  height: 35px;
+}
+
+.language-button img {
+  width: 15px !important;
+  margin-left: 5px;
+}
+
+.language-popup {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  border-radius: 17px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.language-popup.visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  gap: 5px;
+}
+
+.language-option {
+  padding: 15px;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+}

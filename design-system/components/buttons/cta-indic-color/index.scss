@@ -1,0 +1,21 @@
+.cta-indic-color-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    display: flex;
+    gap: 10px;
+    padding: 4px 4px;
+    padding-right: 14px;
+    border-radius: 1000px;
+    width: fit-content;
+    align-items: center;
+  }
+  .color-indic-cta {
+    padding: 7px 12px;
+    border-radius: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

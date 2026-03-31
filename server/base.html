@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" class="bg-1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="apple-touch-icon" href="https://archivesbottega.com/assets/favicon.png/">
+    <link rel="shortcut icon" href="https://archivesbottega.com/assets/favicon.png/" type="image/png">
+    <style>
+        @font-face {
+            font-family: "Colette Regular";
+            src: url("/assets/fonts/ColetteRegular.woff") format("woff");
+            src: url("/assets/fonts/ColetteRegular.woff2") format("woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400 !important;
+        }
+
+        @font-face {
+            font-family: "Colette Bold";
+            src: url("/assets/fonts/ColetteBold.woff") format("woff");
+            src: url("/assets/fonts/ColetteBold.woff2") format("woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 800 !important;
+        }
+
+        @font-face {
+            font-family: "Colette Condensed Semibold";
+            src: url("/assets/fonts/ColetteCondensedSemibold.woff") format("woff");
+            src: url("/assets/fonts/ColetteCondensedSemibold.woff2") format("woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 700 !important;
+        }
+
+        @font-face {
+            font-family: "Colette Condensed Ultra";
+            src: url("/assets/fonts/ColetteCondensedUltra.woff") format("woff");
+            src: url("/assets/fonts/ColetteCondensedUltra.woff2") format("woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 1000 !important;
+        }
+    </style>
+
+    <link rel="stylesheet" href="[ROOT]/css/main.css">
+    <link rel="stylesheet" href="[ROOT]/css/modals/allmodals.css">
+    <script type="module" src="[ROOT]/js/global/lang-redirect.js" defer></script>
+    <script type="module" src="[ROOT]/js/global/language-switcher.js" defer></script>
+    <script type="module" src="[ROOT]/js/router.js" defer></script>
+    <script type="module" src="[ROOT]/js/global/localhostlinks.js" defer></script>
+
+    <div class="custom-head-content"></div>
+
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4946N4CTM"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-Z4946N4CTM');
+</script>
+
+<body class="s-size bg-1 c-reg color-1">
+    <slot></slot>
+    <div id="modals-root"></div>
+    <script>window.__DEFAULT_LANG__ = "en";</script>
+    <!-- <script src="[ROOT]js/modal-config.js" defer></script>
+    <script src="[ROOT]js/modal-manager.js" defer></script> -->
+    <script src="/js/global/price-btc.js"></script>
+
+</body>

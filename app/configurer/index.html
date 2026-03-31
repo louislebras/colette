@@ -1,0 +1,1408 @@
+<link rel="stylesheet" href="/css/pages/configurer.css">
+
+<main>
+    <div id="page-config" class="page">
+
+        <!-- STEPPER -->
+        <div class="stepper xs-size">
+            <div class="stepper-inner">
+                <div class="step active" id="step-dot-1" onclick="stepClickable(1)">
+                    <div class="step-dot"><span>1</span></div>
+                    <div class="step-label">Votre nettoyage</div>
+                </div>
+                <div class="step-line" id="step-line-1"></div>
+                <div class="step" id="step-dot-2" onclick="stepClickable(2)">
+                    <div class="step-dot"><span>2</span></div>
+                    <div class="step-label">Créneau</div>
+                </div>
+                <div class="step-line" id="step-line-2"></div>
+                <div class="step" id="step-dot-3" onclick="stepClickable(3)">
+                    <div class="step-dot"><span>3</span></div>
+                    <div class="step-label">Paiement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÉTAPE 1 : COMPOSITION -->
+        <div id="funnel-step-1" class="funnel-step active">
+            <div class="config-page">
+
+                <div class="config-layout">
+                    <div class="config-header">
+                        <div class="section-label xxs-size c-bold uppercase color-2">La Baule / Pornichet / Le Pouliguen
+                        </div>
+                        <h1 class="xl-size c-cond-u uppercase">Configurez <br> votre nettoyage</h1>
+                        <p class="color-grey">On intervient exactement selon les éléments sélectionnés. <br>
+                            On vous guide pour faire le bon choix.</p>
+                    </div>
+                    <div class="config-sections">
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Niveau de nettoyage</div>
+                            <p class="color-grey config-section-sub">Le niveau choisi définit le résultat final.
+                            </p>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="offre" data-val="basique"
+                                    onclick="selectRadio(this,'offre')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Reset Minimal</div>
+                                            <div class="config-option-desc">Entretien rapide, résultat propre</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="offre" data-val="hygiene"
+                                    onclick="selectRadio(this,'offre')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Reset Hygiène</div>
+                                            <div class="config-option-desc">Intense — cuisine, salle de bain...</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="offre" data-val="edl"
+                                    onclick="selectRadio(this,'offre')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">État des lieux</div>
+                                            <div class="config-option-desc">Standard agence, prêt à relouer</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Surface du logement</div>
+                            <div class="config-options">
+                                <div class="config-option" data-group="surface" data-val="30"
+                                    onclick="selectRadio(this,'surface')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">0 – 30 m2</div>
+                                            <div class="config-option-desc">Équivalent studio</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option selected" data-group="surface" data-val="45"
+                                    onclick="selectRadio(this,'surface')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">30 – 45 m2</div>
+                                            <div class="config-option-desc">Équivalent T2</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="surface" data-val="60"
+                                    onclick="selectRadio(this,'surface')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">45 – 60 m2</div>
+                                            <div class="config-option-desc">Équivalent T2+ / T3</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="surface" data-val="80"
+                                    onclick="selectRadio(this,'surface')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">60 – 80 m2</div>
+                                            <div class="config-option-desc">Équivalent T3</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <!-- <div class="config-option" data-group="surface" data-val="100" onclick="selectRadio(this,'surface')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">80 – 100 m2</div>
+                                            <div class="config-option-desc">Équivalent T4</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div> -->
+                            </div>
+                            <p class="disclaimer-text">
+                                <span class="color-2"> À votre attention :</span><br>
+                                <span class="content-txt">Pour une question de temps et d'efficacité pour votre bien,
+                                    nous intervenons sur tous types de sols (parquet, carrelage, lino),
+                                    sauf sur les moquettes qui ne sont pas prises en charge ni nettoyées.</span><br><br>
+                                <span class="color-grey">Pour toute surface plus grande, veuillez <a class="underline"
+                                        href="/contact/">nous appeler</a>, et nous essayerons de trouver une
+                                    solution.</span>
+                            </p>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">État réel du logement</div>
+                            <p class="color-grey config-section-sub">
+                                Un logement encrassé demande plus de temps, <br>
+                                quel que soit le niveau de nettoyage choisi, <br> pour atteindre le résultat souhaité.
+                            </p>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="salissure" data-val="normal"
+                                    onclick="selectRadio(this,'salissure')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Usage quotidien (accumulation normale)
+                                            </div>
+                                            <div class="config-option-desc">Logement utilisé, traces présentes</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="salissure" data-val="sale"
+                                    onclick="selectRadio(this,'salissure')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Encrassement modéré</div>
+                                            <div class="config-option-desc">Accumulation visible zones sensibles</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="salissure" data-val="tres-sale"
+                                    onclick="selectRadio(this,'salissure')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Encrassement important</div>
+                                            <div class="config-option-desc">Logement très encrassé, nettoyage intensif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Disponibilité souhaitée</div>
+                            <div class="config-section-sub color-grey">En fonction des créneaux disponibles <br> à
+                                sélectionner à l'étape suivante</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="urgence" data-val="48h"
+                                    onclick="selectRadio(this,'urgence')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name" id="urgence-label-48h">Dans les 48–72h</div>
+                                            <div class="config-option-desc" id="urgence-desc-48h"></div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="urgence" data-val="demain"
+                                    onclick="selectRadio(this,'urgence')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name" id="urgence-label-demain">Demain</div>
+                                            <div class="config-option-desc" id="urgence-desc-demain"></div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="urgence" data-val="jour"
+                                    onclick="selectRadio(this,'urgence')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name" id="urgence-label-jour">Dans la journée
+                                            </div>
+                                            <div class="config-option-desc" id="urgence-desc-jour"></div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Rangement du logement</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="rangement" data-val="normal"
+                                    onclick="selectRadio(this,'rangement')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Normal</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="rangement" data-val="encombre"
+                                    onclick="selectRadio(this,'rangement')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Encombré</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="rangement" data-val="desordre"
+                                    onclick="selectRadio(this,'rangement')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Désordre important</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Aménagement du logement</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="meuble" data-val="meuble"
+                                    onclick="selectRadio(this,'meuble')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Meublé</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="meuble" data-val="vide"
+                                    onclick="selectRadio(this,'meuble')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Logement vide</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Présence pendant intervention</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="occup" data-val="vide"
+                                    onclick="selectRadio(this,'occup')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Logement vide</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="occup" data-val="occupe"
+                                    onclick="selectRadio(this,'occup')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Occupé</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Animaux de compagnie</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="animaux" data-val="non"
+                                    onclick="selectRadio(this,'animaux')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Aucun</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="animaux" data-val="poils"
+                                    onclick="selectRadio(this,'animaux')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Présence d'animaux</div>
+                                            <div class="config-option-desc">Poils, traces</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="animaux" data-val="beaucoup"
+                                    onclick="selectRadio(this,'animaux')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Présence importante</div>
+                                            <div class="config-option-desc">Plusieurs animaux, forte accumulation</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Vitres et baies vitrées</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="vitres" data-val="standard"
+                                    onclick="selectRadio(this,'vitres')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Standard</div>
+                                            <div class="config-option-desc">1 baie + 1 vitre par pièce</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="vitres" data-val="2baies"
+                                    onclick="selectRadio(this,'vitres')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">2 baies vitrées</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="vitres" data-val="3baies"
+                                    onclick="selectRadio(this,'vitres')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">3 baies vitrées ou plus</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Pièces d'eau</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="sdb" data-val="1"
+                                    onclick="selectRadio(this,'sdb')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">1 salle de bain</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="sdb" data-val="2"
+                                    onclick="selectRadio(this,'sdb')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">2 salles de bain</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="sdb" data-val="3"
+                                    onclick="selectRadio(this,'sdb')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">3 salles de bain</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">WC supplémentaires</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="wc" data-val="1"
+                                    onclick="selectRadio(this,'wc')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">1 WC inclus</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="wc" data-val="2"
+                                    onclick="selectRadio(this,'wc')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">WC supplémentaire</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Type de cuisine</div>
+                            <div class="config-options">
+                                <div class="config-option selected" data-group="cuisine" data-val="standard"
+                                    onclick="selectRadio(this,'cuisine')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div class="config-option-name">Cuisine standard</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-group="cuisine" data-val="familiale"
+                                    onclick="selectRadio(this,'cuisine')">
+                                    <div class="config-option-left">
+                                        <div class="config-radio"></div>
+                                        <div>
+                                            <div class="config-option-name">Cuisine familiale</div>
+                                            <div class="config-option-desc">Grande cuisine, plus de surfaces</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Éléments supplémentaires</div>
+                            <div class="config-options">
+                                <div class="config-option" data-key="four" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Four</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="frigo" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Réfrigérateur</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="hotte" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Hotte</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="plaques" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Plaques brillantes</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="matelas" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Matelas</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="fauteuil" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Fauteuil</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="canape2" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Canapé 2 places</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="canape3" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Canapé 3 places</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="config-section-title m-size">Options de finition</div>
+                            <div class="config-options">
+                                <div class="config-option" data-key="poussiere" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div>
+                                            <div class="config-option-name">Poussière détailing</div>
+                                            <div class="config-option-desc">Objets, détails, accessoires</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="traces" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div>
+                                            <div class="config-option-name">Traces & marques légères</div>
+                                            <div class="config-option-desc">Murs et cloisons</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="brillance" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div>
+                                            <div class="config-option-name">Brillance cuisine & salle de bain</div>
+                                            <div class="config-option-desc">Finition miroir</div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="degraissage" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div class="config-option-name">Dégraissage renforcé cuisine</div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                                <div class="config-option" data-key="desinfection" onclick="toggleCheck(this)">
+                                    <div class="config-option-left">
+                                        <div class="config-checkbox"></div>
+                                        <div>
+                                            <div class="config-option-name">Désinfection ++</div>
+                                            <div class="config-option-desc">Poignées, interrupteurs, zones de contact
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="config-option-price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="config-sticky-col">
+                    <div class="price-summary">
+                        <div class="ps-title m-size c-cond-sb uppercase">Récapitulatif</div>
+                        <div class="ps-lines-scroll">
+                            <div id="ps-lines"></div>
+                        </div>
+                        <div class="ps-footer">
+                            <div class="ps-total">
+                                <div class="ps-total-label">Total</div>
+                                <div class="ps-total-amount c-cond-u l-size uppercase" id="ps-total"></div>
+                            </div>
+                            <button class="ps-cta c-cond-u l-size uppercase" onclick="goToStep(2)">Choisir mon créneau
+                                →</button>
+                        </div>
+                    </div>
+                    <button class="ps-reset-btn ps-reset-light uppercase c-cond-sb" onclick="resetSimulation()">↺
+                        Réinitialiser la configuration</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÉTAPE 2 : CRÉNEAU -->
+        <div id="funnel-step-2" class="funnel-step">
+            <div class="config-page">
+                <div class="step2-layout">
+                    <div class="step2-cal-wrap">
+                        <div class="config-header">
+                            <div class="step-back xxs-size c-bold uppercase color-2" onclick="goToStep(1)">← Modifier ma
+                                prestation</div>
+                            <h2 class="xl-size c-cond-u uppercase choose-crenal">Choisissez <br> votre créneau</h2>
+                            <p id="step2-sub"></p>
+                        </div>
+                        <div class="step2-choix-row" id="step2-choix-row"></div>
+                        <div class="step2-days" id="step2-days"></div>
+                    </div>
+                    <div class="config-sticky-col">
+                        <div class="price-summary">
+                            <div class="ps-title">Récapitulatif</div>
+                            <div class="ps-lines-scroll">
+                                <div id="ps-lines-2"></div>
+                            </div>
+                            <div class="ps-footer">
+                                <div class="ps-total">
+                                    <div class="ps-total-label">Total estimé</div>
+                                    <div class="ps-total-amount" id="ps-total-2"></div>
+                                </div>
+                                <button class="ps-cta step2-confirm-btn c-cond-u l-size uppercase" id="step2-confirm"
+                                    onclick="goToStep(3)">Confirmer et payer →</button>
+                                <!-- <div class="ps-note" id="step2-notice" style="margin-top:10px"></div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÉTAPE 3 : PAIEMENT -->
+        <div id="funnel-step-3" class="funnel-step">
+            <div class="config-page">
+
+                <div class="step3-layout">
+                    <div class="step3-form">
+                        <div class="config-header">
+                            <div class="step-back" onclick="goToStep(2)">← Modifier mon créneau</div>
+                            <h2 class="xl-size c-cond-u uppercase">Paiement</h2>
+                            <p>Votre réservation est presque confirmée.</p>
+                        </div>
+                        <div class="pay-section">
+                            <div class="pay-section-title">Vos coordonnées</div>
+                            <div class="pay-fields">
+                                <div class="pay-field-row">
+                                    <div class="pay-field"><label>Prénom</label><input type="text" placeholder="Marie">
+                                    </div>
+                                    <div class="pay-field"><label>Nom</label><input type="text" placeholder="Dupont">
+                                    </div>
+                                </div>
+                                <div class="pay-field"><label>Email</label><input type="email"
+                                        placeholder="marie@email.com"></div>
+                                <div class="pay-field"><label>Téléphone (SMS/WhatsApp)</label><input type="tel"
+                                        placeholder="+33 6 12 34 56 78"></div>
+                                <div class="pay-field"><label>Adresse du logement</label><input type="text"
+                                        placeholder="12 rue des Hortensias, La Baule"></div>
+                            </div>
+                        </div>
+                        <div class="pay-section">
+                            <div class="pay-section-title">Paiement sécurisé</div>
+                            <div class="pay-card-mock">
+                                <div class="pay-field"><label>Numéro de carte</label>
+                                    <div class="pay-card-input"><span class="pay-card-icon">💳</span><input type="text"
+                                            placeholder="1234 5678 9012 3456"></div>
+                                </div>
+                                <div class="pay-field-row">
+                                    <div class="pay-field"><label>Expiration</label><input type="text"
+                                            placeholder="MM / AA"></div>
+                                    <div class="pay-field"><label>CVV</label><input type="text" placeholder="123"></div>
+                                </div>
+                                <div class="pay-secure-note">🔒 Paiement crypté SSL — Vos données ne sont jamais
+                                    stockées</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="config-sticky-col">
+                        <div class="price-summary">
+                            <div class="ps-title">Votre réservation</div>
+                            <div class="ps-lines-scroll">
+                                <div id="ps-lines-3"></div>
+                            </div>
+                            <div class="ps-footer">
+                                <div class="pay-slot-recap" id="pay-slot-recap"></div>
+                                <div class="ps-total">
+                                    <div class="ps-total-label">Total</div>
+                                    <div class="ps-total-amount" id="ps-total-3"></div>
+                                </div>
+                                <button class="ps-cta pay-confirm-btn c-cond-u l-size uppercase"
+                                    onclick="handlePayment()">Payer →</button>
+                                <div class="ps-note">En confirmant, vous acceptez nos conditions
+                                    générales.<br>Annulation gratuite 24h avant.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── MOBILE BOTTOM BAR ── -->
+    <div class="mobile-bottom-bar" id="mobile-bottom-bar" style="display:none">
+        <div class="mbb-top" onclick="openDrawer()">
+            <div class="mbb-left">
+                <div class="mbb-label">Total estimé<br><span class="mbb-see">Voir le récapitulatif ↑</span></div>
+            </div>
+            <div class="mbb-amount" id="mbb-total"></div>
+        </div>
+        <button class="mbb-reserve" id="mbb-cta" onclick="goToStep(2)">Choisir mon créneau →</button>
+        <button class="mbb-reserve" id="mbb-step2-confirm" onclick="goToStep(3)"
+            style="display:none;opacity:0.4;cursor:not-allowed">Confirmer et payer →</button>
+        <button class="mbb-reserve" id="mbb-step3-pay" onclick="handlePayment()" style="display:none">Payer →</button>
+    </div>
+
+    <!-- ── DRAWER (récap mobile) ── -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawerOnOverlay(event)">
+        <div class="drawer" id="drawer">
+            <div class="drawer-handle" onclick="closeDrawer()"></div>
+            <div class="drawer-header">
+                <div class="drawer-title">Récapitulatif</div>
+                <div class="drawer-close" onclick="closeDrawer()">×</div>
+            </div>
+            <div class="drawer-lines" id="drawer-lines"></div>
+            <div class="drawer-footer">
+                <div class="drawer-total">
+                    <div class="drawer-total-label">Total estimé</div>
+                    <div class="drawer-total-amount" id="drawer-total"></div>
+                </div>
+                <button class="mbb-reserve" id="drawer-cta" onclick="goToStep(2); closeDrawer();">Choisir mon créneau
+                    →</button>
+                <button class="mbb-reserve" id="drawer-step2-confirm" onclick="goToStep(3); closeDrawer();"
+                    style="display:none;opacity:0.4;cursor:not-allowed">Confirmer et payer →</button>
+                <button class="ps-reset-btn" onclick="closeDrawer(); setTimeout(resetSimulation, 50);"
+                    style="margin-top:10px">↺ Réinitialiser la simulation</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+
+
+        const PRIX = {
+            surface: {
+                30: 179,
+                45: 259,
+                60: 329,
+                80: 399,
+            },
+            offre: {
+                basique: 0,
+                hygiene: 120,
+                edl: 150,
+            },
+            urgence: {
+                '48h': 0,
+                demain: 39,
+                jour: 79,
+            },
+            salissure: {
+                normal: 0,
+                sale: 39,
+                'tres-sale': 149,
+            },
+            rangement: {
+                normal: 0,
+                encombre: 29,
+                desordre: 49,
+            },
+            meuble: {
+                meuble: 0,
+                vide: -29,
+            },
+            occup: {
+                vide: 0,
+                occupe: 19,
+            },
+            animaux: {
+                non: 0,
+                poils: 29,
+                beaucoup: 49,
+            },
+            vitres: {
+                standard: 0,
+                '2baies': 80,
+                '3baies': 160,
+            },
+            sdb: {
+                1: 0,
+                2: 89,
+                3: 209,
+            },
+            wc: {
+                1: 0,
+                2: 39,
+            },
+            cuisine: {
+                standard: 0,
+                familiale: 29,
+            },
+            extras: {
+                four: 59,
+                frigo: 49,
+                hotte: 29,
+                plaques: 29,
+                matelas: 89,
+                fauteuil: 99,
+                canape2: 99,
+                canape3: 129,
+                poussiere: 49,
+                traces: 49,
+                brillance: 39,
+                degraissage: 29,
+                desinfection: 49,
+            },
+        };
+
+
+
+
+
+
+        function injectPrixHTML() {
+
+
+            document.querySelectorAll('[data-group="offre"][data-val]').forEach(el => {
+                const val = el.dataset.val;
+                const montant = PRIX.offre[val];
+                if (montant === undefined) return;
+                el.dataset.uplift = montant;
+                const priceEl = el.querySelector('.config-option-price');
+                if (priceEl) priceEl.textContent = montant === 0 ? 'inclus' : (montant > 0 ? '+' + montant + '€' : montant + '€');
+            });
+
+
+            document.querySelectorAll('[data-group="surface"][data-val]').forEach(el => {
+                const val = parseInt(el.dataset.val);
+                const montant = PRIX.surface[val];
+                if (montant === undefined) return;
+                el.dataset.base = montant;
+                const priceEl = el.querySelector('.config-option-price');
+                if (priceEl) priceEl.textContent = montant + '€';
+            });
+
+
+            const radioGroupes = ['urgence', 'salissure', 'rangement', 'meuble', 'occup', 'animaux', 'vitres', 'sdb', 'wc', 'cuisine'];
+            radioGroupes.forEach(group => {
+                document.querySelectorAll(`[data-group="${group}"][data-val]`).forEach(el => {
+                    const val = el.dataset.val;
+                    const montant = PRIX[group] ? PRIX[group][val] : undefined;
+                    if (montant === undefined) return;
+                    el.dataset.add = montant;
+                    const priceEl = el.querySelector('.config-option-price');
+                    if (priceEl) priceEl.textContent = montant === 0 ? 'inclus' : (montant > 0 ? '+' + montant + '€' : montant + '€');
+                });
+            });
+
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                const montant = PRIX.extras[key];
+                if (montant === undefined) return;
+                el.dataset.add = montant;
+                const priceEl = el.querySelector('.config-option-price');
+                if (priceEl) priceEl.textContent = '+' + montant + '€';
+            });
+        }
+
+
+
+
+
+        function navigate(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('page-' + page);
+            if (target) target.classList.add('active');
+            window.scrollTo(0, 0);
+            const bar = document.getElementById('mobile-bottom-bar');
+            if (bar) bar.style.display = (page === 'config' && window.innerWidth <= 768) ? 'block' : 'none';
+            if (page === 'config') {
+                initUrgenceLabels();
+                requestAnimationFrame(() => updatePrice());
+            }
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            const navEl = document.getElementById('nav-config');
+            if (navEl) navEl.classList.add('active');
+        }
+
+
+
+
+
+        const words = ['nettoyage ?', 'ménage ?', 'état des lieux ?', 'remise en état ?'];
+        let wi = 0;
+        setInterval(() => {
+            wi = (wi + 1) % words.length;
+            const el = document.getElementById('rotating-word');
+            if (!el) return;
+            el.style.opacity = '0';
+            setTimeout(() => { el.textContent = words[wi]; el.style.opacity = '1'; }, 300);
+        }, 2500);
+
+
+
+
+
+        function toggleFaq(el) { el.classList.toggle('open'); }
+
+
+
+
+
+        const cfgState = {
+            offre: { val: 'basique', uplift: PRIX.offre.basique },
+            surface: { val: '45', base: PRIX.surface[45] },
+            urgence: { val: '48h', add: PRIX.urgence['48h'] },
+            salissure: { val: 'normal', add: PRIX.salissure.normal },
+            rangement: { val: 'normal', add: PRIX.rangement.normal },
+            meuble: { val: 'meuble', add: PRIX.meuble.meuble },
+            occup: { val: 'vide', add: PRIX.occup.vide },
+            animaux: { val: 'non', add: PRIX.animaux.non },
+            vitres: { val: 'standard', add: PRIX.vitres.standard },
+            sdb: { val: '1', add: PRIX.sdb[1] },
+            wc: { val: '1', add: PRIX.wc[1] },
+            cuisine: { val: 'standard', add: PRIX.cuisine.standard },
+            extras: {}
+        };
+
+
+
+
+
+        function selectRadio(el, group) {
+            document.querySelectorAll(`[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+            if (group === 'offre') {
+                cfgState.offre = { val: el.dataset.val, uplift: parseInt(el.dataset.uplift) };
+            } else if (group === 'surface') {
+                cfgState.surface = { val: el.dataset.val, base: parseInt(el.dataset.base) };
+            } else {
+                cfgState[group] = { val: el.dataset.val, add: parseInt(el.dataset.add) };
+            }
+            updatePrice();
+        }
+
+
+
+
+
+        function toggleCheck(el) {
+            el.classList.toggle('selected');
+            const cb = el.querySelector('.config-checkbox');
+            if (el.classList.contains('selected')) {
+                cfgState.extras[el.dataset.key] = parseInt(el.dataset.add);
+                cb.textContent = '✓';
+            } else {
+                delete cfgState.extras[el.dataset.key];
+                cb.textContent = '';
+            }
+            updatePrice();
+        }
+
+
+
+
+
+        const offreLabels = { basique: 'Reset Minimal', hygiene: 'Reset Hygiène', edl: 'État des lieux' };
+        const surfaceLabels = { 30: '0–30 m2', 45: '30–45 m2', 60: '45–60 m2', 80: '60–80 m2', 100: '80–100 m2' };
+        const optLabels = {
+            urgence: { demain: 'Urgence demain', jour: 'Urgence jour même' },
+            salissure: { sale: 'Saleté +', 'tres-sale': 'Saleté ++' },
+            rangement: { encombre: 'Encombré', desordre: 'Désordre' },
+            meuble: { vide: 'Logement vide' },
+            occup: { occupe: 'Occupé' },
+            animaux: { poils: 'Animaux', beaucoup: 'Animaux ++' },
+            vitres: { '2baies': '2 baies vitrées', '3baies': '3+ baies vitrées' },
+            sdb: { 2: '2 salles de bain', 3: '3 salles de bain' },
+            wc: { 2: 'WC supplémentaire' },
+            cuisine: { familiale: 'Cuisine familiale' }
+        };
+        const extraLabels = {
+            four: 'Four', frigo: 'Réfrigérateur', hotte: 'Hotte', plaques: 'Plaques brillantes',
+            matelas: 'Matelas', fauteuil: 'Fauteuil', canape2: 'Canapé 2p', canape3: 'Canapé 3p',
+            poussiere: 'Poussière détailing', traces: 'Traces murs', brillance: 'Brillance',
+            degraissage: 'Dégraissage renforcé', desinfection: 'Désinfection ++'
+        };
+
+
+
+
+
+        function updatePrice() {
+            const base = cfgState.surface.base;
+            const uplift = cfgState.offre.uplift;
+            const optKeys = ['salissure', 'rangement', 'meuble', 'occup', 'animaux', 'vitres', 'sdb', 'wc', 'cuisine'];
+            const urgenceAdd = cfgState.urgence ? cfgState.urgence.add : 0;
+            const optsSum = optKeys.reduce((s, k) => s + (cfgState[k] ? cfgState[k].add : 0), 0) + urgenceAdd;
+            const extrasSum = Object.values(cfgState.extras).reduce((s, v) => s + v, 0);
+            const total = base + uplift + optsSum + extrasSum;
+
+            document.getElementById('ps-total').textContent = total + '€';
+
+            const offreSubs = {
+                basique: 'Entretien rapide, résultat propre',
+                hygiene: 'Nettoyage intense, résultat complet',
+                edl: 'Standard agence, prêt à relouer'
+            };
+
+            let html = `<div class="ps-line base">
+  <span class="ps-line-label">
+    <span class="ps-line-offre-name">${offreLabels[cfgState.offre.val]}</span>
+    <span class="ps-line-offre-sub">${offreSubs[cfgState.offre.val]}</span>
+  </span>
+  <span class="ps-line-val">${base + uplift}€</span>
+</div>`;
+            html += `<div class="ps-line"><span class="ps-line-label">${surfaceLabels[cfgState.surface.val]}</span><span class="ps-line-val">inclus</span></div>`;
+
+            const urgenceLabel = typeof getUrgenceDisplayLabel === 'function' ? getUrgenceDisplayLabel() : 'Dans les 48–72h';
+            html += `<div class="ps-line"><span class="ps-line-label">${urgenceLabel}</span><span class="ps-line-val">${urgenceAdd > 0 ? '+' + urgenceAdd + '€' : 'inclus'}</span></div>`;
+
+            optKeys.forEach(k => {
+                const s = cfgState[k];
+                if (s && s.add !== 0 && optLabels[k] && optLabels[k][s.val]) {
+                    html += `<div class="ps-line"><span class="ps-line-label">${optLabels[k][s.val]}</span><span class="ps-line-val">${s.add > 0 ? '+' : ''}${s.add}€</span></div>`;
+                }
+            });
+
+            Object.entries(cfgState.extras).forEach(([k, v]) => {
+                html += `<div class="ps-line"><span class="ps-line-label">${extraLabels[k] || k}</span><span class="ps-line-val">+${v}€</span></div>`;
+            });
+
+            document.getElementById('ps-lines').innerHTML = html;
+
+            const mbbTotal = document.getElementById('mbb-total');
+            const drawerTotal = document.getElementById('drawer-total');
+            const drawerLines = document.getElementById('drawer-lines');
+            if (mbbTotal) mbbTotal.textContent = total + '€';
+            if (drawerTotal) drawerTotal.textContent = total + '€';
+            if (drawerLines) drawerLines.innerHTML = html;
+        }
+
+
+
+
+
+        function openDrawer() {
+            updatePrice();
+            const drawerCta = document.getElementById('drawer-cta');
+            if (drawerCta) drawerCta.style.display = currentStep === 1 ? 'block' : 'none';
+            document.getElementById('drawer-overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function closeDrawerOnOverlay(e) {
+            if (e.target === document.getElementById('drawer-overlay')) closeDrawer();
+        }
+
+
+
+
+
+        function goToConfig(offre) {
+            document.querySelectorAll('[data-group="offre"]').forEach(el => el.classList.remove('selected'));
+            const offreEl = document.querySelector(`[data-group="offre"][data-val="${offre}"]`);
+            if (offreEl) {
+                offreEl.classList.add('selected');
+                cfgState.offre = { val: offre, uplift: parseInt(offreEl.dataset.uplift) };
+            }
+            updatePrice();
+            navigate('config');
+        }
+
+
+
+
+
+        function getFrenchDay(date) {
+            const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+            const months = ['janvier', 'févr.', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+            return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()];
+        }
+
+        function addDays(date, n) {
+            const d = new Date(date);
+            d.setDate(d.getDate() + n);
+            return d;
+        }
+
+
+
+
+
+        function initUrgenceLabels() {
+            const today = new Date();
+            const tomorrow = addDays(today, 1);
+            const d2 = addDays(today, 2);
+            const d3 = addDays(today, 3);
+
+            const lbl48 = document.getElementById('urgence-label-48h');
+            const desc48 = document.getElementById('urgence-desc-48h');
+            const lblDemain = document.getElementById('urgence-label-demain');
+            const descDemain = document.getElementById('urgence-desc-demain');
+            const lblJour = document.getElementById('urgence-label-jour');
+            const descJour = document.getElementById('urgence-desc-jour');
+
+            if (lbl48) lbl48.textContent = 'Dans les 48–72h';
+            if (desc48) desc48.textContent = getFrenchDay(d2) + ' ou ' + getFrenchDay(d3);
+            if (lblDemain) lblDemain.textContent = 'Demain';
+            if (descDemain) descDemain.textContent = getFrenchDay(tomorrow);
+            if (lblJour) lblJour.textContent = 'Dans la journée';
+            if (descJour) descJour.textContent = getFrenchDay(today) + ' — sous réserve de disponibilité';
+        }
+
+        function getUrgenceDisplayLabel() {
+            const today = new Date();
+            const tomorrow = addDays(today, 1);
+            const d2 = addDays(today, 2);
+            const d3 = addDays(today, 3);
+            const val = cfgState.urgence ? cfgState.urgence.val : '48h';
+            if (val === '48h') return 'Dans les 48–72h<br> <span class="color-grey">(' + getFrenchDay(d2) + '/' + getFrenchDay(d3) + ')</span>';
+            if (val === 'demain') return 'Demain — ' + getFrenchDay(tomorrow);
+            if (val === 'jour') return "Aujourd'hui — " + getFrenchDay(today);
+            return 'Dans les 48–72h';
+        }
+
+
+
+
+
+        let currentStep = 1;
+        let selectedSlot = null;
+
+        function stepClickable(n) {
+            if (n < currentStep) { goToStep(n); return; }
+            if (n === 2 && currentStep === 1) { goToStep(2); return; }
+            if (n === 3 && selectedSlot) { goToStep(3); return; }
+        }
+
+        function goToStep(n) {
+            document.querySelectorAll('.funnel-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('funnel-step-' + n).classList.add('active');
+            currentStep = n;
+            window.scrollTo(0, 0);
+
+            for (let i = 1; i <= 3; i++) {
+                const dot = document.getElementById('step-dot-' + i);
+                const line = document.getElementById('step-line-' + i);
+                if (!dot) continue;
+                dot.classList.remove('active', 'done');
+                if (i < n) dot.classList.add('done');
+                else if (i === n) dot.classList.add('active');
+                if (line) {
+                    line.classList.remove('done');
+                    if (i < n) line.classList.add('done');
+                }
+            }
+
+            if (n === 2) buildStep2();
+            if (n === 3) buildStep3();
+
+            const mbbCta = document.getElementById('mbb-cta');
+            const mbbStep2 = document.getElementById('mbb-step2-confirm');
+            const drawerCta = document.getElementById('drawer-cta');
+            const drawerConfirm = document.getElementById('drawer-step2-confirm');
+            const mbbTop = document.querySelector('.mbb-top');
+            const mbbStep3 = document.getElementById('mbb-step3-pay');
+            if (mbbCta) mbbCta.style.display = n === 1 ? 'block' : 'none';
+            if (mbbStep2) mbbStep2.style.display = n === 2 ? 'block' : 'none';
+            if (mbbStep3) mbbStep3.style.display = n === 3 ? 'block' : 'none';
+            if (drawerCta) drawerCta.style.display = n === 1 ? 'block' : 'none';
+            if (drawerConfirm) drawerConfirm.style.display = n === 2 ? 'block' : 'none';
+            if (mbbTop) mbbTop.style.marginBottom = '10px';
+        }
+
+        function mbbCtaClick() {
+            if (currentStep === 1) goToStep(2);
+        }
+
+
+
+
+
+        function buildStep2() {
+            const urgenceVal = cfgState.urgence ? cfgState.urgence.val : '48h';
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const allDays = [
+                { date: new Date(today), relLabel: "Aujourd'hui", tag: urgenceVal === 'jour' ? 'Votre choix' : null, urgenceIfPicked: 'jour', addIfPicked: PRIX.urgence.jour },
+                { date: addDays(today, 1), relLabel: 'Demain', tag: urgenceVal === 'demain' ? 'Votre choix' : null, urgenceIfPicked: 'demain', addIfPicked: PRIX.urgence.demain },
+                { date: addDays(today, 2), relLabel: 'Après-demain', tag: urgenceVal === '48h' ? 'Votre choix' : null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+                { date: addDays(today, 3), relLabel: null, tag: null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+            ];
+
+            const sub = document.getElementById('step2-sub');
+            if (sub) {
+                if (urgenceVal === 'jour') sub.textContent = "Vous avez choisi une intervention aujourd'hui — vérifiez les créneaux disponibles.";
+                else if (urgenceVal === 'demain') sub.textContent = 'Vous avez choisi demain — confirmez votre créneau.';
+                else sub.textContent = 'Vous avez choisi dans les 48–72h — des créneaux plus tôt sont aussi disponibles.';
+            }
+
+            updatePrice();
+            const lines2 = document.getElementById('ps-lines-2');
+            const total2 = document.getElementById('ps-total-2');
+            if (lines2) lines2.innerHTML = document.getElementById('ps-lines').innerHTML;
+            if (total2) total2.textContent = document.getElementById('ps-total').textContent;
+
+            const notice = document.getElementById('step2-notice');
+            const urgenceAdd = cfgState.urgence ? cfgState.urgence.add : 0;
+            if (notice) notice.textContent = urgenceAdd > 0 ? `Majoration de +${urgenceAdd}€ appliquée pour ce délai.` : 'Aucune majoration pour ce délai.';
+
+            const container = document.getElementById('step2-days');
+            if (!container) return;
+            container.innerHTML = '';
+            selectedSlot = null;
+            updateStep2Confirm();
+
+            const now = new Date();
+            window._choixDayIndex = allDays.findIndex(d => d.tag !== null);
+
+            allDays.forEach(({ date, relLabel, tag, urgenceIfPicked, addIfPicked }, dayIndex) => {
+                const col = document.createElement('div');
+                col.className = 'cal-col';
+
+                const head = document.createElement('div');
+                head.className = 'cal-col-head';
+                const dayName = getFrenchDay(date).split(' ')[0];
+                const dayNum = date.getDate();
+                const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'jun', 'jul', 'aoû', 'sep', 'oct', 'nov', 'déc'];
+                const mon = months[date.getMonth()];
+
+                let headHTML = '';
+                if (relLabel) headHTML += `<div class="cal-col-rel">${relLabel}</div>`;
+                headHTML += `<div class="cal-col-day">${dayName} ${dayNum} ${mon}</div>`;
+                head.innerHTML = headHTML;
+                col.appendChild(head);
+
+                const isToday = date.getTime() === today.getTime();
+                const slots = [
+                    { id: date.toISOString().slice(0, 10) + '-matin', time: '9h–12h', label: 'Matin', available: !(isToday && now.getHours() >= 11) },
+                    { id: date.toISOString().slice(0, 10) + '-soir', time: '14h–18h', label: 'Après-midi', available: !(isToday && now.getHours() >= 16) },
+                ];
+
+                const currentAdd = cfgState.urgence ? cfgState.urgence.add : 0;
+                const isUpsell = addIfPicked > currentAdd;
+                const isDownsell = addIfPicked < currentAdd;
+
+                slots.forEach(slot => {
+                    const slotEl = document.createElement('div');
+                    slotEl.className = 'cal-slot-v2' + (slot.available ? '' : ' unavailable');
+
+                    let priceTag = '';
+                    if (slot.available) {
+                        if (isUpsell) priceTag = `<div class="slot-upsell">+${addIfPicked - currentAdd}€</div>`;
+                        else if (isDownsell) priceTag = `<div class="slot-downsell">-${currentAdd - addIfPicked}€</div>`;
+                    }
+
+                    slotEl.innerHTML = `
+                        <div class="slot-v2-time">${slot.time}</div>
+                        <div class="slot-v2-label">${slot.available ? slot.label : 'Complet'}</div>
+                        ${priceTag}
+                    `;
+
+                    if (slot.available) {
+                        slotEl.onclick = () => {
+                            if (urgenceIfPicked !== cfgState.urgence.val) {
+                                cfgState.urgence = { val: urgenceIfPicked, add: addIfPicked };
+                                updatePrice();
+                                const lines2 = document.getElementById('ps-lines-2');
+                                const total2 = document.getElementById('ps-total-2');
+                                if (lines2) lines2.innerHTML = document.getElementById('ps-lines').innerHTML;
+                                if (total2) total2.textContent = document.getElementById('ps-total').textContent;
+                                const notice = document.getElementById('step2-notice');
+                                if (notice) notice.textContent = addIfPicked > 0 ? `Majoration de +${addIfPicked}€ appliquée.` : 'Aucune majoration.';
+                                window._choixDayIndex = dayIndex;
+                                buildChoixRow(dayIndex);
+                            }
+                            container.querySelectorAll('.cal-slot-v2').forEach(s => s.classList.remove('selected'));
+                            slotEl.classList.add('selected');
+                            selectedSlot = { date: (relLabel ? relLabel + ' — ' : '') + getFrenchDay(date), time: slot.time };
+                            updateStep2Confirm();
+                        };
+                    }
+                    col.appendChild(slotEl);
+                });
+
+                container.appendChild(col);
+            });
+
+            buildChoixRow(window._choixDayIndex);
+        }
+
+        function buildChoixRow(activeIdx) {
+            const row = document.getElementById('step2-choix-row');
+            if (!row) return;
+            row.innerHTML = '';
+            for (let i = 0; i < 4; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'choix-row-cell';
+                cell.id = 'choix-cell-' + i;
+                if (i === activeIdx) cell.innerHTML = '<span class="choix-bar-label">Votre choix</span>';
+                row.appendChild(cell);
+            }
+        }
+
+        function updateStep2Confirm() {
+            const btn = document.getElementById('step2-confirm');
+            const drawerBtn = document.getElementById('drawer-step2-confirm');
+            if (!btn) return;
+            const mbbStep2 = document.getElementById('mbb-step2-confirm');
+            if (selectedSlot) {
+                btn.style.opacity = '1'; btn.style.cursor = 'pointer';
+                if (drawerBtn) { drawerBtn.style.opacity = '1'; drawerBtn.style.cursor = 'pointer'; }
+                if (mbbStep2) { mbbStep2.style.opacity = '1'; mbbStep2.style.cursor = 'pointer'; }
+            } else {
+                btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed';
+                if (drawerBtn) { drawerBtn.style.opacity = '0.4'; drawerBtn.style.cursor = 'not-allowed'; }
+                if (mbbStep2) { mbbStep2.style.opacity = '0.4'; mbbStep2.style.cursor = 'not-allowed'; }
+            }
+        }
+
+
+
+
+
+        function buildStep3() {
+            if (!selectedSlot) return;
+            updatePrice();
+            const lines3 = document.getElementById('ps-lines-3');
+            const total3 = document.getElementById('ps-total-3');
+            const slotRecap = document.getElementById('pay-slot-recap');
+            if (lines3) lines3.innerHTML = document.getElementById('ps-lines').innerHTML;
+            if (total3) total3.textContent = document.getElementById('ps-total').textContent;
+            if (slotRecap) slotRecap.textContent = selectedSlot.date + ' · ' + selectedSlot.time;
+        }
+
+        function handlePayment() {
+            alert('Paiement en cours de configuration — Stripe à brancher ici.');
+        }
+
+
+
+
+
+        function resetSimulation() {
+            const defaults = {
+                offre: { val: 'basique', uplift: PRIX.offre.basique },
+                surface: { val: '45', base: PRIX.surface[45] },
+                urgence: { val: '48h', add: PRIX.urgence['48h'] },
+                salissure: { val: 'normal', add: PRIX.salissure.normal },
+                rangement: { val: 'normal', add: PRIX.rangement.normal },
+                meuble: { val: 'meuble', add: PRIX.meuble.meuble },
+                occup: { val: 'vide', add: PRIX.occup.vide },
+                animaux: { val: 'non', add: PRIX.animaux.non },
+                vitres: { val: 'standard', add: PRIX.vitres.standard },
+                sdb: { val: '1', add: PRIX.sdb[1] },
+                wc: { val: '1', add: PRIX.wc[1] },
+                cuisine: { val: 'standard', add: PRIX.cuisine.standard },
+            };
+            Object.assign(cfgState, defaults);
+            cfgState.extras = {};
+
+            Object.keys(defaults).forEach(group => {
+                document.querySelectorAll('[data-group="' + group + '"]').forEach(el => el.classList.remove('selected'));
+                const def = document.querySelector('[data-group="' + group + '"][data-val="' + defaults[group].val + '"]');
+                if (def) def.classList.add('selected');
+            });
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                el.classList.remove('selected');
+                const cb = el.querySelector('.config-checkbox');
+                if (cb) cb.textContent = '';
+            });
+
+            if (currentStep !== 1) goToStep(1);
+            updatePrice();
+        }
+
+
+
+
+
+        window.addEventListener('resize', () => {
+            const bar = document.getElementById('mobile-bottom-bar');
+            const isConfig = document.getElementById('page-config').classList.contains('active');
+            if (bar) bar.style.display = (isConfig && window.innerWidth <= 768) ? 'block' : 'none';
+        });
+
+
+
+
+
+        injectPrixHTML();
+        navigate('config');
+        updatePrice();
+        requestAnimationFrame(() => updatePrice());
+
+    </script>
+</main>

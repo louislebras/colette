@@ -1,0 +1,19 @@
+.hero {
+  height: 90vh;
+  width: 100%;
+  background-color: var(--color-x);
+  margin-bottom: 160vh;
+  padding: 10px;
+}
+
+.logo-hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 65px;
+  gap: 8px;
+}
+
+.img-hero-colette {
+  width: 100%;
+}

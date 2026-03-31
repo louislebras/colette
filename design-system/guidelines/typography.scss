@@ -1,0 +1,276 @@
+.c-reg {
+  font-family: "Colette Regular";
+}
+
+.c-bold {
+  font-family: "Colette Bold";
+  letter-spacing: 0.03em;
+  line-height: 130%;
+}
+
+.c-cond-sb {
+  font-family: "Colette Condensed Semibold";
+  letter-spacing: 9% !important;
+  line-height: 92%;
+}
+
+.c-cond-u {
+  font-family: "Colette Condensed Ultra";
+  letter-spacing: -0.03em;
+  line-height: 92%;
+  text-transform: uppercase;
+}
+
+.xxs-size {
+  font-size: 9px;
+}
+
+.xs-size {
+  font-size: 10px;
+}
+
+.s-size {
+  font-size: 12px;
+}
+
+@media (max-width: 850px) {
+  .s-size {
+    font-size: 12px;
+  }
+}
+
+.sx-size {
+  font-size: 11px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+}
+
+.sxx-size {
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: -0.01em;
+}
+.m-size {
+  font-size: 15px;
+  line-height: 160%; /* 24px */
+  letter-spacing: -0.5px;
+}
+
+.mx-size {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.l-size {
+  font-size: 27px;
+  line-height: 125% !important;
+  letter-spacing: -0.5px;
+  span {
+    line-height: 125% !important;
+    letter-spacing: -0.5px;
+  }
+}
+
+.lx-size {
+  font-size: 23px;
+}
+
+.xl-size {
+  font-size: 51px;
+}
+
+@media (max-width: 850px) {
+  .l-size {
+    font-size: 23px;
+  }
+}
+.large-em {
+  letter-spacing: 0.04em;
+}
+
+button {
+  color: #000;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.underlined {
+  text-underline-offset: 5px;
+  text-decoration: underline;
+}
+
+.dashed {
+  text-underline-offset: 3px;
+  text-decoration: underline dotted;
+  cursor: text;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.dotted {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 12%;
+  text-underline-offset: 2px;
+  text-underline-position: from-font;
+}
+
+.turned-arrow {
+  display: inline-block;
+  transform: rotate(90deg) !important;
+}
+
+.semi-turned-arrow {
+  display: inline-block;
+  transform: rotate(-45deg) !important;
+}
+
+a {
+  text-decoration: none;
+  outline: none !important;
+  color: #000;
+}
+
+// .grey {
+//   color: $text-secondary !important;
+// }
+
+.semi-grey {
+  color: #5a5a5a;
+}
+
+.dark-grey {
+  color: #464646;
+}
+
+// .grey-hover {
+//   color: $text-primary;
+//   transition: 0.3s ease;
+//   &:hover {
+//     color: $text-secondary;
+//   }
+// }
+
+.link-hover {
+  opacity: 1;
+  transition: 0.3s ease;
+  line-height: 100%;
+  outline: none !important;
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li,
+input,
+span {
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+  line-height: 140%;
+}
+
+.glass-button {
+  background-color: #f7f7f7;
+  border-radius: 100px;
+  border: 1.5px solid white;
+  color: #494949;
+  transition: 0.3s ease;
+  &:hover {
+    transition: 0.3s ease;
+  }
+}
+
+.glass-button-2 {
+  background-color: #f7f7f7;
+  border-radius: 14px;
+  border: 1.5px solid white;
+  color: #494949;
+  padding: 10px 14px;
+  transition: 0.3s ease;
+  &:hover {
+    background-color: var(--bg-3);
+    border: 1.5px solid var(--bg-3);
+    color: white;
+  }
+}
+
+.basic-button {
+  display: flex;
+  padding: 11px 13px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 70px;
+  background: var(--bg-1-blur);
+  line-height: 100%;
+  transition: 0.3s ease;
+  cursor: pointer;
+  border: 1px solid var(--bg-1-blur);
+  width: fit-content;
+  // &:hover {
+  //   background-color: var(--color-x);
+  //   border: 1px solid var(--color-x);
+  //   color: white;
+  // }
+  &:hover {
+    box-shadow: none;
+    background-color: var(--bg-2);
+    color: #000;
+    border: 1px solid white;
+  }
+}
+@media (max-width: 850px) {
+  .basic-button {
+    padding: 14px 14px;
+  }
+}
+
+.x-button {
+  display: flex;
+  padding: 11px 13px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 70px;
+  background-color: var(--color-x);
+  // box-shadow: 0 1px 14px 0 #fff inset;
+  color: white;
+  line-height: 100%;
+  transition: 0.3s ease;
+  cursor: pointer;
+  width: fit-content;
+  border: 1px solid var(--color-x);
+  &:hover {
+    box-shadow: 0 11px 18px 0 #fff;
+    background-color: var(--bg-2);
+    color: #000;
+    border: 1px solid white;
+  }
+}
+
+@media (max-width: 850px) {
+  .x-button {
+    padding: 14px 14px;
+  }
+}
+
+.truncate-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}

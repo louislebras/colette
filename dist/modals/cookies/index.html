@@ -1,0 +1,47 @@
+<div class="modal modal-example">
+    <div class="modal-content">
+
+        <div class="waitlist-wrapper-form">
+            <p class="lss-size">Join Private List</p>
+
+            <form id="waitlistForm" action="https://formbold.com/s/oylgW" method="POST">
+                <input class="name-waitlist" type="text" placeholder="Name" name="name" required>
+                <input class="email-waitlist" type="email" placeholder="E-mail" name="email" required>
+                <button type="submit">Join</button>
+            </form>
+
+            <p class="xs-size grey iman">
+                I'm an
+            </p>
+
+            <!-- Sélecteur RÔLE (hors du form mais lié grâce à form="waitlistForm") -->
+            <div class="role-options s-size" aria-label="I am a">
+                <input type="radio" id="role-architect" name="role" value="Architect" form="waitlistForm" required
+                    checked>
+                <label for="role-architect" class="role-pill">Architect</label>
+
+                <input type="radio" id="role-designer" name="role" value="Designer" form="waitlistForm">
+                <label for="role-designer" class="role-pill">Designer</label>
+
+                <input type="radio" id="role-brand" name="role" value="Brand" form="waitlistForm">
+                <label for="role-brand" class="role-pill">Brand</label>
+
+                <input type="radio" id="role-place" name="role" value="Living Place" form="waitlistForm">
+                <label for="role-place" class="role-pill">Living Place</label>
+
+                <input type="radio" id="role-enthusiast" name="role" value="Enthusiast" form="waitlistForm">
+                <label for="role-enthusiast" class="role-pill">Enthusiast</label>
+            </div>
+
+            <p class="close-modal s-size link-hover grey btn-back-waitlist no-mobile">← Back</p>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+</div>
+
+<div class="close-modal blur-back-waitlist"></div>

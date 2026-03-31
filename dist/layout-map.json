@@ -1,0 +1,17 @@
+[
+  {
+    "group": "default",
+    "components": [
+      "header",
+      "pageContent",
+      "footer"
+    ],
+    "pages": [
+      "/models",
+      "/index",
+      "/configurer",
+      "/about",
+      "/404"
+    ]
+  }
+]

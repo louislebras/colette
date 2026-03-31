@@ -1,0 +1,42 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "generate-sitemap": "node utils/generate-sitemap.mjs",
+    "build:styles": "mkdir -p ./css && sass ./scss:./css --no-source-map --style=expanded",
+    "copy:styles": "mkdir -p ./dist/css && cp -r ./css ./dist",
+    "minify:styles": "postcss ./dist/css/**/*.css --replace",
+    "build:styles:min": "npm run build:styles && npm run copy:styles && npm run minify:styles",
+    "build:autotranslate": "node config/translate.js",
+    "build:design-system": "node server/generate-ds.mjs",
+    "build": "npm run build:design-system && node server/ssr.mjs && node utils/alt.cjs && node utils/generate-sitemap.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^7.0.6",
+    "postcss-cli": "^11.0.0",
+    "sass": "^1.82.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead"
+  ],
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.2",
+    "@vercel/analytics": "^1.5.0",
+    "dotenv": "^16.4.7",
+    "glob": "^11.0.0",
+    "googleapis": "^159.0.0",
+    "jsdom": "^25.0.1",
+    "moment": "^2.29.4",
+    "openai": "^4.89.0",
+    "xml": "^1.0.1"
+  }
+}

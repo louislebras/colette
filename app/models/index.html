@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="/css/pages/home.css">
+<link rel="stylesheet" href="/css/pages/models.css">
+
+<img class="brand-mark-scroll" src="/assets/brand-mark-principle-lab.svg" alt="Brand Mark Principle Lab">
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const brandMark = document.querySelector('.brand-mark-scroll');
+        if (!brandMark) return;
+
+
+        let scrollRotationSpeed = 0.2;
+
+        let smoothness = 0.08;
+
+        let currentRotation = 0;
+        let targetRotation = 0;
+        let animationFrame = null;
+
+        function animate() {
+            const diff = targetRotation - currentRotation;
+            currentRotation += diff * smoothness;
+
+            brandMark.style.transform = `rotate(${currentRotation}deg)`;
+
+            if (Math.abs(diff) > 0.01) {
+                animationFrame = requestAnimationFrame(animate);
+            } else {
+                currentRotation = targetRotation;
+                brandMark.style.transform = `rotate(${currentRotation}deg)`;
+                animationFrame = null;
+            }
+        }
+
+        function updateTarget() {
+            targetRotation = window.scrollY * scrollRotationSpeed;
+
+            if (!animationFrame) {
+                animationFrame = requestAnimationFrame(animate);
+            }
+        }
+
+        window.addEventListener('scroll', updateTarget, { passive: true });
+        updateTarget();
+
+
+        window.setBrandMarkScrollSpeed = (speed) => {
+            scrollRotationSpeed = speed;
+            updateTarget();
+        };
+
+        window.setBrandMarkSmoothness = (value) => {
+            smoothness = value;
+        };
+    });
+</script>
+
+<main class="bg-1 color-1">
+
+    <h1 class="l-size">
+        <span class="color-grey">Our models</span> <br>
+        Designing the foundations of predictive markets
+    </h1>
+
+
+    <p class="m-size lab-serif intro-text">
+        Exploring what becomes possible when populations of AI agents can be used to model markets, accelerate
+        experimentation,
+        and reduce the time and cost of understanding complex business environments.
+    </p>
+
+    <a class="link-to-vision" href=""></a>
+
+    <div class="model-sample">
+        <div class="frame-model">
+            <img src="" alt="">
+        </div>
+    </div>
+
+
+
+</main>

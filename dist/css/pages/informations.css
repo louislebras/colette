@@ -1,0 +1,1 @@
+main{display:flex;flex-direction:column;gap:30px;margin-left:30%;overflow:hidden;width:70%}main h1,main p{max-width:375px}@media (max-width:850px){main{margin-left:0;padding-top:50vh;width:100%}main h1,main p{display:inline;font-size:inherit;font-weight:400;max-width:100%}}

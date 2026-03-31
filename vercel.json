@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/:lang(en|us)/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|us)",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
