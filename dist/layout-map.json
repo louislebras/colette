@@ -9,6 +9,7 @@
     "pages": [
       "/models",
       "/index",
+      "/confirmation",
       "/configurer",
       "/about",
       "/404"

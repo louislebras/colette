@@ -1,7 +1,7 @@
 {
   "name": "base",
   "version": "1.0.0",
-  "description": "",
+  "description": "The official website of Principle OS™",
   "type": "module",
   "scripts": {
     "generate-sitemap": "node utils/generate-sitemap.mjs",
@@ -37,6 +37,12 @@
     "jsdom": "^25.0.1",
     "moment": "^2.29.4",
     "openai": "^4.89.0",
+    "resend": "^6.10.0",
+    "stripe": "^21.0.1",
     "xml": "^1.0.1"
+  },
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
   }
 }

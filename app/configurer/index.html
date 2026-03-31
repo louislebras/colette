@@ -1286,7 +1286,12 @@
                             }
                             container.querySelectorAll('.cal-slot-v2').forEach(s => s.classList.remove('selected'));
                             slotEl.classList.add('selected');
-                            selectedSlot = { date: (relLabel ? relLabel + ' — ' : '') + getFrenchDay(date), time: slot.time };
+                            selectedSlot = {
+                                date: (relLabel ? relLabel + ' — ' : '') + getFrenchDay(date),
+                                time: slot.time,
+                                start: slot.id.slice(0, 10) + (slot.id.includes('matin') ? 'T09:00:00' : 'T14:00:00'),
+                                end: slot.id.slice(0, 10) + (slot.id.includes('matin') ? 'T12:00:00' : 'T18:00:00'),
+                            };
                             updateStep2Confirm();
                         };
                     }
@@ -1343,8 +1348,75 @@
             if (slotRecap) slotRecap.textContent = selectedSlot.date + ' · ' + selectedSlot.time;
         }
 
-        function handlePayment() {
-            alert('Paiement en cours de configuration — Stripe à brancher ici.');
+        async function handlePayment() {
+            // Récupère les champs du formulaire étape 3
+            const inputs = document.querySelectorAll('#funnel-step-3 input');
+            const prenom = inputs[0]?.value?.trim();
+            const nom = inputs[1]?.value?.trim();
+            const email = inputs[2]?.value?.trim();
+            const tel = inputs[3]?.value?.trim();
+            const adresse = inputs[4]?.value?.trim();
+
+            // Validation basique
+            if (!prenom || !nom || !email || !adresse) {
+                alert('Merci de remplir tous les champs obligatoires.');
+                return;
+            }
+
+            if (!selectedSlot) {
+                alert('Merci de sélectionner un créneau à l\'étape 2.');
+                return;
+            }
+
+            // Récupère les dates réelles du créneau sélectionné
+            const creneauDate = selectedSlot.rawDate; // on ajoute ça juste après
+            const creneauStart = selectedSlot.start;
+            const creneauEnd = selectedSlot.end;
+
+            const payload = {
+                offre: cfgState.offre.val,
+                surface: cfgState.surface.val,
+                urgence: cfgState.urgence.val,
+                salissure: cfgState.salissure.val,
+                rangement: cfgState.rangement.val,
+                meuble: cfgState.meuble.val,
+                occup: cfgState.occup.val,
+                animaux: cfgState.animaux.val,
+                vitres: cfgState.vitres.val,
+                sdb: cfgState.sdb.val,
+                wc: cfgState.wc.val,
+                cuisine: cfgState.cuisine.val,
+                extras: Object.keys(cfgState.extras),
+                creneau: {
+                    start: creneauStart,
+                    end: creneauEnd,
+                    label: selectedSlot.time,
+                },
+                client: { prenom, nom, email, tel, adresse },
+            };
+
+            // Désactive le bouton pendant la requête
+            const btn = document.querySelector('.pay-confirm-btn');
+            if (btn) { btn.textContent = 'Redirection...'; btn.disabled = true; }
+
+            try {
+                const res = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                const data = await res.json();
+
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert('Erreur : ' + (data.error || 'réponse inattendue'));
+                    if (btn) { btn.textContent = 'Payer →'; btn.disabled = false; }
+                }
+            } catch (err) {
+                alert('Erreur réseau — réessayez.');
+                if (btn) { btn.textContent = 'Payer →'; btn.disabled = false; }
+            }
         }
 
 
