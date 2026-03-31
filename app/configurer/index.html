@@ -1349,7 +1349,7 @@
         }
 
         async function handlePayment() {
-            // Récupère les champs du formulaire étape 3
+
             const inputs = document.querySelectorAll('#funnel-step-3 input');
             const prenom = inputs[0]?.value?.trim();
             const nom = inputs[1]?.value?.trim();
@@ -1357,7 +1357,7 @@
             const tel = inputs[3]?.value?.trim();
             const adresse = inputs[4]?.value?.trim();
 
-            // Validation basique
+
             if (!prenom || !nom || !email || !adresse) {
                 alert('Merci de remplir tous les champs obligatoires.');
                 return;
@@ -1368,8 +1368,8 @@
                 return;
             }
 
-            // Récupère les dates réelles du créneau sélectionné
-            const creneauDate = selectedSlot.rawDate; // on ajoute ça juste après
+
+            const creneauDate = selectedSlot.rawDate;
             const creneauStart = selectedSlot.start;
             const creneauEnd = selectedSlot.end;
 
@@ -1395,7 +1395,7 @@
                 client: { prenom, nom, email, tel, adresse },
             };
 
-            // Désactive le bouton pendant la requête
+
             const btn = document.querySelector('.pay-confirm-btn');
             if (btn) { btn.textContent = 'Redirection...'; btn.disabled = true; }
 
