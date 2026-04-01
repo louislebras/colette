@@ -1,13 +1,13 @@
 // config/config-app.js
 
 // URL de base du site
-const baseUrl = "https://archivesbottega.com";
+const baseUrl = "https://colettelabaule.com";
 
 // Liste des langues disponibles
-const availableLanguages = ["en"];
+const availableLanguages = ["fr"];
 
 // Langue par défaut (utilisée si aucune langue n'est spécifiée ou si la langue de l'utilisateur n'est pas disponible)
-const defaultLanguage = "en";
+const defaultLanguage = "fr";
 
 // Langues à traduire automatiquement via l'API
 const autoTranslatedLanguages = [];
