@@ -9,7 +9,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: rgba(237, 234, 226, 0.2588235294);
+  background-color: rgba(237, 234, 226, 0.89);
   backdrop-filter: blur(45px);
 }
 
@@ -50,9 +50,10 @@ header {
 
 .color-text-header-hero {
   background-color: transparent;
-  backdrop-filter: blur(0px);
+  backdrop-filter: none;
 }
-.color-text-header-hero a {
+.color-text-header-hero a,
+.color-text-header-hero div {
   color: var(--color-100);
   transition: 0.3s ease;
 }
@@ -64,4 +65,8 @@ header {
 .color-text-header-hero .nav-logo {
   opacity: 0;
   transition: 0.3s ease;
+}
+.color-text-header-hero .nav-links {
+  background-color: rgba(176, 190, 156, 0.168627451);
+  backdrop-filter: blur(92px);
 }

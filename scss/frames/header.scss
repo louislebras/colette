@@ -9,7 +9,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: #edeae242;
+  background-color: rgb(237 234 226 / 89%);
   backdrop-filter: blur(45px);
 }
 
@@ -51,8 +51,9 @@ header {
 
 .color-text-header-hero {
   background-color: transparent;
-  backdrop-filter: blur(0px);
-  a {
+  backdrop-filter: none;
+  a,
+  div {
     color: var(--color-100);
     transition: 0.3s ease;
   }
@@ -66,5 +67,10 @@ header {
   .nav-logo {
     opacity: 0;
     transition: 0.3s ease;
+  }
+
+  .nav-links {
+    background-color: #b0be9c2b;
+    backdrop-filter: blur(92px);
   }
 }
