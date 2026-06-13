@@ -99,7 +99,7 @@
 }
 
 button {
-  color: #000;
+  color: var(--color-x);
 }
 
 .uppercase {
@@ -143,7 +143,7 @@ button {
 a {
   text-decoration: none;
   outline: none !important;
-  color: #000;
+  color: var(--color-x);
 }
 
 // .grey {
@@ -194,8 +194,13 @@ span {
 }
 
 .main-cta-dark {
+  font-family: "Colette Bold";
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  line-height: 130%;
+  text-transform: uppercase;
   background-color: var(--color-x);
-  color: var(--color-100);
+  color: #e5e2d3;
   padding: 17px 35px;
   border-radius: 16px;
   border: 5px solid var(--color-x);
@@ -210,6 +215,11 @@ span {
 }
 
 .main-cta-light {
+  font-family: "Colette Bold";
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  line-height: 130%;
+  text-transform: uppercase;
   background-color: var(--color-100);
   color: var(--color-x);
   padding: 17px 35px;
@@ -221,7 +231,7 @@ span {
   &:hover {
     background-color: var(--color-x2);
     border: 5px solid var(--color-x2);
-    color: var(--color-100);
+    color: #e5e2d3;
   }
 }
 

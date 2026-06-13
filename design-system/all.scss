@@ -31,7 +31,7 @@
 }
 
 .color-1-invert {
-  color: var(--color-100);
+  color: #e5e2d3;
 }
 
 .color-grey {
@@ -39,6 +39,11 @@
 }
 
 .cta-indic-color-component {
+  font-family: "Colette Bold";
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  line-height: 130%;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -4,7 +4,29 @@
     <section class="hero">
         <div class="logo-hero-section">
             <img class="img-hero-colette" src="/assets/logo-light-hero.svg" alt="Logo Light Hero">
-            <p class="uppercase color-1-invert c-bold xs-size">La Baule</p>
+            <p class="hero-location uppercase color-1-invert c-bold xs-size">La Baule</p>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title c-cond-u uppercase">
+                Besoin d'un
+                <span>menage</span>
+                en urgence ?
+            </h1>
+            <img class="hero-grog" src="/assets/icons-grog.png" alt="Icons Grog">
+            <div class="hero-availability c-bold uppercase">En 24/48h</div>
+            <div class="hero-actions">
+                <a class="main-cta-light c-bold xs-size" href="/configurer/">Configurer mon nettoyage</a>
+                <a class="hero-secondary-cta c-bold xs-size uppercase" href="/contact/">Nous appeler</a>
+            </div>
+            <p class="hero-promise m2-size">
+                Réservez. On nettoie. C'est réglé.<br>
+                Zéro surprise. Zéro devis. À la carte maintenant.<br>
+                La Baule. Pornichet. Le Pouliguen.
+            </p>
+            <div class="hero-benefits c-bold uppercase">
+                <span>Réservation en 2 minutes</span>
+                <span>Contact privilégié</span>
+            </div>
         </div>
     </section>
     <section class="section-2-home">
@@ -62,13 +84,17 @@
                 <span>→</span>
             </a>
         </div>
-        <div class="container-img-section3"></div>
+        <div class="about-image-frame">
+            <div class="about-image-placeholder c-cond-sb uppercase">Photo d'Isalys et Louis</div>
+            <div class="about-image-caption xs-size c-bold uppercase">Isalys et Louis · Fondateurs et intervenants de
+                Colette</div>
+        </div>
     </section>
 
 
     <section class="before-after">
         <div class="before-after-inner">
-            <div class="section-label m-size c-cond-sb uppercase" style="color:rgba(255,255,255,0.38)">Résultats réels
+            <div class="section-label m-size c-cond-sb uppercase" style="color:#E5E2D3">Résultats réels
             </div>
             <h2 class="xl-size c-cond-u uppercase">
                 Logements réels.
@@ -92,7 +118,7 @@
         </div>
     </section>
 
-    <section class="how-section">
+    <section class="how-section" id="comment-ca-marche">
         <div class="how-inner">
             <div class="section-label m2-size c-cond-sb uppercase color-2">Comment ça marche</div>
             <div class="how-steps">
@@ -160,28 +186,38 @@
 
     <section class="avis-section">
         <div class="section-label m-size c-cond-sb uppercase color-2">Ils ont testé</div>
-        <h2>Ce qu'ils en disent</h2>
-        <div class="avis-grid">
+        <h2 class="xl-size c-cond-u uppercase">Ce qu'ils en disent</h2>
+        <div class="avis-grid m2-size">
             <div class="avis-card">
                 <div class="avis-text">"Réservé en 2 minutes, intervention le lendemain. Parfait."</div>
-                <div class="avis-author">Thomas — La Baule</div>
+                <div class="avis-person">
+                    <div class="avis-avatar" aria-hidden="true"></div>
+                    <div class="avis-author">Thomas — La Baule</div>
+                </div>
             </div>
             <div class="avis-card">
                 <div class="avis-text">"Impossible de trouver quelqu'un en urgence. Eux oui."</div>
-                <div class="avis-author">Julie — Guérande</div>
+                <div class="avis-person">
+                    <div class="avis-avatar" aria-hidden="true"></div>
+                    <div class="avis-author">Julie — Guérande</div>
+                </div>
             </div>
             <div class="avis-card">
                 <div class="avis-text">"Clair, rapide, efficace. Rien à redire."</div>
-                <div class="avis-author">Marc — Pornichet</div>
+                <div class="avis-person">
+                    <div class="avis-avatar" aria-hidden="true"></div>
+                    <div class="avis-author">Marc — Pornichet</div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="prix-section">
         <div class="prix-inner">
-            <div class="section-label" style="color:rgba(255,255,255,0.38)">Exemples de prix</div>
-            <h2>Ce que ça représente concrètement</h2>
-            <p class="prix-sub">Le prix dépend uniquement de ce que vous choisissez.</p>
+            <div class="section-label m-size c-cond-sb uppercase" style="color:#E5E2D3">Exemples de prix
+            </div>
+            <h2 class="xl-size c-cond-u uppercase">Ce que ça représente concrètement</h2>
+            <p class="prix-sub m-size">Le prix dépend uniquement de ce que vous choisissez.</p>
             <div class="prix-examples">
                 <div class="prix-ex">
                     <div class="prix-ex-type">Studio · Reset Basique</div>
@@ -199,55 +235,65 @@
                     <div class="prix-ex-desc">45–60 m², standard agence</div>
                 </div>
             </div>
-            <div style="text-align:center">
-                <button class="btn-primary" onclick="navigate('config')">Simuler mon prix précis</button>
-            </div>
+            <a class="main-cta-light" href="/configurer/">Simuler mon prix précis</a>
         </div>
     </section>
 
     <section class="faq-section">
-        <div class="section-label">Questions fréquentes</div>
-        <h2>On répond</h2>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">Vous vous trompez dans les informations ? <span class="faq-arrow">↓</span></div>
-            <div class="faq-a">On ajuste avec vous avant l'intervention. Vous nous contactez par SMS ou WhatsApp, on
-                revoit
-                le détail ensemble. Rien n'est gravé dans le marbre.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">C'est plus sale que prévu ? <span class="faq-arrow">↓</span></div>
-            <div class="faq-a">Des options sont proposées à la réservation. Rien n'est imposé. Si l'état réel diffère,
-                on
-                vous contacte avant d'agir.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">Vous n'êtes pas sur place ? <span class="faq-arrow">↓</span></div>
-            <div class="faq-a">Aucun problème. Tout est cadré à l'avance par message. On vous envoie un compte-rendu
-                photo
-                en fin d'intervention.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">Comment se passe le paiement ? <span class="faq-arrow">↓</span></div>
-            <div class="faq-a">Paiement sécurisé en ligne au moment de la réservation. Confirmation immédiate. Pas de
-                règlement en espèces demandé.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">Quelles zones géographiques ? <span class="faq-arrow">↓</span></div>
-            <div class="faq-a">Nous intervenons sur La Baule, Guérande, Pornichet, Saint-Nazaire et communes
-                environnantes.
-                Contactez-nous pour vérifier votre adresse.</div>
+        <div class="faq-inner">
+            <div class="section-label m-size c-cond-sb uppercase color-2">Vos questions</div>
+            <h2 class="xl-size c-cond-u uppercase">On répond</h2>
+            <div class="faq-list">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">Vous vous trompez dans les informations ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-a">On ajuste avec vous avant l'intervention. Vous nous contactez par SMS ou
+                        WhatsApp,
+                        on
+                        revoit
+                        le détail ensemble. Rien n'est gravé dans le marbre.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">C'est plus sale que prévu ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-a">Des options sont proposées à la réservation. Rien n'est imposé. Si l'état réel
+                        diffère,
+                        on
+                        vous contacte avant d'agir.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">Vous n'êtes pas sur place ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-a">Aucun problème. Tout est cadré à l'avance par message. On vous envoie un
+                        compte-rendu
+                        photo
+                        en fin d'intervention.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">Comment se passe le paiement ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-a">Paiement sécurisé en ligne au moment de la réservation. Confirmation immédiate.
+                        Pas de
+                        règlement en espèces demandé.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">Quelles zones géographiques ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-a">Nous intervenons sur La Baule, Pornichet et Le Pouliguen.</div>
+                </div>
+            </div>
         </div>
     </section>
 </main>
 
 
 <script>
+    function toggleFaq(item) {
+        item.classList.toggle("open");
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         const header = document.querySelector(".header");
-        let threshold = window.innerHeight * 0.87;
+        const hero = document.querySelector(".hero");
+        let threshold = hero.offsetHeight - 70;
 
         function updateThreshold() {
-            threshold = window.innerHeight * 0.87;
+            threshold = hero.offsetHeight - 70;
         }
 
         function handleScroll() {

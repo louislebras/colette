@@ -158,7 +158,7 @@
 
 .config-option.selected .config-checkbox {
   background: var(--color-x);
-  color: white;
+  color: #e5e2d3;
 }
 
 .config-option-name {
@@ -247,6 +247,7 @@
   flex-shrink: 0;
   padding: 16px 20px 20px;
   background-color: var(--color-x);
+  color: #e5e2d3;
   width: calc(100% - 16px);
   margin-left: 8px;
   margin-bottom: 8px;
@@ -258,18 +259,23 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  color: var(--color-100);
+  color: #e5e2d3;
 }
 
 .ps-total-label {
-  color: var(--color-100);
+  color: #e5e2d3;
 }
 
 .ps-total-amount {
-  color: var(--color-100);
+  color: #e5e2d3;
 }
 
 .ps-cta {
+  font-family: "Colette Bold";
+  font-size: 10px !important;
+  letter-spacing: 0.03em;
+  line-height: 130% !important;
+  text-transform: uppercase;
   width: 100%;
   background: var(--color-100);
   color: var(--color-x);
@@ -296,7 +302,7 @@
 .ps-note {
   text-align: center;
   margin-top: 10px;
-  color: var(--color-100);
+  color: #e5e2d3;
 }
 
 /* ───────── STEPPER ───────── */
@@ -347,7 +353,7 @@
   border-color: var(--color-x);
 }
 .step.active .step-dot span {
-  color: white;
+  color: #e5e2d3;
 }
 .step.active .step-label {
   color: var(--color-x);
@@ -359,7 +365,7 @@
   background: var(--color-x2);
 }
 .step.done .step-dot span {
-  color: var(--color-100);
+  color: #e5e2d3;
 }
 .step.done .step-label {
   color: var(--color-x);
@@ -491,7 +497,7 @@
   height: 80px;
   background: var(--color-x);
   border: 2px solid var(--color-x);
-  color: var(--color-100);
+  color: #e5e2d3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -534,7 +540,7 @@
 
 .slot-downsell {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #e5e2d3;
   margin-top: 4px;
 }
 
@@ -649,7 +655,7 @@
 }
 
 .pay-slot-recap {
-  color: rgba(255, 255, 255, 0.65);
+  color: #e5e2d3;
   padding: 0px 0;
   margin-bottom: 10px;
 }
@@ -663,7 +669,7 @@
   right: 0;
   z-index: 200;
   background: var(--color-x);
-  color: white;
+  color: #e5e2d3;
   padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
   box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
 }
@@ -694,13 +700,18 @@
 }
 
 .mbb-amount {
-  color: white;
+  color: #e5e2d3;
   line-height: 1;
   text-align: right;
 }
 
 /* Bouton CTA du bandeau (Choisir créneau / Confirmer / Payer) */
 .mbb-reserve {
+  font-family: "Colette Bold";
+  font-size: 10px !important;
+  letter-spacing: 0.03em;
+  line-height: 130% !important;
+  text-transform: uppercase;
   width: 100%;
   background: white;
   color: var(--color-x);
@@ -708,16 +719,7 @@
   padding: 13px;
   border-radius: 16px;
   cursor: pointer;
-  letter-spacing: 0.02em;
-  margin-top: 0;
   margin-top: 10px;
-  font-family: "Colette Condensed Ultra";
-  letter-spacing: -0.03em;
-  line-height: 92%;
-  text-transform: uppercase;
-  font-size: 27px;
-  line-height: 125% !important;
-  letter-spacing: -0.5px;
 }
 
 /* ───────── DRAWER (récap mobile) ───────── */
@@ -738,7 +740,7 @@
   left: 0;
   right: 0;
   background: var(--color-x);
-  color: white;
+  color: #e5e2d3;
   border-radius: 14px 14px 0 0;
   height: 65vh;
   display: flex;
@@ -751,13 +753,13 @@
   margin-top: 20px;
 }
 .drawer .ps-line .color-grey {
-  color: rgba(255, 255, 255, 0.431372549);
+  color: #e5e2d3;
 }
 .drawer .ps-line-offre-name {
-  color: var(--color-100);
+  color: #e5e2d3;
 }
 .drawer .ps-line-offre-sub {
-  color: rgba(255, 255, 255, 0.431372549);
+  color: #e5e2d3;
 }
 .drawer-overlay.open .drawer {
   transform: translateY(0);
@@ -787,19 +789,19 @@
 
 .drawer-title {
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
+  color: #e5e2d3;
 }
 
 .ps-reset-btn-drawer {
   width: 100%;
   padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.394);
-  color: var(--color-100);
+  color: #e5e2d3;
   border-radius: 16px;
 }
 
 .drawer-close {
-  color: rgba(255, 255, 255, 0.4);
+  color: #e5e2d3;
   cursor: pointer;
   padding: 4px 4px 4px 12px;
   line-height: 1;
@@ -826,12 +828,12 @@
 }
 
 .drawer-total-label {
-  color: rgba(255, 255, 255, 0.42);
+  color: #e5e2d3;
 }
 
 .drawer-total-amount {
   font-size: 40px;
-  color: white;
+  color: #e5e2d3;
 }
 
 /* ───────── MOBILE ───────── */

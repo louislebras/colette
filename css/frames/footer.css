@@ -1,6 +1,6 @@
 footer {
   background: var(--ink);
-  color: rgba(255, 255, 255, 0.38);
+  color: #e5e2d3;
   padding: 36px 40px;
   display: flex;
   justify-content: space-between;
@@ -13,5 +13,5 @@ footer {
 .footer-logo {
   font-family: var(--sans);
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.65);
+  color: #e5e2d3;
 }
