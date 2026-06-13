@@ -20,6 +20,8 @@
 
 .img-hero-colette {
   width: 100%;
+  max-height: 130px;
+  object-fit: contain;
 }
 
 .hero-location {
@@ -178,12 +180,16 @@
     overflow: visible;
   }
 
+  .img-hero-colette {
+    max-height: none;
+  }
+
   .hero-content {
     margin-top: 36px;
   }
 
   .hero-title {
-    font-size: clamp(46px, 15vw, 64px);
+    font-size: 44px;
   }
 
   .hero-grog {

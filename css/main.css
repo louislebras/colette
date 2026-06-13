@@ -134,6 +134,10 @@
   .l-size {
     font-size: 23px;
   }
+  .xl-size,
+  .xxl-size {
+    font-size: 44px;
+  }
 }
 .large-em {
   letter-spacing: 0.04em;
