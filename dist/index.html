@@ -120,10 +120,25 @@
         <a href="/" id="nav-home" class="active no-mobile">Accueil</a>
         <a href="/about" id="nav-about" class="no-mobile">Qui sommes-nous</a>
         <a href="/contact" id="nav-offres" class="no-mobile">Nous appeler</a>
-        <div class="only-mobile">Menu</div>
+        <button class="mobile-menu-toggle only-mobile uppercase" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
         <a href="/configurer/" id="nav-config" class="nav-cta color-2">Configurer <br> mon nettoyage</a>
     </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-top">
+            <a href="/" class="mobile-menu-logo" aria-label="Accueil Colette">
+                <img src="/assets/logo-light-hero.svg" alt="Logo Light Hero">
+            </a>
+            <button class="mobile-menu-close uppercase" type="button" aria-label="Fermer le menu">Fermer</button>
+        </div>
+        <nav class="mobile-menu-links" aria-label="Navigation mobile">
+            <a href="/" class="c-cond-u uppercase">Accueil</a>
+            <a href="/about" class="c-cond-u uppercase">Qui sommes-nous</a>
+            <a href="/contact" class="c-cond-u uppercase">Nous appeler</a>
+        </nav>
+        <a href="/configurer/" class="main-cta-light mobile-menu-cta">Configurer mon nettoyage</a>
+    </div>
 </header>
+<script type="module" src="/js/global/menu-burger.js" defer=""></script>
 <div id="pageContent"><link rel="stylesheet" href="/css/pages/home.css">
 
 <main>
@@ -377,7 +392,7 @@
             <h2 class="xl-size c-cond-u uppercase">On répond</h2>
             <div class="faq-list">
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-q">Vous vous trompez dans les informations ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-q">Vous vous trompez dans les informations ? <span class="faq-arrow" aria-hidden="true"></span></div>
                     <div class="faq-a">On ajuste avec vous avant l'intervention. Vous nous contactez par SMS ou
                         WhatsApp,
                         on
@@ -385,27 +400,31 @@
                         le détail ensemble. Rien n'est gravé dans le marbre.</div>
                 </div>
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-q">C'est plus sale que prévu ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-q">C'est plus sale que prévu ? <span class="faq-arrow" aria-hidden="true"></span>
+                    </div>
                     <div class="faq-a">Des options sont proposées à la réservation. Rien n'est imposé. Si l'état réel
                         diffère,
                         on
                         vous contacte avant d'agir.</div>
                 </div>
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-q">Vous n'êtes pas sur place ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-q">Vous n'êtes pas sur place ? <span class="faq-arrow" aria-hidden="true"></span>
+                    </div>
                     <div class="faq-a">Aucun problème. Tout est cadré à l'avance par message. On vous envoie un
                         compte-rendu
                         photo
                         en fin d'intervention.</div>
                 </div>
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-q">Comment se passe le paiement ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-q">Comment se passe le paiement ? <span class="faq-arrow" aria-hidden="true"></span>
+                    </div>
                     <div class="faq-a">Paiement sécurisé en ligne au moment de la réservation. Confirmation immédiate.
                         Pas de
                         règlement en espèces demandé.</div>
                 </div>
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-q">Quelles zones géographiques ? <span class="faq-arrow">↓</span></div>
+                    <div class="faq-q">Quelles zones géographiques ? <span class="faq-arrow" aria-hidden="true"></span>
+                    </div>
                     <div class="faq-a">Nous intervenons sur La Baule, Pornichet et Le Pouliguen.</div>
                 </div>
             </div>

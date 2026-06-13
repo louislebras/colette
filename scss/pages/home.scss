@@ -1,13 +1,13 @@
 .hero {
-  height: 90vh;
-  min-height: 760px;
+  height: auto;
+  min-height: max(90vh, 760px);
   width: 100%;
   background-color: var(--color-x);
   padding: 80px 20px 38px;
   color: #e5e2d3;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   justify-content: space-around;
 }
 
@@ -400,11 +400,15 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
+  font-family: "Colette Bold";
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  line-height: 130%;
   text-transform: uppercase;
-  color: #e5e2d3;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 4px 8px;
-  border-radius: 1px;
+  color: var(--color-x);
+  background: var(--color-100);
+  padding: 9px 14px;
+  border-radius: 10px;
 }
 .ba-placeholder {
   width: 100%;
@@ -738,13 +742,32 @@
   gap: 16px;
 }
 .faq-arrow {
+  width: 18px;
+  height: 18px;
   color: var(--color-x2);
-  transition: transform 0.2s;
-  font-size: 18px;
   flex-shrink: 0;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease;
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
 }
-.faq-item.open .faq-arrow {
-  transform: rotate(180deg);
+.faq-item.open .faq-arrow::after {
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
 }
 .faq-a {
   font-size: 14px;
@@ -798,6 +821,10 @@
   .ba-item,
   .how-step {
     width: 100%;
+  }
+
+  .before-after h2 {
+    margin-top: -10px;
   }
 
   .avis-grid,

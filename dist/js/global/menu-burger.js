@@ -1,41 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn = document.querySelector(".menu-pages");
-  const overlay = document.querySelector(".nav-pages-overlay");
-  const closeBtn = document.querySelector(".nav-pages-close");
+  const menuBtn = document.querySelector(".mobile-menu-toggle");
+  const overlay = document.querySelector(".mobile-menu");
+  const closeBtn = document.querySelector(".mobile-menu-close");
+  const menuLinks = overlay?.querySelectorAll("a");
 
   if (!menuBtn || !overlay) return;
 
   const closeMenu = () => {
-    overlay.classList.remove("visible");
-    document.body.classList.remove("no-scroll");
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    menuBtn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("mobile-menu-open");
   };
 
-  // ✅ OUVERTURE
-  menuBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    overlay.classList.add("visible");
-    document.body.classList.add("no-scroll");
+  menuBtn.addEventListener("click", () => {
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+    menuBtn.setAttribute("aria-expanded", "true");
+    document.body.classList.add("mobile-menu-open");
   });
 
-  // ✅ CLIC EN DEHORS
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) {
-      closeMenu();
-    }
-  });
-
-  // ✅ BOUTON CLOSE
   if (closeBtn) {
-    closeBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      closeMenu();
-    });
+    closeBtn.addEventListener("click", closeMenu);
   }
 
-  // ✅ ESC
+  menuLinks?.forEach((link) => link.addEventListener("click", closeMenu));
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeMenu();
     }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 850) closeMenu();
   });
 });

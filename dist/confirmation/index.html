@@ -71,10 +71,25 @@
         <a href="/" id="nav-home" class="active no-mobile">Accueil</a>
         <a href="/about" id="nav-about" class="no-mobile">Qui sommes-nous</a>
         <a href="/contact" id="nav-offres" class="no-mobile">Nous appeler</a>
-        <div class="only-mobile">Menu</div>
+        <button class="mobile-menu-toggle only-mobile uppercase" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
         <a href="/configurer/" id="nav-config" class="nav-cta color-2">Configurer <br> mon nettoyage</a>
     </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-top">
+            <a href="/" class="mobile-menu-logo" aria-label="Accueil Colette">
+                <img src="/assets/logo-light-hero.svg" alt="Logo Light Hero">
+            </a>
+            <button class="mobile-menu-close uppercase" type="button" aria-label="Fermer le menu">Fermer</button>
+        </div>
+        <nav class="mobile-menu-links" aria-label="Navigation mobile">
+            <a href="/" class="c-cond-u uppercase">Accueil</a>
+            <a href="/about" class="c-cond-u uppercase">Qui sommes-nous</a>
+            <a href="/contact" class="c-cond-u uppercase">Nous appeler</a>
+        </nav>
+        <a href="/configurer/" class="main-cta-light mobile-menu-cta">Configurer mon nettoyage</a>
+    </div>
 </header>
+<script type="module" src="../js/global/menu-burger.js" defer=""></script>
 <div id="pageContent"><main>
     <style>
         body {

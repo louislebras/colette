@@ -71,10 +71,25 @@
         <a href="/" id="nav-home" class="active no-mobile">Accueil</a>
         <a href="/about" id="nav-about" class="no-mobile">Qui sommes-nous</a>
         <a href="/contact" id="nav-offres" class="no-mobile">Nous appeler</a>
-        <div class="only-mobile">Menu</div>
+        <button class="mobile-menu-toggle only-mobile uppercase" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
         <a href="/configurer/" id="nav-config" class="nav-cta color-2">Configurer <br> mon nettoyage</a>
     </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-top">
+            <a href="/" class="mobile-menu-logo" aria-label="Accueil Colette">
+                <img src="/assets/logo-light-hero.svg" alt="Logo Light Hero">
+            </a>
+            <button class="mobile-menu-close uppercase" type="button" aria-label="Fermer le menu">Fermer</button>
+        </div>
+        <nav class="mobile-menu-links" aria-label="Navigation mobile">
+            <a href="/" class="c-cond-u uppercase">Accueil</a>
+            <a href="/about" class="c-cond-u uppercase">Qui sommes-nous</a>
+            <a href="/contact" class="c-cond-u uppercase">Nous appeler</a>
+        </nav>
+        <a href="/configurer/" class="main-cta-light mobile-menu-cta">Configurer mon nettoyage</a>
+    </div>
 </header>
+<script type="module" src="../js/global/menu-burger.js" defer=""></script>
 <div id="pageContent"><link rel="stylesheet" href="/css/pages/about.css">
 
 <main class="about-page">
@@ -86,10 +101,20 @@
                 début à la fin.</p>
             <a class="main-cta-dark" href="/configurer/">Configurer mon nettoyage</a>
         </div>
-        <div class="about-image-frame">
-            <div class="about-image-placeholder c-cond-sb uppercase">Photo d'Isalys et Louis</div>
-            <div class="about-image-caption xs-size c-bold uppercase">Isalys et Louis · Fondateurs et intervenants de
-                Colette</div>
+        <div class="about-hero-media">
+            <div class="about-image-frame">
+                <div class="about-image-placeholder c-cond-sb uppercase">Photo d'Isalys et Louis</div>
+                <div class="about-image-caption xs-size c-bold uppercase">Isalys et Louis · Fondateurs et intervenants
+                    de
+                    Colette</div>
+            </div>
+            <p class="about-story about-story-mobile m-size">Vous savez qui intervient. Vous savez à quoi vous attendre. Pas
+                d'intermédiaire, pas de prestataire anonyme.<br><br>
+                Après plusieurs années passées dans l'immobilier et la gestion locative, Louis a vu à quel point un
+                besoin simple pouvait devenir inutilement compliqué : délais trop longs, qualité irrégulière, devis
+                flous, absence de vrai responsable.<br><br>
+                Colette est née pour répondre à cela. À deux, Isalys et Louis offrent un service clair, réactif et
+                maîtrisé, avec un seul niveau d'exigence du début à la fin.</p>
         </div>
     </section>
 
@@ -101,6 +126,14 @@
                 <p class="m-size color-grey">Trouver quelqu'un de fiable, disponible rapidement et avec un prix clair
                     ne devrait pas demander plusieurs jours.</p>
             </div>
+
+            <p class="about-story about-story-desktop m-size">Vous savez qui intervient. Vous savez à quoi vous
+                attendre. Pas d'intermédiaire, pas de prestataire anonyme.<br><br>
+                Après plusieurs années passées dans l'immobilier et la gestion locative, Louis a vu à quel point un
+                besoin simple pouvait devenir inutilement compliqué : délais trop longs, qualité irrégulière, devis
+                flous, absence de vrai responsable.<br><br>
+                Colette est née pour répondre à cela. À deux, Isalys et Louis offrent un service clair, réactif et
+                maîtrisé, avec un seul niveau d'exigence du début à la fin.</p>
 
             <div class="about-points">
                 <article class="about-point">
