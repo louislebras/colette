@@ -1,3 +1,6 @@
 {
-  "404": "404 ou à venir"
+  "404": "404 ou à venir",
+  "PageTitle": "Page introuvable | Colette La Baule",
+  "PageDescription": "La page demandée est introuvable.",
+  "PageRobots": "noindex, nofollow"
 }
