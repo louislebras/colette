@@ -189,6 +189,15 @@
     max-height: none;
   }
 
+  .logo-hero-section {
+    align-items: center;
+  }
+
+  .hero-location {
+    margin-right: 0;
+    text-align: center;
+  }
+
   .hero-content {
     margin-top: 36px;
   }
@@ -196,21 +205,30 @@
   .hero-title {
     font-size: 50px;
     line-height: 84%;
+
+    span {
+      height: 50px;
+      margin: 5px auto;
+      padding: 0 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .hero-grog {
     width: auto;
     height: 100px;
-    margin-top: 18px;
+    margin-top: 14px;
   }
 
   .hero-availability {
-    margin-top: 18px;
+    margin-top: 14px;
   }
 
   .hero-actions {
     width: fit-content;
-    margin-top: 24px;
+    margin-top: 14px;
     display: grid;
     grid-template-columns: auto auto;
     align-items: stretch;
@@ -231,16 +249,16 @@
   }
 
   .hero-promise {
-    margin-top: 24px;
-    margin-bottom: 24px;
+    margin-top: 18px;
+    margin-bottom: 18px;
     font-size: 15px;
     line-height: 160%;
   }
 
   .hero-benefits {
     margin-top: 0;
-    margin-bottom: 24px;
-    gap: 18px;
+    margin-bottom: 14px;
+    gap: 14px;
     flex-direction: row;
     white-space: nowrap;
   }
