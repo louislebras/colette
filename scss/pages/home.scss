@@ -194,22 +194,42 @@
 
   .hero-grog {
     width: auto;
-    height: 140px;
+    height: 100px;
+    margin-top: 18px;
+  }
+
+  .hero-availability {
+    margin-top: 18px;
   }
 
   .hero-actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1.65fr 1fr;
+    width: fit-content;
+    margin-top: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
   }
 
   .hero-actions a {
-    width: 100%;
+    width: fit-content;
+    white-space: nowrap;
+    padding: 14px 18px;
+  }
+
+  .hero-promise {
+    margin-top: 34px;
+    margin-bottom: 34px;
+    font-size: 15px;
+    line-height: 160%;
   }
 
   .hero-benefits {
-    gap: 12px;
-    flex-direction: column;
+    margin-top: 0;
+    margin-bottom: 34px;
+    gap: 18px;
+    flex-direction: row;
+    white-space: nowrap;
   }
 
   .container-cases {
