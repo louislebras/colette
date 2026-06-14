@@ -19,7 +19,7 @@ header {
   img {
     height: 20px;
     position: relative;
-    left: 15px;
+    left: 10px;
   }
 }
 
@@ -164,6 +164,11 @@ header {
     border-radius: 12px;
     background: var(--color-x2);
     color: #e5e2d3;
+  }
+
+  .nav-links {
+    gap: 7px;
+    padding: 5px 5px 5px 10px;
   }
 
   .mobile-menu-links {
