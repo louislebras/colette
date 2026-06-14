@@ -204,12 +204,12 @@
   }
 
   .hero-content {
-    margin-top: 36px;
+    margin-top: 26px;
   }
 
   .hero-title {
-    font-size: 50px;
-    line-height: 84%;
+    font-size: 45px;
+    line-height: 66%;
 
     span {
       height: 50px;
@@ -224,16 +224,16 @@
   .hero-grog {
     width: auto;
     height: 100px;
-    margin-top: 14px;
+    margin-top: 10px;
   }
 
   .hero-availability {
-    margin-top: 14px;
+    margin-top: 10px;
   }
 
   .hero-actions {
     width: fit-content;
-    margin-top: 18px;
+    margin-top: 15px;
     display: grid;
     grid-template-columns: auto auto;
     align-items: stretch;
@@ -254,15 +254,15 @@
   }
 
   .hero-promise {
-    margin-top: 18px;
-    margin-bottom: 18px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     font-size: 15px;
     line-height: 160%;
   }
 
   .hero-benefits {
     margin-top: 0;
-    margin-bottom: 4px;
+    margin-bottom: 0px;
     gap: 14px;
     flex-direction: row;
     white-space: nowrap;
@@ -299,7 +299,6 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
-
 }
 
 .section-3-home {
