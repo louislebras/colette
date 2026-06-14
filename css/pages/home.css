@@ -1,4 +1,9 @@
 @charset "UTF-8";
+html,
+body {
+  background-color: var(--color-x) !important;
+}
+
 .hero {
   height: auto;
   min-height: max(90vh, 760px);
