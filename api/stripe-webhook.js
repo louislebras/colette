@@ -228,7 +228,7 @@ async function sendClientEmail(metadata, total) {
   const prestationRows = buildPrestationRows(metadata);
 
   await resend.emails.send({
-    from: "Colette <bonjour@colettelabaule.com>",
+    from: "Colette <colettelabaule@gmail.com>",
     to: metadata.client_email,
     subject: `Votre intervention Colette est confirmée — ${creneauDate}`,
     html: `
@@ -274,7 +274,7 @@ async function sendClientEmail(metadata, total) {
     </div>
 
     <div style="background:#F6F5F0;border-radius:8px;padding:14px 18px;font-size:13px;color:#4A4A46;line-height:1.7;">
-      Une question ? Écrivez-nous à <a href="mailto:bonjour@colettelabaule.com" style="color:#2D4A2D;font-weight:500;">bonjour@colettelabaule.com</a>
+      Une question ? Écrivez-nous à <a href="mailto:colettelabaule@gmail.com" style="color:#2D4A2D;font-weight:500;">colettelabaule@gmail.com</a>
     </div>
 
     <p style="font-size:11px;color:#ADADAD;margin-top:20px;line-height:1.6;">
@@ -306,7 +306,7 @@ async function sendOwnerEmail(metadata, total) {
   const prestationRows = buildPrestationRows(metadata);
 
   await resend.emails.send({
-    from: "Colette <bonjour@colettelabaule.com>",
+    from: "Colette <colettelabaule@gmail.com>",
     to: "colettelabaule@gmail.com",
     subject: `🆕 Nouvelle réservation — ${metadata.client_name} — ${creneauDate}`,
     html: `
