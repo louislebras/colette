@@ -84,6 +84,16 @@
   text-align: center;
 }
 
+.about-image-photo {
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
 .about-image-caption {
   color: var(--color-x2);
   padding: 2px 4px;
