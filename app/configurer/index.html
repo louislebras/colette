@@ -1136,23 +1136,48 @@
             }
 
 
-            function getFrenchDay(date) {
-                const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-                const months = ['janvier', 'févr.', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
-                return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()];
+            const PARIS_TIME_ZONE = 'Europe/Paris';
+
+            function getParisDateKey(date = new Date()) {
+                const parts = new Intl.DateTimeFormat('en-CA', {
+                    timeZone: PARIS_TIME_ZONE,
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                }).formatToParts(date);
+                const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+                return `${values.year}-${values.month}-${values.day}`;
             }
-            function addDays(date, n) {
-                const d = new Date(date);
-                d.setDate(d.getDate() + n);
-                return d;
+
+            function addParisDays(dateKey, days) {
+                const [year, month, day] = dateKey.split('-').map(Number);
+                const date = new Date(Date.UTC(year, month - 1, day + days));
+                return date.toISOString().slice(0, 10);
+            }
+
+            function getFrenchDay(dateKey) {
+                return new Intl.DateTimeFormat('fr-FR', {
+                    timeZone: PARIS_TIME_ZONE,
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'short',
+                }).format(new Date(`${dateKey}T12:00:00Z`));
+            }
+
+            function getParisHour(date = new Date()) {
+                return Number(new Intl.DateTimeFormat('en-GB', {
+                    timeZone: PARIS_TIME_ZONE,
+                    hour: '2-digit',
+                    hourCycle: 'h23',
+                }).format(date));
             }
 
 
             function initUrgenceLabels() {
-                const today = new Date();
-                const tomorrow = addDays(today, 1);
-                const d2 = addDays(today, 2);
-                const d3 = addDays(today, 3);
+                const today = getParisDateKey();
+                const tomorrow = addParisDays(today, 1);
+                const d2 = addParisDays(today, 2);
+                const d3 = addParisDays(today, 3);
                 const set = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
                 set('urgence-label-48h', 'Dans les 48–72h');
                 set('urgence-desc-48h', getFrenchDay(d2) + ' ou ' + getFrenchDay(d3));
@@ -1163,10 +1188,10 @@
             }
 
             function getUrgenceDisplayLabel() {
-                const today = new Date();
-                const tomorrow = addDays(today, 1);
-                const d2 = addDays(today, 2);
-                const d3 = addDays(today, 3);
+                const today = getParisDateKey();
+                const tomorrow = addParisDays(today, 1);
+                const d2 = addParisDays(today, 2);
+                const d3 = addParisDays(today, 3);
                 const val = cfgState.urgence ? cfgState.urgence.val : '48h';
                 if (val === '48h') return 'Dans les 48–72h<br><span class="color-grey">(' + getFrenchDay(d2) + '/' + getFrenchDay(d3) + ')</span>';
                 if (val === 'demain') return 'Demain — ' + getFrenchDay(tomorrow);
@@ -1222,14 +1247,13 @@
 
             async function buildStep2() {
                 const urgenceVal = cfgState.urgence ? cfgState.urgence.val : '48h';
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
+                const today = getParisDateKey();
 
                 const allDays = [
-                    { date: new Date(today), relLabel: "Aujourd'hui", urgenceIfPicked: 'jour', addIfPicked: PRIX.urgence.jour },
-                    { date: addDays(today, 1), relLabel: 'Demain', urgenceIfPicked: 'demain', addIfPicked: PRIX.urgence.demain },
-                    { date: addDays(today, 2), relLabel: 'Après-demain', urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
-                    { date: addDays(today, 3), relLabel: null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+                    { date: today, relLabel: "Aujourd'hui", urgenceIfPicked: 'jour', addIfPicked: PRIX.urgence.jour },
+                    { date: addParisDays(today, 1), relLabel: 'Demain', urgenceIfPicked: 'demain', addIfPicked: PRIX.urgence.demain },
+                    { date: addParisDays(today, 2), relLabel: 'Après-demain', urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+                    { date: addParisDays(today, 3), relLabel: null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
                 ];
 
 
@@ -1268,7 +1292,7 @@
                 }
 
                 container.innerHTML = '';
-                const now = new Date();
+                const parisHour = getParisHour();
 
                 allDays.forEach(({ date, relLabel, urgenceIfPicked, addIfPicked }, dayIndex) => {
                     const col = document.createElement('div');
@@ -1277,15 +1301,14 @@
 
                     const head = document.createElement('div');
                     head.className = 'cal-col-head';
-                    const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'jun', 'jul', 'aoû', 'sep', 'oct', 'nov', 'déc'];
                     let headHTML = '';
                     if (relLabel) headHTML += `<div class="cal-col-rel">${relLabel}</div>`;
-                    headHTML += `<div class="cal-col-day">${getFrenchDay(date).split(' ')[0]} ${date.getDate()} ${months[date.getMonth()]}</div>`;
+                    headHTML += `<div class="cal-col-day">${getFrenchDay(date)}</div>`;
                     head.innerHTML = headHTML;
                     col.appendChild(head);
 
-                    const dateStr = date.toISOString().slice(0, 10);
-                    const isToday = date.getTime() === today.getTime();
+                    const dateStr = date;
+                    const isToday = date === today;
                     const apiSlots = calSlots[dateStr] || [];
 
                     const slotDefs = [
@@ -1300,8 +1323,8 @@
                     slotDefs.forEach(slot => {
 
                         const pastToday = isToday && (
-                            slot.id.includes('matin') ? now.getHours() >= 11 :
-                                slot.id.includes('apres-midi') ? now.getHours() >= 16 : false
+                            slot.id.includes('matin') ? parisHour >= 11 :
+                                slot.id.includes('apres-midi') ? parisHour >= 16 : false
                         );
 
 
