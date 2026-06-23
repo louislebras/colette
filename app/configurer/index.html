@@ -662,8 +662,9 @@
                                     <div class="pay-field"><label>Adresse du logement</label><input type="text"
                                             placeholder="12 rue des Hortensias, La Baule"></div>
 
-                                    <div class="pay-field"><label>Informations supplémentaires</label><textarea
-                                            placeholder="Note libre" rows="3" style="resize: vertical;"></textarea>
+                                    <div class="pay-field"><label for="client-comment">Informations supplémentaires</label><textarea
+                                            id="client-comment" placeholder="Code d'accès, consignes, informations utiles…"
+                                            rows="3" maxlength="500" style="resize: vertical;"></textarea>
                                     </div>
                                 </div>
 
@@ -1431,6 +1432,7 @@
                 const email = inputs[2]?.value?.trim();
                 const tel = inputs[3]?.value?.trim();
                 const adresse = inputs[4]?.value?.trim();
+                const commentaire = document.getElementById('client-comment')?.value?.trim() || '';
 
                 if (!prenom || !nom || !email || !adresse) {
                     alert('Merci de remplir tous les champs obligatoires.');
@@ -1460,6 +1462,7 @@
                         end: selectedSlot.end,
                         label: selectedSlot.time,
                     },
+                    commentaire,
                     client: { prenom, nom, email, tel, adresse },
                 };
 

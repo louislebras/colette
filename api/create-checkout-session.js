@@ -389,6 +389,10 @@ export default async function handler(req, res) {
 
     const lineItems = buildLineItems(body);
     const total = calculerTotal(lineItems);
+    const commentaire =
+      typeof body.commentaire === "string"
+        ? body.commentaire.trim().slice(0, 500)
+        : "";
 
     if (total < 0) return res.status(400).json({ error: "Montant invalide" });
 
@@ -420,6 +424,7 @@ export default async function handler(req, res) {
         client_name: `${body.client.prenom} ${body.client.nom}`,
         client_tel: body.client.tel || "",
         adresse: body.client.adresse || "",
+        commentaire,
       },
       success_url: `${baseUrl}/confirmation/?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/configurer/`,

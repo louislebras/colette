@@ -141,6 +141,30 @@ function buildPrestationRows(metadata) {
   return `<table style="width:100%;border-collapse:collapse;">${rows}${extrasRow}</table>`;
 }
 
+function getCustomerComment(metadata) {
+  return String(metadata.commentaire || "").trim();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function buildCommentEmailBlock(metadata) {
+  const comment = getCustomerComment(metadata);
+  if (!comment) return "";
+
+  return `
+    <div style="background:#F6F5F0;border-radius:8px;padding:16px 20px;margin-bottom:16px;">
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#9A9A96;margin:0 0 6px;">Informations supplémentaires</p>
+      <p style="font-size:14px;color:#1A1A18;margin:0;line-height:1.6;white-space:pre-line;">${escapeHtml(comment)}</p>
+    </div>`;
+}
+
 // ── Auth Google ──
 function getAuth() {
   const privateKey = (process.env.GOOGLE_PRIVATE_KEY || "")
@@ -166,6 +190,7 @@ async function createCalendarEvent(metadata, total) {
       ? "\nExtras : " +
         extras.map((k) => LABELS.extras[k]?.split(" —")[0] || k).join(", ")
       : "";
+  const comment = getCustomerComment(metadata);
 
   const description = [
     `── CLIENT ──`,
@@ -188,6 +213,7 @@ async function createCalendarEvent(metadata, total) {
     `WC : ${LABELS.wc[metadata.wc] || LABELS.wc[parseInt(metadata.wc)] || metadata.wc}`,
     `Cuisine : ${LABELS.cuisine[metadata.cuisine] || metadata.cuisine}`,
     extrasText,
+    ...(comment ? ["", `── COMMENTAIRE CLIENT ──`, comment] : []),
     ``,
     `── PAIEMENT ──`,
     `Total : ${total}€`,
@@ -226,6 +252,7 @@ async function sendClientEmail(metadata, total) {
     minute: "2-digit",
   });
   const prestationRows = buildPrestationRows(metadata);
+  const commentBlock = buildCommentEmailBlock(metadata);
 
   await resend.emails.send({
     from: "Colette <bonjour@colettelabaule.com>",
@@ -256,6 +283,8 @@ async function sendClientEmail(metadata, total) {
       <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#9A9A96;margin:0 0 4px;">Adresse d'intervention</p>
       <p style="font-size:14px;color:#1A1A18;margin:0;font-weight:500;">📍 ${metadata.adresse}</p>
     </div>
+
+    ${commentBlock}
 
     <div style="background:#F6F5F0;border-radius:8px;padding:20px 24px;margin-bottom:16px;">
       <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#9A9A96;margin:0 0 14px;">Détail de la prestation</p>
@@ -304,6 +333,7 @@ async function sendOwnerEmail(metadata, total) {
     minute: "2-digit",
   });
   const prestationRows = buildPrestationRows(metadata);
+  const commentBlock = buildCommentEmailBlock(metadata);
 
   await resend.emails.send({
     from: "Colette <bonjour@colettelabaule.com>",
@@ -325,6 +355,8 @@ async function sendOwnerEmail(metadata, total) {
       <p style="font-size:13px;color:#4A4A46;margin:0 0 2px;">📱 ${metadata.client_tel || "Non renseigné"}</p>
       <p style="font-size:13px;color:#4A4A46;margin:0;">📍 ${metadata.adresse}</p>
     </div>
+
+    ${commentBlock}
 
     <div style="background:#2D4A2D;border-radius:8px;padding:18px 22px;margin-bottom:16px;">
       <p style="color:rgba(255,255,255,0.55);font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 6px;">Créneau</p>
