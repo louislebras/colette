@@ -13,12 +13,12 @@
                 <div class="step-line" id="step-line-1"></div>
                 <div class="step" id="step-dot-2" onclick="stepClickable(2)">
                     <div class="step-dot"><span>2</span></div>
-                    <div class="step-label">Créneau</div>
+                    <div class="step-label">Créneau souhaité</div>
                 </div>
                 <div class="step-line" id="step-line-2"></div>
                 <div class="step" id="step-dot-3" onclick="stepClickable(3)">
                     <div class="step-dot"><span>3</span></div>
-                    <div class="step-label">Paiement</div>
+                    <div class="step-label">Pré-réservation</div>
                 </div>
             </div>
         </div>
@@ -34,6 +34,10 @@
                         <h1 class="xl-size c-cond-u uppercase">Configurez <br> votre nettoyage</h1>
                         <p class="color-grey">On intervient exactement selon les éléments sélectionnés. <br>
                             On vous guide pour faire le bon choix.</p>
+                        <p class="color-2"
+                            style="margin-top:14px;font-family:'Colette Bold',sans-serif;font-size:12px;line-height:1.45;">
+                            Pré-réservation sans paiement : nous confirmons d'abord le créneau avec vous par SMS ou
+                            téléphone. Vous pouvez aussi nous appeler.</p>
                     </div>
                     <div class="config-sections">
 
@@ -604,8 +608,13 @@
                         <div class="config-header">
                             <div class="step-back xxs-size c-bold uppercase color-2" onclick="goToStep(1)">← Modifier ma
                                 prestation</div>
-                            <h2 class="xl-size c-cond-u uppercase choose-crenal">Choisissez <br> votre créneau</h2>
+                            <h2 class="xl-size c-cond-u uppercase choose-crenal">Choisissez <br> votre créneau souhaité
+                            </h2>
                             <p id="step2-sub"></p>
+                            <p class="color-2"
+                                style="margin-top:14px;font-family:'Colette Bold',sans-serif;font-size:12px;line-height:1.45;">
+                                Pré-réservation sans paiement : nous confirmons d'abord le créneau avec vous par SMS ou
+                                téléphone. Vous pouvez aussi nous appeler.</p>
                         </div>
                         <div class="step2-choix-row" id="step2-choix-row"></div>
                         <div class="step2-days" id="step2-days"></div>
@@ -622,7 +631,7 @@
                                     <div class="ps-total-amount" id="ps-total-2"></div>
                                 </div>
                                 <button class="ps-cta step2-confirm-btn c-cond-u l-size uppercase" id="step2-confirm"
-                                    onclick="goToStep(3)">Confirmer et payer →</button>
+                                    onclick="goToStep(3)">Confirmer ma pré-réservation →</button>
                                 <!-- <div class="ps-note" id="step2-notice" style="margin-top:10px"></div> -->
                             </div>
                         </div>
@@ -631,7 +640,7 @@
             </div>
         </div>
 
-        <!-- ÉTAPE 3 : PAIEMENT -->
+        <!-- ÉTAPE 3 : PRÉ-RÉSERVATION -->
         <div id="funnel-step-3" class="funnel-step">
             <div class="config-page">
 
@@ -640,8 +649,11 @@
                         <div class="cont-step3">
                             <div class="config-header">
                                 <div class="step-back" onclick="goToStep(2)">← Modifier mon créneau</div>
-                                <h2 class="xl-size c-cond-u uppercase">Paiement</h2>
-                                <p>Votre réservation est presque confirmée.</p>
+                                <h2 class="xl-size c-cond-u uppercase">Pré-réservation</h2>
+                                <p class="color-2"
+                                    style="margin-top:14px;font-family:'Colette Bold',sans-serif;font-size:12px;line-height:1.45;">
+                                    Pré-réservation sans paiement : nous confirmons d'abord le créneau avec vous par SMS
+                                    ou téléphone. Vous pouvez aussi nous appeler.</p>
                             </div>
                             <div class="pay-section">
                                 <div class="pay-section-title">Vos coordonnées</div>
@@ -662,15 +674,20 @@
                                     <div class="pay-field"><label>Adresse du logement</label><input type="text"
                                             placeholder="12 rue des Hortensias, La Baule"></div>
 
-                                    <div class="pay-field"><label for="client-comment">Informations supplémentaires</label><textarea
-                                            id="client-comment" placeholder="Code d'accès, consignes, informations utiles…"
-                                            rows="3" maxlength="500" style="resize: vertical;"></textarea>
+                                    <div class="pay-field"><label for="client-comment">Informations
+                                            supplémentaires</label><textarea id="client-comment"
+                                            placeholder="Code d'accès, consignes, informations utiles…" rows="3"
+                                            maxlength="500" style="resize: vertical;"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="infos-imp-colette">
-                                    <h3 class="c-cond-u l-size uppercase">Note Importante</h3>
-                                    <p>Chez Colette, chaque réservation est préparée sur mesure pour votre logement, le
+                                    <h3 class="c-cond-u l-size uppercase">Avant de continuer</h3>
+                                    <p><strong>Votre demande est une pré-réservation : le créneau n'est pas encore
+                                            confirmé.</strong> Nous revenons vers vous au plus vite par SMS ou
+                                        téléphone. Après notre accord, vous pourrez payer avec le lien Stripe reçu par
+                                        email.<br><br>Chez Colette, chaque pré-réservation est préparée sur mesure pour
+                                        votre logement, le
                                         bon
                                         créneau, le bon matériel, les bons
                                         intervenants. Ce sérieux est notre engagement depuis le début, et il repose sur
@@ -839,20 +856,20 @@
                         </div>
                         <div class="config-sticky-col">
                             <div class="price-summary">
-                                <div class="ps-title m-size c-cond-sb uppercase">Votre réservation</div>
+                                <div class="ps-title m-size c-cond-sb uppercase">Votre pré-réservation</div>
                                 <div class="ps-lines-scroll">
                                     <div id="ps-lines-3"></div>
                                 </div>
                                 <div class="ps-footer">
                                     <div class="pay-slot-recap" id="pay-slot-recap"></div>
                                     <div class="ps-total">
-                                        <div class="ps-total-label">Total</div>
+                                        <div class="ps-total-label">À payer après validation</div>
                                         <div class="ps-total-amount" id="ps-total-3"></div>
                                     </div>
                                     <button class="ps-cta pay-confirm-btn c-cond-u l-size uppercase"
-                                        onclick="handlePayment()">Payer →</button>
-                                    <div class="ps-note">En confirmant via paiement, vous acceptez nos conditions
-                                        générales décrites dans la note ci contre.</div>
+                                        onclick="handlePrebooking()">Envoyer ma pré-réservation →</button>
+                                    <div class="ps-note">Aucun paiement maintenant. Votre email de pré-réservation
+                                        contient le lien de paiement, à utiliser après notre validation.</div>
                                 </div>
                             </div>
                         </div>
@@ -873,9 +890,9 @@
             <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-cta" onclick="goToStep(2)">Choisir mon créneau
                 →</button>
             <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-step2-confirm" onclick="goToStep(3)"
-                style="display:none;opacity:0.4;cursor:not-allowed">Confirmer et payer →</button>
-            <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-step3-pay" onclick="handlePayment()"
-                style="display:none">Payer
+                style="display:none;opacity:0.4;cursor:not-allowed">Confirmer ma pré-réservation →</button>
+            <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-step3-pay" onclick="handlePrebooking()"
+                style="display:none">Envoyer ma demande
                 →</button>
         </div>
 
@@ -899,7 +916,7 @@
                         →</button>
                     <button class="mbb-reserve c-cond-u l-size uppercase" id="drawer-step2-confirm"
                         onclick="goToStep(3); closeDrawer();"
-                        style="display:none;opacity:0.4;cursor:not-allowed">Confirmer et payer →</button>
+                        style="display:none;opacity:0.4;cursor:not-allowed">Confirmer ma pré-réservation →</button>
                     <button class="ps-reset-btn-drawer m-size c-cond-sb uppercase"
                         onclick="closeDrawer(); setTimeout(resetSimulation, 50);" style="margin-top:10px">↺
                         Réinitialiser la simulation</button>
@@ -1425,7 +1442,7 @@
             }
 
 
-            async function handlePayment() {
+            async function handlePrebooking() {
                 const inputs = document.querySelectorAll('#funnel-step-3 input');
                 const prenom = inputs[0]?.value?.trim();
                 const nom = inputs[1]?.value?.trim();
@@ -1466,8 +1483,8 @@
                     client: { prenom, nom, email, tel, adresse },
                 };
 
-                const btn = document.querySelector('.pay-confirm-btn');
-                if (btn) { btn.textContent = 'Redirection...'; btn.disabled = true; }
+                const submitButtons = document.querySelectorAll('.pay-confirm-btn, #mbb-step3-pay');
+                submitButtons.forEach(btn => { btn.textContent = 'Envoi en cours...'; btn.disabled = true; });
 
                 try {
                     const res = await fetch('/api/create-checkout-session', {
@@ -1476,15 +1493,15 @@
                         body: JSON.stringify(payload),
                     });
                     const data = await res.json();
-                    if (data.url) {
-                        window.location.href = data.url;
+                    if (data.orderId) {
+                        window.location.href = `/confirmation/?status=prebooking&order_id=${encodeURIComponent(data.orderId)}`;
                     } else {
                         alert('Erreur : ' + (data.error || 'réponse inattendue'));
-                        if (btn) { btn.textContent = 'Payer →'; btn.disabled = false; }
+                        submitButtons.forEach(btn => { btn.textContent = 'Envoyer ma pré-réservation →'; btn.disabled = false; });
                     }
                 } catch (err) {
                     alert('Erreur réseau — réessayez.');
-                    if (btn) { btn.textContent = 'Payer →'; btn.disabled = false; }
+                    submitButtons.forEach(btn => { btn.textContent = 'Envoyer ma pré-réservation →'; btn.disabled = false; });
                 }
             }
 

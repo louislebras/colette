@@ -212,8 +212,10 @@
 //   }
 // }
 import Stripe from "stripe";
+import { Resend } from "resend";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const PRIX = {
   surface: { 30: 179, 45: 259, 60: 329, 80: 399 },
@@ -283,6 +285,91 @@ const LABELS = {
 };
 
 const PRODUCT_IMAGE = "https://www.colettelabaule.com/assets/cover.png";
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatSlot(creneau) {
+  const date = new Date(creneau.start);
+  const day = date.toLocaleDateString("fr-FR", {
+    timeZone: "Europe/Paris",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  return `${day} · ${creneau.label || "créneau à confirmer"}`;
+}
+
+function getSelectedOptions(body) {
+  const keys = [
+    "urgence",
+    "salissure",
+    "rangement",
+    "meuble",
+    "occup",
+    "animaux",
+    "vitres",
+    "sdb",
+    "wc",
+    "cuisine",
+  ];
+  const labels = keys
+    .map((key) => LABELS[key]?.[body[key]])
+    .filter(Boolean);
+  return [...labels, ...(body.extras || []).map((key) => LABELS.extras[key]).filter(Boolean)];
+}
+
+async function sendPrebookingEmails({ body, checkoutUrl, orderId, total }) {
+  const creneau = body.creneau;
+  const slot = formatSlot(creneau);
+  const clientName = `${body.client.prenom} ${body.client.nom}`.trim();
+  const selectedOptions = getSelectedOptions(body);
+  const comment = String(body.commentaire || "").trim();
+  const optionsHtml = selectedOptions.length
+    ? `<ul style="margin:8px 0 0;padding-left:18px;color:#4A4A46;font-size:14px;line-height:1.55;">${selectedOptions.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>`
+    : "";
+  const commentHtml = comment
+    ? `<p style="margin:0 0 14px;color:#4A4A46;font-size:14px;line-height:1.55;"><strong>Informations supplémentaires :</strong><br>${escapeHtml(comment).replace(/\n/g, "<br>")}</p>`
+    : "";
+  const paymentCta = `<a href="${checkoutUrl}" style="display:inline-block;background:#012D18;color:#EDEAE2;padding:15px 20px;font-size:12px;font-weight:700;letter-spacing:.05em;text-decoration:none;text-transform:uppercase;">Accéder au paiement →</a>`;
+
+  const clientEmail = await resend.emails.send({
+    from: "Colette <bonjour@colettelabaule.com>",
+    to: body.client.email,
+    subject: `Votre pré-réservation Colette — ${slot}`,
+    html: `<div style="font-family:Arial,sans-serif;max-width:580px;margin:0 auto;color:#012D18;background:#fff;">
+      <div style="background:#012D18;padding:28px 32px;color:#EDEAE2;"><p style="margin:0;font-size:24px;font-weight:700;">Colette</p><p style="margin:6px 0 0;color:#FF9BD2;font-size:11px;letter-spacing:.08em;text-transform:uppercase;">Pré-réservation reçue</p></div>
+      <div style="padding:32px;">
+        <h1 style="margin:0 0 12px;font-size:24px;">Bonjour ${escapeHtml(body.client.prenom)},</h1>
+        <p style="margin:0 0 22px;color:#4A4A46;line-height:1.6;">Votre demande est reçue. <strong>Ce n'est pas encore une réservation confirmée.</strong> Nous revenons vers vous au plus vite par SMS ou téléphone pour valider le créneau et la prestation.</p>
+        <div style="background:#E5E1D7;padding:18px 20px;margin-bottom:14px;"><p style="margin:0 0 5px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#005D41;">Créneau souhaité — à confirmer</p><p style="margin:0;font-size:16px;font-weight:700;">${escapeHtml(slot)}</p></div>
+        <div style="background:#F6F5F0;padding:18px 20px;margin-bottom:14px;"><p style="margin:0 0 5px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#98968B;">Prestation estimée</p><p style="margin:0;font-size:15px;font-weight:700;">${escapeHtml(LABELS.offre[body.offre] || body.offre)} · ${escapeHtml(LABELS.surface[body.surface] || body.surface)}</p>${optionsHtml}<p style="margin:16px 0 0;font-size:18px;font-weight:700;color:#005D41;">${total}€</p></div>
+        ${commentHtml}
+        <div style="border:1px solid #DAD6C8;padding:18px 20px;margin-bottom:20px;"><p style="margin:0 0 12px;font-size:13px;line-height:1.55;"><strong>Votre lien de paiement est prêt.</strong> Merci de l'utiliser uniquement après notre confirmation par téléphone ou SMS.</p>${paymentCta}</div>
+        <p style="margin:0;color:#4A4A46;font-size:13px;line-height:1.6;">Une question ou une urgence ? Appelez-nous au <a href="tel:0776232034" style="color:#005D41;font-weight:700;">07 76 23 20 34</a>.</p>
+        <p style="margin:24px 0 0;color:#98968B;font-size:11px;">Référence : ${escapeHtml(orderId)}</p>
+      </div>
+    </div>`,
+  });
+
+  const ownerEmail = await resend.emails.send({
+    from: "Colette <bonjour@colettelabaule.com>",
+    to: "colettelabaule@gmail.com",
+    subject: `⏳ Pré-réservation à valider — ${clientName} — ${slot}`,
+    html: `<div style="font-family:Arial,sans-serif;max-width:580px;margin:0 auto;color:#012D18;"><h1 style="font-size:22px;">Nouvelle pré-réservation</h1><p><strong>${escapeHtml(clientName)}</strong> souhaite le créneau <strong>${escapeHtml(slot)}</strong>.</p><p><strong>Prestation :</strong> ${escapeHtml(LABELS.offre[body.offre] || body.offre)} · ${escapeHtml(LABELS.surface[body.surface] || body.surface)}</p>${optionsHtml}<p>Montant prévu : <strong>${total}€</strong></p><p>📞 ${escapeHtml(body.client.tel || "Téléphone non renseigné")}<br>📧 ${escapeHtml(body.client.email)}<br>📍 ${escapeHtml(body.client.adresse || "Adresse non renseignée")}</p>${comment ? `<p><strong>Informations supplémentaires :</strong><br>${escapeHtml(comment).replace(/\n/g, "<br>")}</p>` : ""}<p><strong>À faire :</strong> appeler ou envoyer un SMS pour confirmer le créneau avant paiement.</p><p style="color:#777;font-size:12px;">Référence : ${escapeHtml(orderId)}</p></div>`,
+  });
+
+  if (clientEmail.error || ownerEmail.error) {
+    throw new Error(clientEmail.error?.message || ownerEmail.error?.message || "Erreur d'envoi de pré-réservation");
+  }
+}
 
 function buildLineItems(body) {
   const items = [];
@@ -407,6 +494,7 @@ export default async function handler(req, res) {
       line_items: lineItems,
       metadata: {
         order_id: orderId,
+        flow: "prebooking",
         offre: body.offre,
         surface: String(body.surface),
         urgence: body.urgence,
@@ -426,15 +514,22 @@ export default async function handler(req, res) {
         adresse: body.client.adresse || "",
         commentaire,
       },
-      success_url: `${baseUrl}/confirmation/?order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/configurer/`,
+      success_url: `${baseUrl}/confirmation/?status=paid&order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/confirmation/?status=prebooking&order_id=${orderId}&payment=cancelled`,
     });
 
-    return res.status(200).json({ url: session.url });
+    await sendPrebookingEmails({
+      body,
+      checkoutUrl: session.url,
+      orderId,
+      total,
+    });
+
+    return res.status(200).json({ orderId });
   } catch (err) {
-    console.error("Erreur checkout:", err);
+    console.error("Erreur pré-réservation:", err);
     return res
       .status(500)
-      .json({ error: "Erreur lors de la création du paiement" });
+      .json({ error: "Erreur lors de l'envoi de la pré-réservation" });
   }
 }

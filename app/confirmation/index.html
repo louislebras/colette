@@ -303,38 +303,38 @@
     <section class="confirmation-hero" aria-labelledby="confirmation-title">
         <div class="confirmation-hero-inner">
             <div class="confirmation-eyebrow">Colette · La Baule / Pornichet / Le Pouliguen</div>
-            <h1 class="confirmation-title" id="confirmation-title">C'est <span>réglé.</span></h1>
-            <p class="confirmation-hero-copy">Votre paiement a été reçu et votre demande est maintenant enregistrée.</p>
+            <h1 class="confirmation-title" id="confirmation-title">C'est <span>noté.</span></h1>
+            <p class="confirmation-hero-copy" id="confirmation-hero-copy">Votre pré-réservation est reçue. Nous revenons vers vous rapidement pour confirmer le créneau.</p>
         </div>
     </section>
 
     <section class="confirmation-panel-wrap" aria-live="polite">
         <div class="confirmation-panel" id="confirmation-card">
             <div class="confirmation-main">
-                <div class="confirmation-status"><span class="confirmation-status-mark">✓</span> Réservation confirmée</div>
-                <h2>On s'occupe<br>de la suite.</h2>
-                <p class="confirmation-main-intro">Un récapitulatif vient de vous être envoyé par email. Nous gardons votre créneau et préparons l'intervention selon vos sélections.</p>
+                <div class="confirmation-status"><span class="confirmation-status-mark">✓</span> <span id="confirmation-status-text">Pré-réservation reçue</span></div>
+                <h2 id="confirmation-main-title">On valide<br>avec vous.</h2>
+                <p class="confirmation-main-intro" id="confirmation-main-intro">Un récapitulatif et votre lien Stripe viennent de vous être envoyés. Le créneau reste à confirmer avec vous par téléphone ou SMS.</p>
 
                 <div class="confirmation-steps">
                     <div class="confirmation-step">
                         <div class="confirmation-step-number">01</div>
-                        <div><strong>Récapitulatif envoyé</strong><p>Vous recevez par email le détail de la prestation et les informations transmises.</p></div>
+                        <div><strong id="confirmation-step-1-title">Récapitulatif envoyé</strong><p id="confirmation-step-1-copy">Vous recevez par email le détail de la prestation et votre lien de paiement Stripe.</p></div>
                     </div>
                     <div class="confirmation-step">
                         <div class="confirmation-step-number">02</div>
-                        <div><strong>Confirmation la veille</strong><p>Nous vous contactons par SMS pour confirmer l'heure exacte d'arrivée.</p></div>
+                        <div><strong id="confirmation-step-2-title">Validation rapide</strong><p id="confirmation-step-2-copy">Nous vous appelons ou vous écrivons pour valider le créneau. Vous pouvez aussi nous appeler.</p></div>
                     </div>
                     <div class="confirmation-step">
                         <div class="confirmation-step-number">03</div>
-                        <div><strong>Intervention</strong><p>Le jour J, nous intervenons selon exactement ce que vous avez réservé.</p></div>
+                        <div><strong id="confirmation-step-3-title">Paiement puis intervention</strong><p id="confirmation-step-3-copy">Après notre accord, réglez via le lien Stripe reçu. Votre intervention sera alors confirmée.</p></div>
                     </div>
                 </div>
             </div>
 
             <aside class="confirmation-aside">
                 <div>
-                    <h3>Besoin<br>d'ajouter<br>une précision ?</h3>
-                    <p>Répondez à l'email de confirmation ou contactez-nous directement. Nous prenons en compte les informations utiles avant l'intervention.</p>
+                    <h3 id="confirmation-aside-title">Besoin<br>de nous<br>joindre ?</h3>
+                    <p id="confirmation-aside-copy">Répondez à l'email reçu ou appelez-nous. Nous validons chaque pré-réservation avec vous avant tout paiement.</p>
                 </div>
                 <div>
                     <div class="confirmation-contact">
@@ -351,7 +351,24 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         const orderId = params.get('order_id');
+        const isPaid = params.get('status') === 'paid' || Boolean(params.get('session_id'));
         const reference = document.getElementById('confirmation-reference');
         if (reference) reference.textContent = orderId || '—';
+
+        if (isPaid) {
+            document.getElementById('confirmation-title').innerHTML = `C'est <span>réglé.</span>`;
+            document.getElementById('confirmation-hero-copy').textContent = 'Votre paiement est reçu : votre intervention est maintenant confirmée.';
+            document.getElementById('confirmation-status-text').textContent = 'Intervention confirmée';
+            document.getElementById('confirmation-main-title').innerHTML = 'On s’occupe<br>de la suite.';
+            document.getElementById('confirmation-main-intro').textContent = 'Votre créneau est confirmé. Nous préparons l’intervention selon vos sélections.';
+            document.getElementById('confirmation-step-1-title').textContent = 'Confirmation envoyée';
+            document.getElementById('confirmation-step-1-copy').textContent = 'Vous recevez le récapitulatif final de votre intervention.';
+            document.getElementById('confirmation-step-2-title').textContent = 'Confirmation la veille';
+            document.getElementById('confirmation-step-2-copy').textContent = 'Nous vous contactons par SMS pour confirmer l’heure exacte d’arrivée.';
+            document.getElementById('confirmation-step-3-title').textContent = 'Intervention';
+            document.getElementById('confirmation-step-3-copy').textContent = 'Le jour J, nous intervenons selon exactement ce que vous avez réservé.';
+            document.getElementById('confirmation-aside-title').innerHTML = 'Besoin<br>d’ajouter<br>une précision ?';
+            document.getElementById('confirmation-aside-copy').textContent = 'Répondez à l’email de confirmation ou contactez-nous directement avant l’intervention.';
+        }
     </script>
 </main>

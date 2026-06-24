@@ -47,7 +47,7 @@
 
     <script type="module" src="../js/global/localhostlinks.js" defer=""></script>
 
-    <title>Confirmation de réservation | Colette La Baule</title>
+    <title>Pré-réservation et confirmation | Colette La Baule</title>
 <meta name="description" content="Votre demande de nettoyage auprès de Colette a bien été enregistrée.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#012d18">
@@ -107,284 +107,378 @@
     </div>
 </header>
 <script type="module" src="../js/global/menu-burger.js" defer=""></script>
-<div id="pageContent"><main>
+<div id="pageContent"><main class="confirmation-page">
     <style>
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: #F2F2EE;
-            color: #1A1A18;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .confirmation-wrap {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px 40px;
-        }
-
-        .confirmation-card {
-            background: #fff;
-            border-radius: 12px;
-            max-width: 540px;
-            width: 100%;
+        .confirmation-page {
+            --confirmation-ink: var(--color-x, #012d18);
+            --confirmation-green: var(--color-x2, #005d41);
+            --confirmation-paper: var(--color-100, #edeae2);
+            --confirmation-sand: var(--color-back-selector, #e5e1d7);
+            --confirmation-line: var(--color-x-mid, #dad6c8);
+            --confirmation-muted: var(--color-grey, #98968b);
+            background: var(--confirmation-paper);
+            color: var(--confirmation-ink);
+            min-height: calc(100vh - 72px);
             overflow: hidden;
-            box-shadow: 0 2px 32px rgba(0, 0, 0, 0.06);
+            position: relative;
         }
 
-        .card-header {
-            background: #2D4A2D;
-            padding: 36px 40px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .check-circle {
-            width: 44px;
-            height: 44px;
+        .confirmation-page::before,
+        .confirmation-page::after {
+            border: 1px solid rgba(229, 226, 211, 0.2);
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            display: flex;
+            content: "";
+            pointer-events: none;
+            position: absolute;
+        }
+
+        .confirmation-page::before {
+            height: 560px;
+            right: -220px;
+            top: -250px;
+            width: 560px;
+        }
+
+        .confirmation-page::after {
+            height: 290px;
+            left: -150px;
+            top: 260px;
+            width: 290px;
+        }
+
+        .confirmation-hero {
+            background: var(--confirmation-ink);
+            color: #e5e2d3;
+            min-height: 350px;
+            padding: clamp(52px, 8vw, 104px) 7vw clamp(80px, 10vw, 132px);
+            position: relative;
+        }
+
+        .confirmation-hero-inner {
+            margin: 0 auto;
+            max-width: 1140px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .confirmation-eyebrow {
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 20px;
+            color: #ff9bd2;
+            display: flex;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 11px;
+            gap: 10px;
+            letter-spacing: 0.08em;
+            margin-bottom: 22px;
+            text-transform: uppercase;
         }
 
-        .card-header h1 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #FAFAF7;
-            margin: 0 0 4px;
+        .confirmation-eyebrow::before {
+            background: currentColor;
+            content: "";
+            height: 8px;
+            width: 8px;
         }
 
-        .card-header p {
+        .confirmation-title {
+            color: #e5e2d3;
+            font-family: "Colette Condensed Ultra", "Arial Narrow", sans-serif;
+            font-size: clamp(56px, 10vw, 130px);
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            line-height: 0.76;
+            margin: 0;
+            max-width: 700px;
+            text-transform: uppercase;
+        }
+
+        .confirmation-title span {
+            color: #ff9bd2;
+            display: block;
+            margin-left: clamp(32px, 8vw, 132px);
+        }
+
+        .confirmation-hero-copy {
+            color: rgba(229, 226, 211, 0.8);
+            font-family: "Colette Regular", sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 30px 0 0;
+            max-width: 410px;
+        }
+
+        .confirmation-panel-wrap {
+            margin: -62px auto 0;
+            max-width: 1140px;
+            padding: 0 7vw 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .confirmation-panel {
+            background: var(--confirmation-paper);
+            border: 1px solid var(--confirmation-line);
+            box-shadow: 0 18px 50px rgba(1, 45, 24, 0.12);
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);
+        }
+
+        .confirmation-main {
+            padding: clamp(28px, 4vw, 52px);
+        }
+
+        .confirmation-status {
+            align-items: center;
+            color: var(--confirmation-green);
+            display: flex;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 12px;
+            gap: 10px;
+            letter-spacing: 0.08em;
+            margin-bottom: 34px;
+            text-transform: uppercase;
+        }
+
+        .confirmation-status-mark {
+            align-items: center;
+            background: var(--confirmation-green);
+            border-radius: 50%;
+            color: var(--confirmation-paper);
+            display: inline-flex;
+            font-family: Arial, sans-serif;
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
+            height: 22px;
+            justify-content: center;
+            width: 22px;
+        }
+
+        .confirmation-main h2,
+        .confirmation-aside h3 {
+            font-family: "Colette Condensed Semibold", "Arial Narrow", sans-serif;
+            font-size: clamp(28px, 3vw, 42px);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 0.92;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .confirmation-main-intro {
+            color: var(--confirmation-muted);
+            font-family: "Colette Regular", sans-serif;
+            line-height: 1.55;
+            margin: 14px 0 32px;
+            max-width: 480px;
+        }
+
+        .confirmation-steps {
+            border-top: 1px solid var(--confirmation-line);
+        }
+
+        .confirmation-step {
+            align-items: flex-start;
+            border-bottom: 1px solid var(--confirmation-line);
+            display: grid;
+            gap: 16px;
+            grid-template-columns: 36px 1fr;
+            padding: 17px 0;
+        }
+
+        .confirmation-step-number {
+            color: var(--confirmation-green);
+            font-family: "Colette Condensed Ultra", sans-serif;
+            font-size: 30px;
+            line-height: 0.9;
+        }
+
+        .confirmation-step strong {
+            display: block;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .confirmation-step p {
+            color: var(--confirmation-muted);
+            font-family: "Colette Regular", sans-serif;
+            font-size: 14px;
+            line-height: 1.45;
             margin: 0;
         }
 
-        .card-body {
-            padding: 36px 40px;
+        .confirmation-aside {
+            background: var(--confirmation-sand);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: clamp(28px, 4vw, 52px);
         }
 
-        .recap-block {
-            background: #F2F2EE;
-            border-radius: 8px;
-            padding: 20px 24px;
+        .confirmation-aside h3 {
+            color: var(--confirmation-green);
+            font-size: clamp(25px, 2.5vw, 34px);
             margin-bottom: 16px;
         }
 
-        .recap-block-title {
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #9A9A96;
-            margin-bottom: 10px;
+        .confirmation-aside p {
+            color: var(--confirmation-ink);
+            font-family: "Colette Regular", sans-serif;
+            line-height: 1.55;
+            margin: 0;
         }
 
-        .recap-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-size: 14px;
-            color: #1A1A18;
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        .confirmation-contact {
+            border-top: 1px solid rgba(1, 45, 24, 0.2);
+            margin-top: 42px;
+            padding-top: 20px;
         }
 
-        .recap-row:last-child {
-            border-bottom: none;
-        }
-
-        .recap-row-label {
-            color: #4A4A46;
-        }
-
-        .recap-row-val {
-            font-weight: 500;
-        }
-
-        .creneau-block {
-            background: #2D4A2D;
-            border-radius: 8px;
-            padding: 20px 24px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .creneau-icon {
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .creneau-date {
-            font-size: 16px;
-            font-weight: 600;
-            color: #FAFAF7;
-            margin-bottom: 3px;
-        }
-
-        .creneau-heure {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 20px 24px;
-            background: #F2F2EE;
-            border-radius: 8px;
-            margin-bottom: 28px;
-        }
-
-        .total-label {
-            font-size: 13px;
-            color: #9A9A96;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .total-amount {
-            font-size: 32px;
-            font-weight: 600;
-            color: #2D4A2D;
-        }
-
-        .next-steps {
-            margin-bottom: 28px;
-        }
-
-        .next-steps-title {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #9A9A96;
-            margin-bottom: 12px;
-        }
-
-        .next-step-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 14px;
-            color: #4A4A46;
-            line-height: 1.6;
-            padding: 8px 0;
-            border-bottom: 1px solid #F2F2EE;
-        }
-
-        .next-step-item:last-child {
-            border-bottom: none;
-        }
-
-        .step-num {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #2D4A2D;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .btn-home {
-            font-family: "Colette Bold";
-            font-size: 10px;
-            letter-spacing: 0.03em;
-            line-height: 130%;
-            text-transform: uppercase;
+        .confirmation-contact-label,
+        .confirmation-reference-label {
+            color: var(--confirmation-muted);
             display: block;
-            width: 100%;
-            text-align: center;
-            background: #2D4A2D;
-            color: #fff;
-            padding: 14px;
-            border-radius: 4px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .confirmation-contact a {
+            color: var(--confirmation-green);
+            font-family: "Colette Bold", sans-serif;
             text-decoration: none;
-            transition: background 0.2s;
         }
 
-        .btn-home:hover {
-            background: #3D6B3D;
+        .confirmation-reference {
+            color: var(--confirmation-muted);
+            font-family: "Colette Regular", sans-serif;
+            font-size: 13px;
+            margin-top: 28px;
         }
 
-        .order-ref {
-            text-align: center;
+        .confirmation-home-link {
+            align-items: center;
+            background: var(--confirmation-ink);
+            color: #e5e2d3;
+            display: flex;
+            font-family: "Colette Bold", sans-serif;
             font-size: 11px;
-            color: #9A9A96;
-            margin-top: 16px;
+            justify-content: space-between;
+            letter-spacing: 0.06em;
+            margin-top: 38px;
+            padding: 17px 18px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background 0.2s ease;
         }
 
-        /* État chargement */
-        .loading-state {
-            text-align: center;
-            padding: 60px 40px;
-            color: #9A9A96;
-            font-size: 14px;
+        .confirmation-home-link:hover {
+            background: var(--confirmation-green);
         }
 
-        @media (max-width: 600px) {
+        .confirmation-home-link span:last-child {
+            font-size: 20px;
+            line-height: 0;
+        }
 
-            .card-header,
-            .card-body {
-                padding: 28px 24px;
+        @media (max-width: 760px) {
+            .confirmation-hero {
+                min-height: 310px;
+                padding-bottom: 92px;
+            }
+
+            .confirmation-title span {
+                margin-left: 32px;
+            }
+
+            .confirmation-panel-wrap {
+                margin-top: -46px;
+                padding: 0 20px 48px;
+            }
+
+            .confirmation-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .confirmation-aside {
+                min-height: 300px;
             }
         }
     </style>
-    <div class="confirmation-wrap">
-        <div class="confirmation-card" id="confirmation-card">
-            <div class="loading-state">Chargement de votre confirmation…</div>
+
+    <section class="confirmation-hero" aria-labelledby="confirmation-title">
+        <div class="confirmation-hero-inner">
+            <div class="confirmation-eyebrow">Colette · La Baule / Pornichet / Le Pouliguen</div>
+            <h1 class="confirmation-title" id="confirmation-title">C'est <span>noté.</span></h1>
+            <p class="confirmation-hero-copy" id="confirmation-hero-copy">Votre pré-réservation est reçue. Nous revenons vers vous rapidement pour confirmer le créneau.</p>
         </div>
-    </div>
+    </section>
+
+    <section class="confirmation-panel-wrap" aria-live="polite">
+        <div class="confirmation-panel" id="confirmation-card">
+            <div class="confirmation-main">
+                <div class="confirmation-status"><span class="confirmation-status-mark">✓</span> <span id="confirmation-status-text">Pré-réservation reçue</span></div>
+                <h2 id="confirmation-main-title">On valide<br>avec vous.</h2>
+                <p class="confirmation-main-intro" id="confirmation-main-intro">Un récapitulatif et votre lien Stripe viennent de vous être envoyés. Le créneau reste à confirmer avec vous par téléphone ou SMS.</p>
+
+                <div class="confirmation-steps">
+                    <div class="confirmation-step">
+                        <div class="confirmation-step-number">01</div>
+                        <div><strong id="confirmation-step-1-title">Récapitulatif envoyé</strong><p id="confirmation-step-1-copy">Vous recevez par email le détail de la prestation et votre lien de paiement Stripe.</p></div>
+                    </div>
+                    <div class="confirmation-step">
+                        <div class="confirmation-step-number">02</div>
+                        <div><strong id="confirmation-step-2-title">Validation rapide</strong><p id="confirmation-step-2-copy">Nous vous appelons ou vous écrivons pour valider le créneau. Vous pouvez aussi nous appeler.</p></div>
+                    </div>
+                    <div class="confirmation-step">
+                        <div class="confirmation-step-number">03</div>
+                        <div><strong id="confirmation-step-3-title">Paiement puis intervention</strong><p id="confirmation-step-3-copy">Après notre accord, réglez via le lien Stripe reçu. Votre intervention sera alors confirmée.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="confirmation-aside">
+                <div>
+                    <h3 id="confirmation-aside-title">Besoin<br>de nous<br>joindre ?</h3>
+                    <p id="confirmation-aside-copy">Répondez à l'email reçu ou appelez-nous. Nous validons chaque pré-réservation avec vous avant tout paiement.</p>
+                </div>
+                <div>
+                    <div class="confirmation-contact">
+                        <span class="confirmation-contact-label">Contact direct</span>
+                        <a href="mailto:colettelabaule@gmail.com">colettelabaule@gmail.com</a>
+                    </div>
+                    <p class="confirmation-reference"><span class="confirmation-reference-label">Référence</span><span id="confirmation-reference">—</span></p>
+                    <a href="/" class="confirmation-home-link"><span>Retour à l'accueil</span><span>→</span></a>
+                </div>
+            </aside>
+        </div>
+    </section>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const orderId = params.get('order_id');
-        const sessionId = params.get('session_id');
-        const card = document.getElementById('confirmation-card');
+        const isPaid = params.get('status') === 'paid' || Boolean(params.get('session_id'));
+        const reference = document.getElementById('confirmation-reference');
+        if (reference) reference.textContent = orderId || '—';
 
-
-        card.innerHTML = `
-  <div class="card-header">
-    <div class="check-circle">✓</div>
-    <div>
-      <h1>Réservation confirmée</h1>
-      <p>Un email de confirmation vous a été envoyé</p>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="next-steps">
-      <div class="next-steps-title">Prochaines étapes</div>
-      <div class="next-step-item"><div class="step-num">1</div><div>Vous recevez un <strong>email de confirmation</strong> avec le récapitulatif complet.</div></div>
-      <div class="next-step-item"><div class="step-num">2</div><div>Nous vous contactons par <strong>SMS la veille</strong> pour confirmer l'heure d'arrivée.</div></div>
-      <div class="next-step-item"><div class="step-num">3</div><div>Le jour J, nous intervenons selon exactement ce que vous avez sélectionné.</div></div>
-    </div>
-    <div style="background:#F2F2EE;border-radius:8px;padding:18px 24px;margin-bottom:24px;font-size:13px;color:#4A4A46;line-height:1.7">
-      Une question ? <a href="mailto:colettelabaule@gmail.com" style="color:#2D4A2D;font-weight:500">colettelabaule@gmail.com</a>
-    </div>
-    <a href="/" class="btn-home">Retour à l'accueil</a>
-    <div class="order-ref">Référence : ${orderId || 'N/A'}</div>
-  </div>
-`;
+        if (isPaid) {
+            document.getElementById('confirmation-title').innerHTML = `C'est <span>réglé.</span>`;
+            document.getElementById('confirmation-hero-copy').textContent = 'Votre paiement est reçu : votre intervention est maintenant confirmée.';
+            document.getElementById('confirmation-status-text').textContent = 'Intervention confirmée';
+            document.getElementById('confirmation-main-title').innerHTML = 'On s’occupe<br>de la suite.';
+            document.getElementById('confirmation-main-intro').textContent = 'Votre créneau est confirmé. Nous préparons l’intervention selon vos sélections.';
+            document.getElementById('confirmation-step-1-title').textContent = 'Confirmation envoyée';
+            document.getElementById('confirmation-step-1-copy').textContent = 'Vous recevez le récapitulatif final de votre intervention.';
+            document.getElementById('confirmation-step-2-title').textContent = 'Confirmation la veille';
+            document.getElementById('confirmation-step-2-copy').textContent = 'Nous vous contactons par SMS pour confirmer l’heure exacte d’arrivée.';
+            document.getElementById('confirmation-step-3-title').textContent = 'Intervention';
+            document.getElementById('confirmation-step-3-copy').textContent = 'Le jour J, nous intervenons selon exactement ce que vous avez réservé.';
+            document.getElementById('confirmation-aside-title').innerHTML = 'Besoin<br>d’ajouter<br>une précision ?';
+            document.getElementById('confirmation-aside-copy').textContent = 'Répondez à l’email de confirmation ou contactez-nous directement avant l’intervention.';
+        }
     </script>
 </main></div>
 <link rel="stylesheet" href="../css/frames/footer.css">
@@ -393,8 +487,8 @@
     <div class="footer-top">
         <div class="footer-intro">
             <div class="footer-label c-bold uppercase">Nettoyage local · La Baule</div>
-            <p class="footer-description m2-size">Réservez. On nettoie. C'est réglé. Un service direct, responsable et
-                sans intermédiaire.</p>
+            <p class="footer-description m2-size">Pré-réservez. On vous rappelle. Puis on nettoie. Un service direct,
+                responsable et sans intermédiaire.</p>
             <a class="footer-cta main-cta-light" href="/configurer/">Configurer mon nettoyage</a>
         </div>
 
@@ -433,7 +527,7 @@
 
     <div class="footer-benefits c-bold uppercase">
         <span>En 24/48h</span>
-        <span>Réservation en 2 minutes</span>
+        <span>Pré-réservation en 2 minutes</span>
         <span>Contact privilégié</span>
     </div>
 

@@ -134,12 +134,12 @@
                 <div class="step-line" id="step-line-1"></div>
                 <div class="step" id="step-dot-2" onclick="stepClickable(2)">
                     <div class="step-dot"><span>2</span></div>
-                    <div class="step-label">Créneau</div>
+                    <div class="step-label">Créneau souhaité</div>
                 </div>
                 <div class="step-line" id="step-line-2"></div>
                 <div class="step" id="step-dot-3" onclick="stepClickable(3)">
                     <div class="step-dot"><span>3</span></div>
-                    <div class="step-label">Paiement</div>
+                    <div class="step-label">Pré-réservation</div>
                 </div>
             </div>
         </div>
@@ -155,6 +155,9 @@
                         <h1 class="xl-size c-cond-u uppercase">Configurez <br> votre nettoyage</h1>
                         <p class="color-grey">On intervient exactement selon les éléments sélectionnés. <br>
                             On vous guide pour faire le bon choix.</p>
+                        <p class="color-2" style="margin-top:14px;font-family:'Colette Bold',sans-serif;font-size:12px;line-height:1.45;">
+                            Pré-réservation sans paiement : nous confirmons d'abord le créneau avec vous par SMS ou
+                            téléphone. Vous pouvez aussi nous appeler.</p>
                     </div>
                     <div class="config-sections">
 
@@ -691,8 +694,12 @@
                         <div class="config-header">
                             <div class="step-back xxs-size c-bold uppercase color-2" onclick="goToStep(1)">← Modifier ma
                                 prestation</div>
-                            <h2 class="xl-size c-cond-u uppercase choose-crenal">Choisissez <br> votre créneau</h2>
+                            <h2 class="xl-size c-cond-u uppercase choose-crenal">Choisissez <br> votre créneau souhaité
+                            </h2>
                             <p id="step2-sub"></p>
+                            <p class="color-2" style="margin-top:14px;font-family:'Colette Bold',sans-serif;font-size:12px;line-height:1.45;">
+                                Pré-réservation sans paiement : nous confirmons d'abord le créneau avec vous par SMS ou
+                                téléphone. Vous pouvez aussi nous appeler.</p>
                         </div>
                         <div class="step2-choix-row" id="step2-choix-row"></div>
                         <div class="step2-days" id="step2-days"></div>
@@ -708,7 +715,7 @@
                                     <div class="ps-total-label">Total estimé</div>
                                     <div class="ps-total-amount" id="ps-total-2"></div>
                                 </div>
-                                <button class="ps-cta step2-confirm-btn c-cond-u l-size uppercase" id="step2-confirm" onclick="goToStep(3)">Confirmer et payer →</button>
+                                <button class="ps-cta step2-confirm-btn c-cond-u l-size uppercase" id="step2-confirm" onclick="goToStep(3)">Confirmer ma pré-réservation →</button>
                                 <!-- <div class="ps-note" id="step2-notice" style="margin-top:10px"></div> -->
                             </div>
                         </div>
@@ -717,7 +724,7 @@
             </div>
         </div>
 
-        <!-- ÉTAPE 3 : PAIEMENT -->
+        <!-- ÉTAPE 3 : PRÉ-RÉSERVATION -->
         <div id="funnel-step-3" class="funnel-step">
             <div class="config-page">
 
@@ -726,8 +733,10 @@
                         <div class="cont-step3">
                             <div class="config-header">
                                 <div class="step-back" onclick="goToStep(2)">← Modifier mon créneau</div>
-                                <h2 class="xl-size c-cond-u uppercase">Paiement</h2>
-                                <p>Votre réservation est presque confirmée.</p>
+                                <h2 class="xl-size c-cond-u uppercase">Pré-réservation</h2>
+                                <p class="color-2" style="margin-top:14px;font-family:'Colette Bold',sans-serif;font-size:12px;line-height:1.45;">
+                                    Pré-réservation sans paiement : nous confirmons d'abord le créneau avec vous par SMS
+                                    ou téléphone. Vous pouvez aussi nous appeler.</p>
                             </div>
                             <div class="pay-section">
                                 <div class="pay-section-title">Vos coordonnées</div>
@@ -743,13 +752,18 @@
                                     </div>
                                     <div class="pay-field"><label>Adresse du logement</label><input type="text" placeholder="12 rue des Hortensias, La Baule"></div>
 
-                                    <div class="pay-field"><label>Informations supplémentaires</label><textarea placeholder="Note libre" rows="3" style="resize: vertical;"></textarea>
+                                    <div class="pay-field"><label for="client-comment">Informations
+                                            supplémentaires</label><textarea id="client-comment" placeholder="Code d'accès, consignes, informations utiles…" rows="3" maxlength="500" style="resize: vertical;"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="infos-imp-colette">
-                                    <h3 class="c-cond-u l-size uppercase">Note Importante</h3>
-                                    <p>Chez Colette, chaque réservation est préparée sur mesure pour votre logement, le
+                                    <h3 class="c-cond-u l-size uppercase">Avant de continuer</h3>
+                                    <p><strong>Votre demande est une pré-réservation : le créneau n'est pas encore
+                                            confirmé.</strong> Nous revenons vers vous au plus vite par SMS ou
+                                        téléphone. Après notre accord, vous pourrez payer avec le lien Stripe reçu par
+                                        email.<br><br>Chez Colette, chaque pré-réservation est préparée sur mesure pour
+                                        votre logement, le
                                         bon
                                         créneau, le bon matériel, les bons
                                         intervenants. Ce sérieux est notre engagement depuis le début, et il repose sur
@@ -918,19 +932,19 @@
                         </div>
                         <div class="config-sticky-col">
                             <div class="price-summary">
-                                <div class="ps-title m-size c-cond-sb uppercase">Votre réservation</div>
+                                <div class="ps-title m-size c-cond-sb uppercase">Votre pré-réservation</div>
                                 <div class="ps-lines-scroll">
                                     <div id="ps-lines-3"></div>
                                 </div>
                                 <div class="ps-footer">
                                     <div class="pay-slot-recap" id="pay-slot-recap"></div>
                                     <div class="ps-total">
-                                        <div class="ps-total-label">Total</div>
+                                        <div class="ps-total-label">À payer après validation</div>
                                         <div class="ps-total-amount" id="ps-total-3"></div>
                                     </div>
-                                    <button class="ps-cta pay-confirm-btn c-cond-u l-size uppercase" onclick="handlePayment()">Payer →</button>
-                                    <div class="ps-note">En confirmant via paiement, vous acceptez nos conditions
-                                        générales décrites dans la note ci contre.</div>
+                                    <button class="ps-cta pay-confirm-btn c-cond-u l-size uppercase" onclick="handlePrebooking()">Envoyer ma pré-réservation →</button>
+                                    <div class="ps-note">Aucun paiement maintenant. Votre email de pré-réservation
+                                        contient le lien de paiement, à utiliser après notre validation.</div>
                                 </div>
                             </div>
                         </div>
@@ -950,8 +964,8 @@
             </div>
             <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-cta" onclick="goToStep(2)">Choisir mon créneau
                 →</button>
-            <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-step2-confirm" onclick="goToStep(3)" style="display:none;opacity:0.4;cursor:not-allowed">Confirmer et payer →</button>
-            <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-step3-pay" onclick="handlePayment()" style="display:none">Payer
+            <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-step2-confirm" onclick="goToStep(3)" style="display:none;opacity:0.4;cursor:not-allowed">Confirmer ma pré-réservation →</button>
+            <button class="mbb-reserve c-cond-u l-size uppercase" id="mbb-step3-pay" onclick="handlePrebooking()" style="display:none">Envoyer ma demande
                 →</button>
         </div>
 
@@ -972,7 +986,7 @@
                     <button class="mbb-reserve c-cond-u l-size uppercase" id="drawer-cta" onclick="goToStep(2); closeDrawer();">Choisir mon
                         créneau
                         →</button>
-                    <button class="mbb-reserve c-cond-u l-size uppercase" id="drawer-step2-confirm" onclick="goToStep(3); closeDrawer();" style="display:none;opacity:0.4;cursor:not-allowed">Confirmer et payer →</button>
+                    <button class="mbb-reserve c-cond-u l-size uppercase" id="drawer-step2-confirm" onclick="goToStep(3); closeDrawer();" style="display:none;opacity:0.4;cursor:not-allowed">Confirmer ma pré-réservation →</button>
                     <button class="ps-reset-btn-drawer m-size c-cond-sb uppercase" onclick="closeDrawer(); setTimeout(resetSimulation, 50);" style="margin-top:10px">↺
                         Réinitialiser la simulation</button>
                 </div>
@@ -1209,23 +1223,48 @@
             }
 
 
-            function getFrenchDay(date) {
-                const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-                const months = ['janvier', 'févr.', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
-                return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()];
+            const PARIS_TIME_ZONE = 'Europe/Paris';
+
+            function getParisDateKey(date = new Date()) {
+                const parts = new Intl.DateTimeFormat('en-CA', {
+                    timeZone: PARIS_TIME_ZONE,
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                }).formatToParts(date);
+                const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+                return `${values.year}-${values.month}-${values.day}`;
             }
-            function addDays(date, n) {
-                const d = new Date(date);
-                d.setDate(d.getDate() + n);
-                return d;
+
+            function addParisDays(dateKey, days) {
+                const [year, month, day] = dateKey.split('-').map(Number);
+                const date = new Date(Date.UTC(year, month - 1, day + days));
+                return date.toISOString().slice(0, 10);
+            }
+
+            function getFrenchDay(dateKey) {
+                return new Intl.DateTimeFormat('fr-FR', {
+                    timeZone: PARIS_TIME_ZONE,
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'short',
+                }).format(new Date(`${dateKey}T12:00:00Z`));
+            }
+
+            function getParisHour(date = new Date()) {
+                return Number(new Intl.DateTimeFormat('en-GB', {
+                    timeZone: PARIS_TIME_ZONE,
+                    hour: '2-digit',
+                    hourCycle: 'h23',
+                }).format(date));
             }
 
 
             function initUrgenceLabels() {
-                const today = new Date();
-                const tomorrow = addDays(today, 1);
-                const d2 = addDays(today, 2);
-                const d3 = addDays(today, 3);
+                const today = getParisDateKey();
+                const tomorrow = addParisDays(today, 1);
+                const d2 = addParisDays(today, 2);
+                const d3 = addParisDays(today, 3);
                 const set = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
                 set('urgence-label-48h', 'Dans les 48–72h');
                 set('urgence-desc-48h', getFrenchDay(d2) + ' ou ' + getFrenchDay(d3));
@@ -1236,10 +1275,10 @@
             }
 
             function getUrgenceDisplayLabel() {
-                const today = new Date();
-                const tomorrow = addDays(today, 1);
-                const d2 = addDays(today, 2);
-                const d3 = addDays(today, 3);
+                const today = getParisDateKey();
+                const tomorrow = addParisDays(today, 1);
+                const d2 = addParisDays(today, 2);
+                const d3 = addParisDays(today, 3);
                 const val = cfgState.urgence ? cfgState.urgence.val : '48h';
                 if (val === '48h') return 'Dans les 48–72h<br><span class="color-grey">(' + getFrenchDay(d2) + '/' + getFrenchDay(d3) + ')</span>';
                 if (val === 'demain') return 'Demain — ' + getFrenchDay(tomorrow);
@@ -1295,14 +1334,13 @@
 
             async function buildStep2() {
                 const urgenceVal = cfgState.urgence ? cfgState.urgence.val : '48h';
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
+                const today = getParisDateKey();
 
                 const allDays = [
-                    { date: new Date(today), relLabel: "Aujourd'hui", urgenceIfPicked: 'jour', addIfPicked: PRIX.urgence.jour },
-                    { date: addDays(today, 1), relLabel: 'Demain', urgenceIfPicked: 'demain', addIfPicked: PRIX.urgence.demain },
-                    { date: addDays(today, 2), relLabel: 'Après-demain', urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
-                    { date: addDays(today, 3), relLabel: null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+                    { date: today, relLabel: "Aujourd'hui", urgenceIfPicked: 'jour', addIfPicked: PRIX.urgence.jour },
+                    { date: addParisDays(today, 1), relLabel: 'Demain', urgenceIfPicked: 'demain', addIfPicked: PRIX.urgence.demain },
+                    { date: addParisDays(today, 2), relLabel: 'Après-demain', urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
+                    { date: addParisDays(today, 3), relLabel: null, urgenceIfPicked: '48h', addIfPicked: PRIX.urgence['48h'] },
                 ];
 
 
@@ -1341,7 +1379,7 @@
                 }
 
                 container.innerHTML = '';
-                const now = new Date();
+                const parisHour = getParisHour();
 
                 allDays.forEach(({ date, relLabel, urgenceIfPicked, addIfPicked }, dayIndex) => {
                     const col = document.createElement('div');
@@ -1350,15 +1388,14 @@
 
                     const head = document.createElement('div');
                     head.className = 'cal-col-head';
-                    const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'jun', 'jul', 'aoû', 'sep', 'oct', 'nov', 'déc'];
                     let headHTML = '';
                     if (relLabel) headHTML += `<div class="cal-col-rel">${relLabel}</div>`;
-                    headHTML += `<div class="cal-col-day">${getFrenchDay(date).split(' ')[0]} ${date.getDate()} ${months[date.getMonth()]}</div>`;
+                    headHTML += `<div class="cal-col-day">${getFrenchDay(date)}</div>`;
                     head.innerHTML = headHTML;
                     col.appendChild(head);
 
-                    const dateStr = date.toISOString().slice(0, 10);
-                    const isToday = date.getTime() === today.getTime();
+                    const dateStr = date;
+                    const isToday = date === today;
                     const apiSlots = calSlots[dateStr] || [];
 
                     const slotDefs = [
@@ -1373,8 +1410,8 @@
                     slotDefs.forEach(slot => {
 
                         const pastToday = isToday && (
-                            slot.id.includes('matin') ? now.getHours() >= 11 :
-                                slot.id.includes('apres-midi') ? now.getHours() >= 16 : false
+                            slot.id.includes('matin') ? parisHour >= 11 :
+                                slot.id.includes('apres-midi') ? parisHour >= 16 : false
                         );
 
 
@@ -1474,13 +1511,14 @@
             }
 
 
-            async function handlePayment() {
+            async function handlePrebooking() {
                 const inputs = document.querySelectorAll('#funnel-step-3 input');
                 const prenom = inputs[0]?.value?.trim();
                 const nom = inputs[1]?.value?.trim();
                 const email = inputs[2]?.value?.trim();
                 const tel = inputs[3]?.value?.trim();
                 const adresse = inputs[4]?.value?.trim();
+                const commentaire = document.getElementById('client-comment')?.value?.trim() || '';
 
                 if (!prenom || !nom || !email || !adresse) {
                     alert('Merci de remplir tous les champs obligatoires.');
@@ -1510,11 +1548,12 @@
                         end: selectedSlot.end,
                         label: selectedSlot.time,
                     },
+                    commentaire,
                     client: { prenom, nom, email, tel, adresse },
                 };
 
-                const btn = document.querySelector('.pay-confirm-btn');
-                if (btn) { btn.textContent = 'Redirection...'; btn.disabled = true; }
+                const submitButtons = document.querySelectorAll('.pay-confirm-btn, #mbb-step3-pay');
+                submitButtons.forEach(btn => { btn.textContent = 'Envoi en cours...'; btn.disabled = true; });
 
                 try {
                     const res = await fetch('/api/create-checkout-session', {
@@ -1523,15 +1562,15 @@
                         body: JSON.stringify(payload),
                     });
                     const data = await res.json();
-                    if (data.url) {
-                        window.location.href = data.url;
+                    if (data.orderId) {
+                        window.location.href = `/confirmation/?status=prebooking&order_id=${encodeURIComponent(data.orderId)}`;
                     } else {
                         alert('Erreur : ' + (data.error || 'réponse inattendue'));
-                        if (btn) { btn.textContent = 'Payer →'; btn.disabled = false; }
+                        submitButtons.forEach(btn => { btn.textContent = 'Envoyer ma pré-réservation →'; btn.disabled = false; });
                     }
                 } catch (err) {
                     alert('Erreur réseau — réessayez.');
-                    if (btn) { btn.textContent = 'Payer →'; btn.disabled = false; }
+                    submitButtons.forEach(btn => { btn.textContent = 'Envoyer ma pré-réservation →'; btn.disabled = false; });
                 }
             }
 
@@ -1587,8 +1626,8 @@
     <div class="footer-top">
         <div class="footer-intro">
             <div class="footer-label c-bold uppercase">Nettoyage local · La Baule</div>
-            <p class="footer-description m2-size">Réservez. On nettoie. C'est réglé. Un service direct, responsable et
-                sans intermédiaire.</p>
+            <p class="footer-description m2-size">Pré-réservez. On vous rappelle. Puis on nettoie. Un service direct,
+                responsable et sans intermédiaire.</p>
             <a class="footer-cta main-cta-light" href="/configurer/">Configurer mon nettoyage</a>
         </div>
 
@@ -1627,7 +1666,7 @@
 
     <div class="footer-benefits c-bold uppercase">
         <span>En 24/48h</span>
-        <span>Réservation en 2 minutes</span>
+        <span>Pré-réservation en 2 minutes</span>
         <span>Contact privilégié</span>
     </div>
 
