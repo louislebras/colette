@@ -115,7 +115,7 @@ list.addEventListener("click", async (event) => {
   if (!button) return;
 
   const orderId = button.dataset.cancelOrder;
-  if (!window.confirm("Annuler cette pré-réservation ? Le lien Stripe sera immédiatement désactivé.")) return;
+  if (!window.confirm("Annuler cette pré-réservation ? Le lien de paiement sera immédiatement désactivé.")) return;
 
   button.disabled = true;
   button.textContent = "Annulation…";

@@ -35,8 +35,8 @@ Après ajout, redéployer le site afin que les fonctions de pré-réservation, l
 
 Le dashboard est disponible sur `/dashboard/`.
 
-- **À confirmer** : demandes reçues, avec email, téléphone et lien Stripe à relancer.
+- **À confirmer** : demandes reçues, avec email, téléphone et lien de paiement à relancer.
 - **Payées** : paiements Stripe reçus ; le webhook les déplace automatiquement dans cet onglet.
-- **Toutes** : les pré-réservations et paiements actifs. Une demande annulée est retirée des listes et son lien Stripe est expiré.
+- **Toutes** : les pré-réservations et paiements actifs. Une demande annulée est retirée des listes et son lien de paiement est désactivé.
 
-Le bouton « Relancer par email » ouvre un email prérempli ; « Appeler » compose directement le numéro du client. « Annuler » demande une confirmation, expire le lien Stripe et retire la demande des listes actives.
+Le bouton « Relancer par email » ouvre un email prérempli ; « Appeler » compose directement le numéro du client. « Annuler » demande une confirmation, désactive le lien de paiement et retire la demande des listes actives.

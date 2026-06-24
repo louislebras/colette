@@ -1,6 +1,7 @@
 <main class="colette-dashboard">
     <style>
         .colette-dashboard { --ink:#012d18; --green:#005d41; --paper:#edeae2; --sand:#e5e1d7; --line:#dad6c8; --muted:#78776e; background:var(--paper); color:var(--ink); min-height:calc(100vh - 80px); padding:0 7vw 84px; }
+        body:has(.colette-dashboard) .site-footer { display:none; }
         header.colette-header-transparent { background-color:transparent; backdrop-filter:none; }
         .dashboard-shell { max-width:1180px; margin:0 auto; }
         .dashboard-heading { margin-top:10vh; }
@@ -53,7 +54,7 @@
         .booking-details dl { background:var(--paper); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:0; padding:4px 16px 16px; }
         .booking-detail-row { border-bottom:1px solid var(--line); padding:11px 12px 11px 0; }.booking-detail-row:nth-child(odd) { margin-right:12px; }.booking-detail-row dt { color:var(--muted); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.06em; margin:0 0 4px; text-transform:uppercase; }.booking-detail-row dd { font-size:13px; line-height:1.45; margin:0; }
         .dashboard-empty { border:1px dashed var(--line); border-radius:16px; color:var(--muted); padding:34px; text-align:center; }
-        @media (max-width:780px) { .colette-dashboard { padding:0 20px 52px; }.dashboard-heading { margin-top:5vh; }.dashboard-title { font-size:44px; }.dashboard-stats { display:flex; margin-right:-20px; overflow-x:auto; padding:2px 20px 8px 0; scroll-snap-type:x mandatory; scrollbar-width:none; }.dashboard-stats::-webkit-scrollbar { display:none; }.dashboard-stat { flex:0 0 60vw; scroll-snap-align:start; }.dashboard-topline { align-items:flex-start; flex-direction:column; }.booking-card { grid-template-columns:1fr; }.booking-actions { flex-direction:row; flex-wrap:wrap; }.booking-details dl { grid-template-columns:1fr; }.booking-detail-row:nth-child(odd) { margin-right:0; }.dashboard-tabs { gap:6px; overflow:auto; }.dashboard-tab { flex:0 0 auto; } }
+        @media (max-width:780px) { .colette-dashboard { padding:0 20px 52px; }.dashboard-heading { margin-top:10vh; }.dashboard-title { font-size:44px; }.dashboard-stats { display:flex; margin-right:-20px; overflow-x:auto; padding:2px 20px 8px 0; scroll-snap-type:x mandatory; scrollbar-width:none; }.dashboard-stats::-webkit-scrollbar { display:none; }.dashboard-stat { flex:0 0 60vw; scroll-snap-align:start; }.dashboard-topline { align-items:flex-start; flex-direction:column; }.booking-card { grid-template-columns:1fr; }.booking-actions { flex-direction:row; flex-wrap:wrap; }.booking-details dl { grid-template-columns:1fr; }.booking-detail-row:nth-child(odd) { margin-right:0; }.dashboard-tabs { gap:6px; overflow:auto; }.dashboard-tab { flex:0 0 auto; } }
     </style>
     <div class="dashboard-shell" id="dashboard-root">
         <div class="dashboard-heading">
