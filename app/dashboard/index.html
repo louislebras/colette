@@ -1,0 +1,68 @@
+<main class="colette-dashboard">
+    <style>
+        .colette-dashboard { --ink:#012d18; --green:#005d41; --paper:#edeae2; --sand:#e5e1d7; --line:#dad6c8; --muted:#78776e; background:var(--paper); color:var(--ink); min-height:calc(100vh - 80px); padding:48px 7vw 84px; }
+        .dashboard-shell { max-width:1180px; margin:0 auto; }
+        .dashboard-kicker { color:var(--green); font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; margin:0 0 12px; }
+        .dashboard-title { font-family:"Colette Condensed Ultra","Arial Narrow",sans-serif; font-size:clamp(44px,7vw,88px); font-weight:400; letter-spacing:-.04em; line-height:.8; margin:0; text-transform:uppercase; }
+        .dashboard-title span { color:var(--green); display:block; margin-left:clamp(28px,6vw,90px); }
+        .dashboard-subtitle { color:var(--muted); margin:24px 0 38px; max-width:500px; }
+        .dashboard-login { background:var(--sand); border:1px solid var(--line); max-width:440px; padding:32px; }
+        .dashboard-login h2 { font-family:"Colette Condensed Semibold",sans-serif; font-size:34px; font-weight:400; line-height:.9; margin:0 0 12px; text-transform:uppercase; }
+        .dashboard-login p { color:var(--muted); line-height:1.5; margin:0 0 22px; }
+        .dashboard-field { display:grid; gap:7px; margin:0 0 14px; }
+        .dashboard-field label { font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
+        .dashboard-field input { background:#fff; border:1px solid var(--line); border-radius:0; color:var(--ink); font:inherit; padding:14px; }
+        .dashboard-button { background:var(--ink); border:0; color:#e5e2d3; cursor:pointer; font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.06em; padding:15px 18px; text-transform:uppercase; }
+        .dashboard-button:hover { background:var(--green); }
+        .dashboard-message { color:#b52626; font-size:13px; line-height:1.45; margin:14px 0 0; min-height:20px; }
+        .dashboard-app[hidden], .dashboard-login[hidden] { display:none; }
+        .dashboard-topline { align-items:flex-end; display:flex; gap:20px; justify-content:space-between; margin-bottom:28px; }
+        .dashboard-user { color:var(--muted); font-size:13px; margin:0; }
+        .dashboard-link-button { background:none; border:0; color:var(--green); cursor:pointer; font:inherit; padding:0; text-decoration:underline; }
+        .dashboard-stats { display:grid; gap:12px; grid-template-columns:repeat(3,1fr); margin:0 0 30px; }
+        .dashboard-stat { background:var(--sand); border:1px solid var(--line); padding:18px; }
+        .dashboard-stat-number { color:var(--green); font-family:"Colette Condensed Ultra",sans-serif; font-size:42px; line-height:.8; }
+        .dashboard-stat-label { color:var(--muted); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.08em; margin-top:10px; text-transform:uppercase; }
+        .dashboard-tabs { border-bottom:1px solid var(--line); display:flex; gap:22px; margin-bottom:20px; }
+        .dashboard-tab { background:none; border:0; color:var(--muted); cursor:pointer; font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.06em; padding:0 0 12px; text-transform:uppercase; }
+        .dashboard-tab.is-active { border-bottom:3px solid var(--green); color:var(--ink); }
+        .booking-list { display:grid; gap:12px; }
+        .booking-card { background:#fff; border:1px solid var(--line); display:grid; gap:18px; grid-template-columns:minmax(0,1.35fr) minmax(180px,.65fr) auto; padding:20px; }
+        .booking-status { display:inline-block; font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.08em; margin-bottom:9px; text-transform:uppercase; }
+        .booking-status.pending_confirmation { color:#9c5a00; } .booking-status.paid { color:var(--green); }
+        .booking-client { font-family:"Colette Condensed Semibold",sans-serif; font-size:25px; line-height:.9; margin:0 0 8px; text-transform:uppercase; }
+        .booking-detail, .booking-meta { color:var(--muted); font-size:13px; line-height:1.5; margin:0; }
+        .booking-slot { font-family:"Colette Bold",sans-serif; font-size:14px; line-height:1.4; margin:0 0 8px; }
+        .booking-total { color:var(--green); font-family:"Colette Condensed Ultra",sans-serif; font-size:34px; line-height:.8; margin-top:18px; }
+        .booking-actions { align-items:flex-start; display:flex; flex-direction:column; gap:9px; justify-content:flex-start; }
+        .booking-action { border:1px solid var(--ink); color:var(--ink); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.06em; padding:10px 12px; text-decoration:none; text-transform:uppercase; white-space:nowrap; }
+        .booking-action.primary { background:var(--ink); color:#e5e2d3; }.booking-action:hover { background:var(--green); border-color:var(--green); color:#e5e2d3; }
+        .booking-comment { background:var(--paper); color:var(--ink); font-size:13px; line-height:1.5; margin-top:12px; padding:10px 12px; white-space:pre-line; }
+        .dashboard-empty { border:1px dashed var(--line); color:var(--muted); padding:34px; text-align:center; }
+        @media (max-width:780px) { .colette-dashboard { padding:34px 20px 52px; }.dashboard-stats { grid-template-columns:1fr; }.dashboard-topline { align-items:flex-start; flex-direction:column; }.booking-card { grid-template-columns:1fr; }.booking-actions { flex-direction:row; flex-wrap:wrap; }.dashboard-tabs { gap:14px; overflow:auto; } }
+    </style>
+    <div class="dashboard-shell" id="dashboard-root">
+        <p class="dashboard-kicker">Colette · Espace interne</p>
+        <h1 class="dashboard-title">Suivi des <span>demandes.</span></h1>
+        <p class="dashboard-subtitle">Pré-réservations à confirmer, paiements reçus et contacts clients — au même endroit.</p>
+
+        <section class="dashboard-login" id="dashboard-login">
+            <h2>Connexion</h2>
+            <p>Accès réservé à l'équipe Colette.</p>
+            <form id="dashboard-login-form">
+                <div class="dashboard-field"><label for="dashboard-email">Adresse email</label><input id="dashboard-email" type="email" autocomplete="email" required></div>
+                <div class="dashboard-field"><label for="dashboard-password">Mot de passe</label><input id="dashboard-password" type="password" autocomplete="current-password" required></div>
+                <button class="dashboard-button" type="submit">Se connecter →</button>
+                <p class="dashboard-message" id="dashboard-message" role="alert"></p>
+            </form>
+        </section>
+
+        <section class="dashboard-app" id="dashboard-app" hidden>
+            <div class="dashboard-topline"><p class="dashboard-user" id="dashboard-user"></p><button class="dashboard-link-button" id="dashboard-signout" type="button">Se déconnecter</button></div>
+            <div class="dashboard-stats" id="dashboard-stats"></div>
+            <div class="dashboard-tabs" role="tablist"><button class="dashboard-tab is-active" data-tab="pending_confirmation" type="button">À confirmer</button><button class="dashboard-tab" data-tab="paid" type="button">Payées</button><button class="dashboard-tab" data-tab="all" type="button">Toutes</button></div>
+            <div class="booking-list" id="booking-list"></div>
+        </section>
+    </div>
+    <script type="module" src="/js/pages/dashboard.js"></script>
+</main>

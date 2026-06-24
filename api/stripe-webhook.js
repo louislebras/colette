@@ -1,9 +1,33 @@
 import Stripe from "stripe";
 import { google } from "googleapis";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+async function markPrebookingAsPaid(session, total) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.error("Configuration Supabase manquante : statut de paiement non synchronisé");
+    return;
+  }
+
+  const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY,
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
+  const { error } = await supabase
+    .from("prebookings")
+    .update({
+      status: "paid",
+      paid_at: new Date().toISOString(),
+      total,
+    })
+    .eq("order_id", session.metadata?.order_id);
+
+  if (error) console.error("Erreur synchronisation Supabase:", error);
+}
 
 export const config = {
   api: { bodyParser: false },
@@ -418,6 +442,8 @@ export default async function handler(req, res) {
 
     metadata.client_email =
       session.customer_email || session.customer_details?.email || "";
+
+    await markPrebookingAsPaid(session, total);
 
     try {
       await Promise.all([

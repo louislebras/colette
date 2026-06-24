@@ -213,9 +213,21 @@
 // }
 import Stripe from "stripe";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+function getSupabaseAdmin() {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    throw new Error("Configuration Supabase manquante");
+  }
+  return createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY,
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
+}
 
 const PRIX = {
   surface: { 30: 179, 45: 259, 60: 329, 80: 399 },
@@ -371,6 +383,42 @@ async function sendPrebookingEmails({ body, checkoutUrl, orderId, total }) {
   }
 }
 
+async function savePrebooking({ body, session, orderId, total, commentaire }) {
+  const supabase = getSupabaseAdmin();
+  const { error } = await supabase.from("prebookings").insert({
+    order_id: orderId,
+    status: "pending_confirmation",
+    client_name: `${body.client.prenom} ${body.client.nom}`.trim(),
+    client_email: body.client.email,
+    client_tel: body.client.tel || null,
+    adresse: body.client.adresse || null,
+    slot_start: body.creneau.start,
+    slot_end: body.creneau.end,
+    slot_label: body.creneau.label || null,
+    total,
+    commentaire: commentaire || null,
+    stripe_checkout_session_id: session.id,
+    checkout_url: session.url,
+    configuration: {
+      offre: body.offre,
+      surface: body.surface,
+      urgence: body.urgence,
+      salissure: body.salissure,
+      rangement: body.rangement,
+      meuble: body.meuble,
+      occup: body.occup,
+      animaux: body.animaux,
+      vitres: body.vitres,
+      sdb: body.sdb,
+      wc: body.wc,
+      cuisine: body.cuisine,
+      extras: body.extras || [],
+    },
+  });
+
+  if (error) throw error;
+}
+
 function buildLineItems(body) {
   const items = [];
 
@@ -517,6 +565,8 @@ export default async function handler(req, res) {
       success_url: `${baseUrl}/confirmation/?status=paid&order_id=${orderId}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/confirmation/?status=prebooking&order_id=${orderId}&payment=cancelled`,
     });
+
+    await savePrebooking({ body, session, orderId, total, commentaire });
 
     await sendPrebookingEmails({
       body,

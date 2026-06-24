@@ -9,6 +9,7 @@
     "pages": [
       "/models",
       "/index",
+      "/dashboard",
       "/confirmation",
       "/configurer",
       "/about",
