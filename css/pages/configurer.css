@@ -873,6 +873,18 @@
   .config-page {
     padding: 0px 20px 180px; /* espace pour le bandeau fixe */
   }
+  /* À l'étape des créneaux, le bandeau suit la grille au lieu de la recouvrir. */
+  #funnel-step-2 .config-page {
+    padding-bottom: 0;
+  }
+  .step2-layout {
+    height: auto;
+    min-height: 0;
+  }
+  #page-config:has(#funnel-step-2.active) .mobile-bottom-bar {
+    position: static;
+    margin-top: 10vh;
+  }
   .mobile-bottom-bar {
     display: block;
   }
