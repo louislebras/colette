@@ -2,7 +2,7 @@
     <style>
         .colette-dashboard { --ink:#012d18; --green:#005d41; --paper:#edeae2; --sand:#e5e1d7; --line:#dad6c8; --muted:#78776e; background:var(--paper); color:var(--ink); min-height:calc(100vh - 80px); padding:0 7vw 84px; }
         .dashboard-shell { max-width:1180px; margin:0 auto; }
-        .dashboard-heading { margin-top:20vh; }
+        .dashboard-heading { margin-top:10vh; }
         .dashboard-kicker { align-items:center; color:var(--green); display:flex; font-family:"Colette Bold",sans-serif; font-size:11px; gap:8px; letter-spacing:.1em; text-transform:uppercase; margin:0 0 14px; }
         .dashboard-kicker::before { background:var(--green); border-radius:99px; content:""; display:block; height:8px; width:8px; }
         .dashboard-title { font-family:"Colette Condensed Ultra","Arial Narrow",sans-serif; font-size:clamp(44px,7vw,88px); font-weight:400; letter-spacing:-.04em; line-height:88%; margin:0; text-transform:uppercase; }
@@ -33,7 +33,7 @@
         .dashboard-tab { background:transparent; border:1px solid transparent; border-radius:99px; color:var(--muted); cursor:pointer; font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.06em; padding:10px 14px; text-transform:uppercase; }
         .dashboard-tab:hover { border-color:var(--line); color:var(--ink); }.dashboard-tab.is-active { background:var(--ink); color:#e5e2d3; }
         .booking-list { display:grid; gap:12px; }
-        .booking-card { background:#fff; border:1px solid var(--line); border-radius:20px; display:grid; gap:18px; grid-template-columns:minmax(0,1.35fr) minmax(180px,.65fr) auto; overflow:hidden; padding:20px 20px 20px 26px; position:relative; }
+        .booking-card { background:var(--sand); border:0; border-radius:20px; display:grid; gap:18px; grid-template-columns:minmax(0,1.35fr) minmax(180px,.65fr) auto; overflow:hidden; padding:20px 20px 20px 26px; position:relative; }
         .booking-card::before { background:var(--green); content:""; height:100%; left:0; position:absolute; top:0; width:6px; }.booking-card:has(.booking-status.pending_confirmation)::before { background:#b57218; }
         .booking-status { display:inline-block; font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.08em; margin-bottom:9px; text-transform:uppercase; }
         .booking-status.pending_confirmation { color:#9c5a00; } .booking-status.paid { color:var(--green); }
@@ -44,11 +44,12 @@
         .booking-actions { align-items:flex-start; display:flex; flex-direction:column; gap:9px; justify-content:flex-start; }
         .booking-action { border:1px solid var(--ink); border-radius:12px; color:var(--ink); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.06em; padding:10px 12px; text-decoration:none; text-transform:uppercase; white-space:nowrap; }
         .booking-action.primary { background:var(--ink); color:#e5e2d3; }.booking-action:hover { background:var(--green); border-color:var(--green); color:#e5e2d3; }
+        .booking-action.danger { border-color:#9c5a00; color:#9c5a00; }.booking-action.danger:hover { background:#9c5a00; border-color:#9c5a00; color:#fff; }
         .booking-comment { background:var(--paper); border-radius:10px; color:var(--ink); font-size:13px; line-height:1.5; margin-top:12px; padding:10px 12px; white-space:pre-line; }
         .booking-details { background:var(--paper); border-radius:14px; grid-column:1/-1; overflow:hidden; }
         .booking-details summary { align-items:center; color:var(--green); cursor:pointer; display:flex; font-family:"Colette Bold",sans-serif; font-size:11px; justify-content:space-between; letter-spacing:.06em; list-style:none; padding:14px 16px; text-transform:uppercase; }
         .booking-details summary::-webkit-details-marker { display:none; }.booking-details summary span { font-family:"Colette Condensed Ultra",sans-serif; font-size:22px; line-height:1; }.booking-details[open] summary span { transform:rotate(45deg); }
-        .booking-details dl { background:#fff; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:0; padding:4px 16px 16px; }
+        .booking-details dl { background:var(--paper); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:0; padding:4px 16px 16px; }
         .booking-detail-row { border-bottom:1px solid var(--line); padding:11px 12px 11px 0; }.booking-detail-row:nth-child(odd) { margin-right:12px; }.booking-detail-row dt { color:var(--muted); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.06em; margin:0 0 4px; text-transform:uppercase; }.booking-detail-row dd { font-size:13px; line-height:1.45; margin:0; }
         .dashboard-empty { border:1px dashed var(--line); border-radius:16px; color:var(--muted); padding:34px; text-align:center; }
         @media (max-width:780px) { .colette-dashboard { padding:0 20px 52px; }.dashboard-title { font-size:44px; }.dashboard-stats { grid-template-columns:1fr; }.dashboard-topline { align-items:flex-start; flex-direction:column; }.booking-card { grid-template-columns:1fr; }.booking-actions { flex-direction:row; flex-wrap:wrap; }.booking-details dl { grid-template-columns:1fr; }.booking-detail-row:nth-child(odd) { margin-right:0; }.dashboard-tabs { gap:6px; overflow:auto; }.dashboard-tab { flex:0 0 auto; } }

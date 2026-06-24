@@ -150,7 +150,7 @@
             background: var(--confirmation-ink);
             color: #e5e2d3;
             min-height: 350px;
-            padding: clamp(52px, 8vw, 104px) 7vw clamp(80px, 10vw, 132px);
+            padding: 10vh 7vw clamp(80px, 10vw, 132px);
             position: relative;
         }
 
@@ -186,16 +186,21 @@
             font-size: clamp(56px, 10vw, 130px);
             font-weight: 400;
             letter-spacing: -0.04em;
-            line-height: 0.76;
+            line-height: 88%;
             margin: 0;
             max-width: 700px;
             text-transform: uppercase;
         }
 
         .confirmation-title span {
+            border: 2px solid #ff9bd2;
+            border-radius: 12px;
             color: #ff9bd2;
             display: block;
-            margin-left: clamp(32px, 8vw, 132px);
+            line-height: 88%;
+            margin: 5px 0 0 clamp(32px, 8vw, 132px);
+            padding: 1px 13px 5px;
+            width: fit-content;
         }
 
         .confirmation-hero-copy {
@@ -218,9 +223,10 @@
         .confirmation-panel {
             background: var(--confirmation-paper);
             border: 1px solid var(--confirmation-line);
-            box-shadow: 0 18px 50px rgba(1, 45, 24, 0.12);
+            border-radius: 20px;
             display: grid;
             grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);
+            overflow: hidden;
         }
 
         .confirmation-main {
@@ -370,6 +376,7 @@
             letter-spacing: 0.06em;
             margin-top: 38px;
             padding: 17px 18px;
+            border-radius: 16px;
             text-decoration: none;
             text-transform: uppercase;
             transition: background 0.2s ease;

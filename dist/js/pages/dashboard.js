@@ -49,24 +49,27 @@ function detailRows(configuration) {
 }
 
 function renderStats() {
-  const pending = bookings.filter((booking) => booking.status === "pending_confirmation").length;
-  const paid = bookings.filter((booking) => booking.status === "paid").length;
-  stats.innerHTML = [[pending, "À confirmer"], [paid, "Payées"], [bookings.length, "Total"]].map(([number, label]) => `<div class="dashboard-stat"><div class="dashboard-stat-number">${number}</div><div class="dashboard-stat-label">${label}</div></div>`).join("");
+  const activeBookings = bookings.filter((booking) => booking.status !== "cancelled");
+  const pending = activeBookings.filter((booking) => booking.status === "pending_confirmation").length;
+  const paid = activeBookings.filter((booking) => booking.status === "paid").length;
+  stats.innerHTML = [[pending, "À confirmer"], [paid, "Payées"], [activeBookings.length, "Total"]].map(([number, label]) => `<div class="dashboard-stat"><div class="dashboard-stat-number">${number}</div><div class="dashboard-stat-label">${label}</div></div>`).join("");
 }
 
 function bookingCard(booking) {
   const isPaid = booking.status === "paid";
+  const isPending = booking.status === "pending_confirmation";
   const mailSubject = encodeURIComponent(`Colette — votre pré-réservation ${booking.order_id}`);
   const mailBody = encodeURIComponent("Bonjour,\n\nNous revenons vers vous au sujet de votre pré-réservation Colette afin de confirmer le créneau souhaité.\n\nÀ bientôt,");
   const details = booking.configuration || {};
   const offer = details.offre || "Prestation";
   const surface = details.surface ? `${details.surface} m²` : "";
-  return `<article class="booking-card"><div><span class="booking-status ${escapeHtml(booking.status)}">${isPaid ? "Payée" : "À confirmer"}</span><h2 class="booking-client">${escapeHtml(booking.client_name)}</h2><p class="booking-detail">${escapeHtml(booking.client_email)} · ${escapeHtml(booking.client_tel || "Téléphone non renseigné")}</p><p class="booking-detail">${escapeHtml(booking.adresse || "Adresse non renseignée")}</p>${booking.commentaire ? `<div class="booking-comment"><strong>Note :</strong> ${escapeHtml(booking.commentaire)}</div>` : ""}</div><div><p class="booking-slot">${escapeHtml(formatDate(booking.slot_start))}${booking.slot_label ? ` · ${escapeHtml(booking.slot_label)}` : ""}</p><p class="booking-meta">${escapeHtml(offer)} ${escapeHtml(surface)}</p><div class="booking-total">${Number(booking.total || 0)}€</div><p class="booking-meta">${escapeHtml(booking.order_id)}</p></div><div class="booking-actions">${!isPaid ? `<a class="booking-action primary" href="mailto:${encodeURIComponent(booking.client_email)}?subject=${mailSubject}&body=${mailBody}">Relancer par email</a><a class="booking-action" href="tel:${escapeHtml(booking.client_tel || "")}">Appeler</a>${booking.checkout_url ? `<a class="booking-action" href="${escapeHtml(booking.checkout_url)}" target="_blank" rel="noopener">Voir le paiement</a>` : ""}` : `<span class="booking-meta">Payée le ${booking.paid_at ? escapeHtml(formatDate(booking.paid_at)) : "—"}</span>`}</div><details class="booking-details"><summary>Détail complet de la prestation <span>+</span></summary><dl>${detailRows(details)}</dl></details></article>`;
+  return `<article class="booking-card"><div><span class="booking-status ${escapeHtml(booking.status)}">${isPaid ? "Payée" : "À confirmer"}</span><h2 class="booking-client">${escapeHtml(booking.client_name)}</h2><p class="booking-detail">${escapeHtml(booking.client_email)} · ${escapeHtml(booking.client_tel || "Téléphone non renseigné")}</p><p class="booking-detail">${escapeHtml(booking.adresse || "Adresse non renseignée")}</p>${booking.commentaire ? `<div class="booking-comment"><strong>Note :</strong> ${escapeHtml(booking.commentaire)}</div>` : ""}</div><div><p class="booking-slot">${escapeHtml(formatDate(booking.slot_start))}${booking.slot_label ? ` · ${escapeHtml(booking.slot_label)}` : ""}</p><p class="booking-meta">${escapeHtml(offer)} ${escapeHtml(surface)}</p><div class="booking-total">${Number(booking.total || 0)}€</div><p class="booking-meta">${escapeHtml(booking.order_id)}</p></div><div class="booking-actions">${isPending ? `<a class="booking-action primary" href="mailto:${encodeURIComponent(booking.client_email)}?subject=${mailSubject}&body=${mailBody}">Relancer par email</a><a class="booking-action" href="tel:${escapeHtml(booking.client_tel || "")}">Appeler</a>${booking.checkout_url ? `<a class="booking-action" href="${escapeHtml(booking.checkout_url)}" target="_blank" rel="noopener">Voir le paiement</a>` : ""}<button class="booking-action danger" data-cancel-order="${escapeHtml(booking.order_id)}" type="button">Annuler</button>` : `<span class="booking-meta">Payée le ${booking.paid_at ? escapeHtml(formatDate(booking.paid_at)) : "—"}</span>`}</div><details class="booking-details"><summary>Détail complet de la prestation <span>+</span></summary><dl>${detailRows(details)}</dl></details></article>`;
 }
 
 function renderBookings() {
   document.querySelectorAll(".dashboard-tab").forEach((tab) => tab.classList.toggle("is-active", tab.dataset.tab === activeTab));
-  const visible = activeTab === "all" ? bookings : bookings.filter((booking) => booking.status === activeTab);
+  const activeBookings = bookings.filter((booking) => booking.status !== "cancelled");
+  const visible = activeTab === "all" ? activeBookings : activeBookings.filter((booking) => booking.status === activeTab);
   list.innerHTML = visible.length ? visible.map(bookingCard).join("") : `<div class="dashboard-empty">Aucune ${activeTab === "paid" ? "réservation payée" : "pré-réservation à afficher"}.</div>`;
 }
 
@@ -107,5 +110,36 @@ form.addEventListener("submit", async (event) => {
 });
 
 document.getElementById("dashboard-signout").addEventListener("click", async () => { await supabase.auth.signOut(); app.hidden = true; login.hidden = false; form.reset(); });
+list.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-cancel-order]");
+  if (!button) return;
+
+  const orderId = button.dataset.cancelOrder;
+  if (!window.confirm("Annuler cette pré-réservation ? Le lien Stripe sera immédiatement désactivé.")) return;
+
+  button.disabled = true;
+  button.textContent = "Annulation…";
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    const response = await fetch("/api/cancel-prebooking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.access_token || ""}`,
+      },
+      body: JSON.stringify({ orderId }),
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || "Annulation impossible");
+    bookings = bookings.map((booking) => booking.order_id === orderId ? { ...booking, status: "cancelled" } : booking);
+    renderStats();
+    renderBookings();
+  } catch (error) {
+    alert(error.message || "Impossible d'annuler cette pré-réservation.");
+    button.disabled = false;
+    button.textContent = "Annuler";
+    await loadBookings();
+  }
+});
 document.querySelectorAll(".dashboard-tab").forEach((tab) => tab.addEventListener("click", () => { activeTab = tab.dataset.tab; renderBookings(); }));
 bootstrap();
