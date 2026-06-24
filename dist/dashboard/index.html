@@ -110,10 +110,8 @@
         header.colette-header-transparent { background-color:transparent; backdrop-filter:none; }
         .dashboard-shell { max-width:1180px; margin:0 auto; }
         .dashboard-heading { margin-top:10vh; }
-        .dashboard-kicker { align-items:center; color:var(--green); display:flex; font-family:"Colette Bold",sans-serif; font-size:11px; gap:8px; letter-spacing:.1em; text-transform:uppercase; margin:0 0 14px; }
-        .dashboard-kicker::before { background:var(--green); border-radius:99px; content:""; display:block; height:8px; width:8px; }
         .dashboard-title { font-family:"Colette Condensed Ultra","Arial Narrow",sans-serif; font-size:clamp(44px,7vw,88px); font-weight:400; letter-spacing:-.04em; line-height:88%; margin:0; text-transform:uppercase; }
-        .dashboard-title span { border:2px solid var(--green); border-radius:12px; color:var(--green); display:block; line-height:88%; margin:5px 0 0 clamp(28px,6vw,90px); padding:1px 13px 4px; width:fit-content; }
+        .dashboard-title span { color:var(--green); }
         .dashboard-subtitle { color:var(--muted); font-size:16px; line-height:145%; margin:24px 0 38px; max-width:520px; }
         .dashboard-login { background:var(--sand); border:1px solid var(--line); border-radius:20px; max-width:440px; overflow:hidden; padding:8px; }
         .dashboard-login form { background:var(--paper); border-radius:14px; padding:24px; }
@@ -132,8 +130,7 @@
         .dashboard-user { color:var(--muted); font-size:13px; margin:0; }
         .dashboard-link-button { background:none; border:0; color:var(--green); cursor:pointer; font:inherit; padding:0; text-decoration:underline; }
         .dashboard-stats { display:grid; gap:12px; grid-template-columns:repeat(3,1fr); margin:0 0 30px; }
-        .dashboard-stat { background:var(--sand); border:1px solid var(--line); border-radius:16px; overflow:hidden; padding:18px; position:relative; }
-        .dashboard-stat::after { background:var(--green); border-radius:0 0 0 16px; content:""; height:12px; position:absolute; right:0; top:0; width:12px; }
+        .dashboard-stat { background:var(--sand); border:1px solid var(--line); border-radius:16px; overflow:hidden; padding:18px; }
         .dashboard-stat-number { color:var(--green); font-family:"Colette Condensed Ultra",sans-serif; font-size:42px; line-height:88%; }
         .dashboard-stat-label { color:var(--muted); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.08em; margin-top:10px; text-transform:uppercase; }
         .dashboard-tabs { display:flex; gap:8px; margin-bottom:20px; }
@@ -159,11 +156,10 @@
         .booking-details dl { background:var(--paper); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:0; padding:4px 16px 16px; }
         .booking-detail-row { border-bottom:1px solid var(--line); padding:11px 12px 11px 0; }.booking-detail-row:nth-child(odd) { margin-right:12px; }.booking-detail-row dt { color:var(--muted); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.06em; margin:0 0 4px; text-transform:uppercase; }.booking-detail-row dd { font-size:13px; line-height:1.45; margin:0; }
         .dashboard-empty { border:1px dashed var(--line); border-radius:16px; color:var(--muted); padding:34px; text-align:center; }
-        @media (max-width:780px) { .colette-dashboard { padding:0 20px 52px; }.dashboard-heading { margin-top:10vh; }.dashboard-title { font-size:44px; }.dashboard-stats { display:flex; margin-right:-20px; overflow-x:auto; padding:2px 20px 8px 0; scroll-snap-type:x mandatory; scrollbar-width:none; }.dashboard-stats::-webkit-scrollbar { display:none; }.dashboard-stat { flex:0 0 60vw; scroll-snap-align:start; }.dashboard-topline { align-items:flex-start; flex-direction:column; }.booking-card { grid-template-columns:1fr; }.booking-actions { flex-direction:row; flex-wrap:wrap; }.booking-details dl { grid-template-columns:1fr; }.booking-detail-row:nth-child(odd) { margin-right:0; }.dashboard-tabs { gap:6px; overflow:auto; }.dashboard-tab { flex:0 0 auto; } }
+        @media (max-width:780px) { .colette-dashboard { padding:0 20px 52px; }.dashboard-heading { margin-top:15vh; }.dashboard-title { font-size:44px; }.dashboard-stats { display:flex; margin-right:-20px; overflow-x:auto; padding:2px 20px 8px 0; scroll-snap-type:x mandatory; scrollbar-width:none; }.dashboard-stats::-webkit-scrollbar { display:none; }.dashboard-stat { flex:0 0 60vw; scroll-snap-align:start; }.dashboard-topline { align-items:flex-start; flex-direction:column; }.booking-card { grid-template-columns:1fr; }.booking-actions { flex-direction:row; flex-wrap:wrap; }.booking-details dl { grid-template-columns:1fr; }.booking-detail-row:nth-child(odd) { margin-right:0; }.dashboard-tabs { gap:6px; overflow:auto; }.dashboard-tab { flex:0 0 auto; } }
     </style>
     <div class="dashboard-shell" id="dashboard-root">
         <div class="dashboard-heading">
-            <p class="dashboard-kicker">Colette · Espace interne</p>
             <h1 class="dashboard-title">Suivi des <span>demandes.</span></h1>
             <p class="dashboard-subtitle">Pré-réservations à confirmer, paiements reçus et contacts clients — au même endroit.</p>
         </div>
