@@ -14,6 +14,11 @@
             position: relative;
         }
 
+        header.colette-header-transparent {
+            background-color: transparent;
+            backdrop-filter: none;
+        }
+
         .confirmation-page::before,
         .confirmation-page::after {
             border: 1px solid rgba(229, 226, 211, 0.2);
@@ -356,6 +361,7 @@
     </section>
 
     <script>
+        document.querySelector('header')?.classList.add('colette-header-transparent');
         const params = new URLSearchParams(window.location.search);
         const orderId = params.get('order_id');
         const isPaid = params.get('status') === 'paid' || Boolean(params.get('session_id'));

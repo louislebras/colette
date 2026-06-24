@@ -4,8 +4,6 @@
 
 Dans **Supabase > SQL Editor**, exécuter le contenu de [supabase/schema.sql](supabase/schema.sql).
 
-Si la table a déjà été créée, exécuter aussi le bloc de migration situé à la fin de ce fichier SQL : il ajoute le statut `cancelled`, nécessaire au bouton « Annuler » du dashboard.
-
 ## 2. Créer le seul compte de connexion
 
 Dans **Authentication > Users > Add user** :
@@ -39,6 +37,6 @@ Le dashboard est disponible sur `/dashboard/`.
 
 - **À confirmer** : demandes reçues, avec email, téléphone et lien Stripe à relancer.
 - **Payées** : paiements Stripe reçus ; le webhook les déplace automatiquement dans cet onglet.
-- **Toutes** : les pré-réservations et paiements actifs. Les demandes annulées sont retirées de ces listes et leur lien Stripe est expiré.
+- **Toutes** : les pré-réservations et paiements actifs. Une demande annulée est retirée des listes et son lien Stripe est expiré.
 
 Le bouton « Relancer par email » ouvre un email prérempli ; « Appeler » compose directement le numéro du client. « Annuler » demande une confirmation, expire le lien Stripe et retire la demande des listes actives.

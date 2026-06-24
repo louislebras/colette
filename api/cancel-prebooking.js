@@ -40,6 +40,7 @@ export default async function handler(req, res) {
     }
 
     const supabase = getSupabaseAdmin();
+    console.info("[cancel-prebooking] requested", { orderId });
     const { data: booking, error: readError } = await supabase
       .from("prebookings")
       .select("status,stripe_checkout_session_id")
@@ -59,19 +60,24 @@ export default async function handler(req, res) {
       }
       if (session.status === "open") {
         await stripe.checkout.sessions.expire(booking.stripe_checkout_session_id);
+        console.info("[cancel-prebooking] Stripe checkout expired", { orderId });
       }
     }
 
-    const { error: updateError } = await supabase
+    const { error: deleteError } = await supabase
       .from("prebookings")
-      .update({ status: "cancelled" })
+      .delete()
       .eq("order_id", orderId)
       .eq("status", "pending_confirmation");
-    if (updateError) throw updateError;
+    if (deleteError) throw deleteError;
 
+    console.info("[cancel-prebooking] completed", { orderId });
     return res.status(200).json({ cancelled: true });
   } catch (error) {
-    console.error("Erreur annulation pré-réservation:", error);
+    console.error("[cancel-prebooking] failed", {
+      message: error instanceof Error ? error.message : String(error),
+      code: error?.code,
+    });
     return res.status(500).json({ error: "Impossible d'annuler la pré-réservation" });
   }
 }

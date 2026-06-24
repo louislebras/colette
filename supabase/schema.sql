@@ -4,7 +4,7 @@ create table if not exists public.prebookings (
   id uuid primary key default gen_random_uuid(),
   order_id text not null unique,
   status text not null default 'pending_confirmation'
-    check (status in ('pending_confirmation', 'paid', 'cancelled')),
+    check (status in ('pending_confirmation', 'paid')),
   client_name text not null,
   client_email text not null,
   client_tel text,
@@ -23,11 +23,6 @@ create table if not exists public.prebookings (
 
 create index if not exists prebookings_status_created_at_idx
   on public.prebookings (status, created_at desc);
-
--- If the table already exists, run this migration once as well.
-alter table public.prebookings drop constraint if exists prebookings_status_check;
-alter table public.prebookings add constraint prebookings_status_check
-  check (status in ('pending_confirmation', 'paid', 'cancelled'));
 
 alter table public.prebookings enable row level security;
 

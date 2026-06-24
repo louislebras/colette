@@ -131,7 +131,7 @@ list.addEventListener("click", async (event) => {
     });
     const result = await response.json();
     if (!response.ok) throw new Error(result.error || "Annulation impossible");
-    bookings = bookings.map((booking) => booking.order_id === orderId ? { ...booking, status: "cancelled" } : booking);
+    bookings = bookings.filter((booking) => booking.order_id !== orderId);
     renderStats();
     renderBookings();
   } catch (error) {
