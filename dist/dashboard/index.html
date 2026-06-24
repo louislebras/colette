@@ -105,63 +105,513 @@
 <script type="module" src="../js/global/menu-burger.js" defer=""></script>
 <div id="pageContent"><main class="colette-dashboard">
     <style>
-        .colette-dashboard { --ink:#012d18; --green:#005d41; --paper:#edeae2; --sand:#e5e1d7; --line:#dad6c8; --muted:#78776e; background:var(--paper); color:var(--ink); min-height:calc(100vh - 80px); padding:0 7vw 84px; }
-        body:has(.colette-dashboard) .site-footer { display:none; }
-        header.colette-header-transparent { background-color:transparent; backdrop-filter:none; }
-        .dashboard-shell { max-width:1180px; margin:0 auto; }
-        .dashboard-heading { margin-top:10vh; }
-        .dashboard-title { font-family:"Colette Condensed Ultra","Arial Narrow",sans-serif; font-size:clamp(44px,7vw,88px); font-weight:400; letter-spacing:-.04em; line-height:88%; margin:0; text-transform:uppercase; }
-        .dashboard-title span { color:var(--green); }
-        .dashboard-subtitle { color:var(--muted); font-size:16px; line-height:145%; margin:24px 0 38px; max-width:520px; }
-        .dashboard-login { background:var(--sand); border:1px solid var(--line); border-radius:20px; max-width:440px; overflow:hidden; padding:8px; }
-        .dashboard-login form { background:var(--paper); border-radius:14px; padding:24px; }
-        .dashboard-login h2 { font-family:"Colette Condensed Semibold",sans-serif; font-size:34px; font-weight:400; line-height:92%; margin:20px 24px 10px; text-transform:uppercase; }
-        .dashboard-login p { color:var(--muted); line-height:1.5; margin:0 0 22px; }
-        .dashboard-login > p { margin:0 24px 20px; }
-        .dashboard-field { display:grid; gap:7px; margin:0 0 14px; }
-        .dashboard-field label { font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
-        .dashboard-field input { background:#fff; border:1px solid var(--line); border-radius:12px; color:var(--ink); font:inherit; padding:14px; }
-        .dashboard-field input:focus { border-color:var(--green); outline:2px solid rgba(0,93,65,.14); outline-offset:2px; }
-        .dashboard-button { background:var(--ink); border:0; border-radius:16px; color:#e5e2d3; cursor:pointer; font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.06em; padding:15px 18px; text-transform:uppercase; }
-        .dashboard-button:hover { background:var(--green); }
-        .dashboard-message { color:#b52626; font-size:13px; line-height:1.45; margin:14px 0 0; min-height:20px; }
-        .dashboard-app[hidden], .dashboard-login[hidden] { display:none; }
-        .dashboard-topline { align-items:flex-end; border-bottom:1px solid var(--line); display:flex; gap:20px; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; }
-        .dashboard-user { color:var(--muted); font-size:13px; margin:0; }
-        .dashboard-link-button { background:none; border:0; color:var(--green); cursor:pointer; font:inherit; padding:0; text-decoration:underline; }
-        .dashboard-stats { display:grid; gap:12px; grid-template-columns:repeat(3,1fr); margin:0 0 30px; }
-        .dashboard-stat { background:var(--sand); border:1px solid var(--line); border-radius:16px; overflow:hidden; padding:18px; }
-        .dashboard-stat-number { color:var(--green); font-family:"Colette Condensed Ultra",sans-serif; font-size:42px; line-height:88%; }
-        .dashboard-stat-label { color:var(--muted); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.08em; margin-top:10px; text-transform:uppercase; }
-        .dashboard-tabs { display:flex; gap:8px; margin-bottom:20px; }
-        .dashboard-tab { background:transparent; border:1px solid transparent; border-radius:99px; color:var(--muted); cursor:pointer; font-family:"Colette Bold",sans-serif; font-size:11px; letter-spacing:.06em; padding:10px 14px; text-transform:uppercase; }
-        .dashboard-tab:hover { border-color:var(--line); color:var(--ink); }.dashboard-tab.is-active { background:var(--ink); color:#e5e2d3; }
-        .booking-list { display:grid; gap:12px; }
-        .booking-card { background:var(--sand); border:0; border-radius:20px; display:grid; gap:18px; grid-template-columns:minmax(0,1.35fr) minmax(180px,.65fr) auto; overflow:hidden; padding:20px 20px 20px 26px; position:relative; }
-        .booking-card::before { background:var(--green); content:""; height:100%; left:0; position:absolute; top:0; width:6px; }.booking-card:has(.booking-status.pending_confirmation)::before { background:#b57218; }
-        .booking-status { display:inline-block; font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.08em; margin-bottom:9px; text-transform:uppercase; }
-        .booking-status.pending_confirmation { color:#9c5a00; } .booking-status.paid { color:var(--green); }
-        .booking-client { font-family:"Colette Condensed Semibold",sans-serif; font-size:25px; line-height:92%; margin:0 0 8px; text-transform:uppercase; }
-        .booking-detail, .booking-meta { color:var(--muted); font-size:13px; line-height:1.5; margin:0; }
-        .booking-slot { font-family:"Colette Bold",sans-serif; font-size:14px; line-height:1.4; margin:0 0 8px; }
-        .booking-total { color:var(--green); font-family:"Colette Condensed Ultra",sans-serif; font-size:34px; line-height:88%; margin-top:18px; }
-        .booking-actions { align-items:flex-start; display:flex; flex-direction:column; gap:9px; justify-content:flex-start; }
-        .booking-action { border:1px solid var(--ink); border-radius:12px; color:var(--ink); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.06em; padding:10px 12px; text-decoration:none; text-transform:uppercase; white-space:nowrap; }
-        .booking-action.primary { background:var(--ink); color:#e5e2d3; }.booking-action:hover { background:var(--green); border-color:var(--green); color:#e5e2d3; }
-        .booking-action.danger { border-color:#9c5a00; color:#9c5a00; }.booking-action.danger:hover { background:#9c5a00; border-color:#9c5a00; color:#fff; }
-        .booking-comment { background:var(--paper); border-radius:10px; color:var(--ink); font-size:13px; line-height:1.5; margin-top:12px; padding:10px 12px; white-space:pre-line; }
-        .booking-details { background:var(--paper); border-radius:14px; grid-column:1/-1; overflow:hidden; }
-        .booking-details summary { align-items:center; color:var(--green); cursor:pointer; display:flex; font-family:"Colette Bold",sans-serif; font-size:11px; justify-content:space-between; letter-spacing:.06em; list-style:none; padding:14px 16px; text-transform:uppercase; }
-        .booking-details summary::-webkit-details-marker { display:none; }.booking-details summary span { font-family:"Colette Condensed Ultra",sans-serif; font-size:22px; line-height:1; }.booking-details[open] summary span { transform:rotate(45deg); }
-        .booking-details dl { background:var(--paper); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:0; padding:4px 16px 16px; }
-        .booking-detail-row { border-bottom:1px solid var(--line); padding:11px 12px 11px 0; }.booking-detail-row:nth-child(odd) { margin-right:12px; }.booking-detail-row dt { color:var(--muted); font-family:"Colette Bold",sans-serif; font-size:10px; letter-spacing:.06em; margin:0 0 4px; text-transform:uppercase; }.booking-detail-row dd { font-size:13px; line-height:1.45; margin:0; }
-        .dashboard-empty { border:1px dashed var(--line); border-radius:16px; color:var(--muted); padding:34px; text-align:center; }
-        @media (max-width:780px) { .colette-dashboard { padding:0 20px 52px; }.dashboard-heading { margin-top:15vh; }.dashboard-title { font-size:44px; }.dashboard-stats { display:flex; margin-right:-20px; overflow-x:auto; padding:2px 20px 8px 0; scroll-snap-type:x mandatory; scrollbar-width:none; }.dashboard-stats::-webkit-scrollbar { display:none; }.dashboard-stat { flex:0 0 60vw; scroll-snap-align:start; }.dashboard-topline { align-items:flex-start; flex-direction:column; }.booking-card { grid-template-columns:1fr; }.booking-actions { flex-direction:row; flex-wrap:wrap; }.booking-details dl { grid-template-columns:1fr; }.booking-detail-row:nth-child(odd) { margin-right:0; }.dashboard-tabs { gap:6px; overflow:auto; }.dashboard-tab { flex:0 0 auto; } }
+        .colette-dashboard {
+            --ink: #012d18;
+            --green: #005d41;
+            --paper: #edeae2;
+            --sand: #e5e1d7;
+            --line: #dad6c8;
+            --muted: #78776e;
+            background: var(--paper);
+            color: var(--ink);
+            min-height: calc(100vh - 80px);
+            padding: 0 7vw 84px;
+        }
+
+        body:has(.colette-dashboard) .site-footer {
+            display: none;
+        }
+
+        header.colette-header-transparent {
+            background-color: transparent;
+            backdrop-filter: none;
+        }
+
+        .dashboard-shell {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .dashboard-heading {
+            margin-top: 10vh;
+        }
+
+        .dashboard-title {
+            font-family: "Colette Condensed Ultra", "Arial Narrow", sans-serif;
+            font-size: clamp(44px, 7vw, 88px);
+            font-weight: 400;
+            letter-spacing: -.04em;
+            line-height: 88%;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .dashboard-title span {
+            color: var(--green);
+        }
+
+        .dashboard-subtitle {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 145%;
+            margin: 24px 0 38px;
+            max-width: 520px;
+        }
+
+        .dashboard-login {
+            background: var(--sand);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            max-width: 440px;
+            overflow: hidden;
+            padding: 8px;
+        }
+
+        .dashboard-login form {
+            background: var(--paper);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .dashboard-login h2 {
+            font-family: "Colette Condensed Semibold", sans-serif;
+            font-size: 34px;
+            font-weight: 400;
+            line-height: 92%;
+            margin: 20px 24px 10px;
+            text-transform: uppercase;
+        }
+
+        .dashboard-login p {
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0 0 22px;
+        }
+
+        .dashboard-login>p {
+            margin: 0 24px 20px;
+        }
+
+        .dashboard-field {
+            display: grid;
+            gap: 7px;
+            margin: 0 0 14px;
+        }
+
+        .dashboard-field label {
+            font-family: "Colette Bold", sans-serif;
+            font-size: 11px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .dashboard-field input {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            color: var(--ink);
+            font: inherit;
+            padding: 14px;
+        }
+
+        .dashboard-field input:focus {
+            border-color: var(--green);
+            outline: 2px solid rgba(0, 93, 65, .14);
+            outline-offset: 2px;
+        }
+
+        .dashboard-button {
+            background: var(--ink);
+            border: 0;
+            border-radius: 16px;
+            color: #e5e2d3;
+            cursor: pointer;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 11px;
+            letter-spacing: .06em;
+            padding: 15px 18px;
+            text-transform: uppercase;
+        }
+
+        .dashboard-button:hover {
+            background: var(--green);
+        }
+
+        .dashboard-message {
+            color: #b52626;
+            font-size: 13px;
+            line-height: 1.45;
+            margin: 14px 0 0;
+            min-height: 20px;
+        }
+
+        .dashboard-app[hidden],
+        .dashboard-login[hidden] {
+            display: none;
+        }
+
+        .dashboard-topline {
+            align-items: flex-end;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+        }
+
+        .dashboard-user {
+            color: var(--muted);
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .dashboard-link-button {
+            background: none;
+            border: 0;
+            color: var(--green);
+            cursor: pointer;
+            font: inherit;
+            padding: 0;
+            text-decoration: underline;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 0 0 30px;
+        }
+
+        .dashboard-stat {
+            background: var(--sand);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden;
+            padding: 18px;
+        }
+
+        .dashboard-stat-number {
+            color: var(--green);
+            font-family: "Colette Condensed Ultra", sans-serif;
+            font-size: 42px;
+            line-height: 88%;
+        }
+
+        .dashboard-stat-label {
+            color: var(--muted);
+            font-family: "Colette Bold", sans-serif;
+            font-size: 10px;
+            letter-spacing: .08em;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-tab {
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 99px;
+            color: var(--muted);
+            cursor: pointer;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 11px;
+            letter-spacing: .06em;
+            padding: 10px 14px;
+            text-transform: uppercase;
+        }
+
+        .dashboard-tab:hover {
+            border-color: var(--line);
+            color: var(--ink);
+        }
+
+        .dashboard-tab.is-active {
+            background: var(--ink);
+            color: #e5e2d3;
+        }
+
+        .booking-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .booking-card {
+            background: var(--sand);
+            border: 0;
+            border-radius: 20px;
+            display: grid;
+            gap: 18px;
+            grid-template-columns: minmax(0, 1.35fr) minmax(180px, .65fr) auto;
+            overflow: hidden;
+            padding: 20px 20px 20px 26px;
+            position: relative;
+        }
+
+        .booking-card::before {
+            background: var(--green);
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 6px;
+        }
+
+        .booking-card:has(.booking-status.pending_confirmation)::before {
+            background: #b57218;
+        }
+
+        .booking-status {
+            display: inline-block;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 10px;
+            letter-spacing: .08em;
+            margin-bottom: 9px;
+            text-transform: uppercase;
+        }
+
+        .booking-status.pending_confirmation {
+            color: #9c5a00;
+        }
+
+        .booking-status.paid {
+            color: var(--green);
+        }
+
+        .booking-client {
+            font-family: "Colette Condensed Semibold", sans-serif;
+            font-size: 25px;
+            line-height: 92%;
+            margin: 0 0 8px;
+            text-transform: uppercase;
+        }
+
+        .booking-detail,
+        .booking-meta {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .booking-slot {
+            font-family: "Colette Bold", sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0 0 8px;
+        }
+
+        .booking-total {
+            color: var(--green);
+            font-family: "Colette Condensed Ultra", sans-serif;
+            font-size: 34px;
+            line-height: 88%;
+            margin-top: 18px;
+        }
+
+        .booking-actions {
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            justify-content: flex-start;
+        }
+
+        .booking-action {
+            border: 1px solid var(--ink);
+            border-radius: 12px;
+            color: var(--ink);
+            font-family: "Colette Bold", sans-serif;
+            font-size: 10px;
+            letter-spacing: .06em;
+            padding: 10px 12px;
+            text-decoration: none;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .booking-action.primary {
+            background: var(--ink);
+            color: #e5e2d3;
+        }
+
+        .booking-action:hover {
+            background: var(--green);
+            border-color: var(--green);
+            color: #e5e2d3;
+        }
+
+        .booking-action.danger {
+            border-color: #9c5a00;
+            color: #9c5a00;
+        }
+
+        .booking-action.danger:hover {
+            background: #9c5a00;
+            border-color: #9c5a00;
+            color: #fff;
+        }
+
+        .booking-comment {
+            background: var(--paper);
+            border-radius: 10px;
+            color: var(--ink);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-top: 12px;
+            padding: 10px 12px;
+            white-space: pre-line;
+        }
+
+        .booking-details {
+            background: var(--paper);
+            border-radius: 14px;
+            grid-column: 1/-1;
+            overflow: hidden;
+        }
+
+        .booking-details summary {
+            align-items: center;
+            color: var(--green);
+            cursor: pointer;
+            display: flex;
+            font-family: "Colette Bold", sans-serif;
+            font-size: 11px;
+            justify-content: space-between;
+            letter-spacing: .06em;
+            list-style: none;
+            padding: 14px 16px;
+            text-transform: uppercase;
+        }
+
+        .booking-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .booking-details summary span {
+            font-family: "Colette Condensed Ultra", sans-serif;
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .booking-details[open] summary span {
+            transform: rotate(45deg);
+        }
+
+        .booking-details dl {
+            background: var(--paper);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin: 0;
+            padding: 4px 16px 16px;
+        }
+
+        .booking-detail-row {
+            border-bottom: 1px solid var(--line);
+            padding: 11px 12px 11px 0;
+        }
+
+        .booking-detail-row:nth-child(odd) {
+            margin-right: 12px;
+        }
+
+        .booking-detail-row dt {
+            color: var(--muted);
+            font-family: "Colette Bold", sans-serif;
+            font-size: 10px;
+            letter-spacing: .06em;
+            margin: 0 0 4px;
+            text-transform: uppercase;
+        }
+
+        .booking-detail-row dd {
+            font-size: 13px;
+            line-height: 1.45;
+            margin: 0;
+        }
+
+        .dashboard-empty {
+            border: 1px dashed var(--line);
+            border-radius: 16px;
+            color: var(--muted);
+            padding: 34px;
+            text-align: center;
+        }
+
+        @media (max-width:780px) {
+            .colette-dashboard {
+                padding: 0 20px 52px;
+            }
+
+            .dashboard-heading {
+                margin-top: 15vh;
+            }
+
+            .dashboard-title {
+                font-size: 44px;
+            }
+
+            .dashboard-stats {
+                display: flex;
+                margin-right: -20px;
+                overflow-x: auto;
+                padding: 2px 20px 8px 0;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+            }
+
+            .dashboard-stats::-webkit-scrollbar {
+                display: none;
+            }
+
+            .dashboard-stat {
+                flex: 0 0 60vw;
+                scroll-snap-align: start;
+            }
+
+            .dashboard-topline {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .booking-card {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .booking-details dl {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-detail-row:nth-child(odd) {
+                margin-right: 0;
+            }
+
+            .dashboard-tabs {
+                gap: 6px;
+                overflow: auto;
+            }
+
+            .dashboard-tab {
+                flex: 0 0 auto;
+            }
+        }
     </style>
     <div class="dashboard-shell" id="dashboard-root">
         <div class="dashboard-heading">
-            <h1 class="dashboard-title">Suivi des <span>demandes.</span></h1>
-            <p class="dashboard-subtitle">Pré-réservations à confirmer, paiements reçus et contacts clients — au même endroit.</p>
+            <h1 class="dashboard-title">Suivi des <br><span>demandes</span></h1>
+            <p class="dashboard-subtitle">Pré-réservations à confirmer, paiements reçus et contacts clients — au même
+                endroit.</p>
         </div>
 
         <section class="dashboard-login" id="dashboard-login">
@@ -176,7 +626,9 @@
         </section>
 
         <section class="dashboard-app" id="dashboard-app" hidden="">
-            <div class="dashboard-topline"><p class="dashboard-user" id="dashboard-user"></p><button class="dashboard-link-button" id="dashboard-signout" type="button">Se déconnecter</button></div>
+            <div class="dashboard-topline">
+                <p class="dashboard-user" id="dashboard-user"></p><button class="dashboard-link-button" id="dashboard-signout" type="button">Se déconnecter</button>
+            </div>
             <div class="dashboard-stats" id="dashboard-stats"></div>
             <div class="dashboard-tabs" role="tablist"><button class="dashboard-tab is-active" data-tab="pending_confirmation" type="button">À confirmer</button><button class="dashboard-tab" data-tab="paid" type="button">Payées</button><button class="dashboard-tab" data-tab="all" type="button">Toutes</button></div>
             <div class="booking-list" id="booking-list"></div>
