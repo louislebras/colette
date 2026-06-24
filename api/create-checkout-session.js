@@ -375,7 +375,7 @@ function buildPrestationDetailsHtml(details) {
   return `<table style="width:100%;border-collapse:collapse;">${details.map(({ label, value }) => `<tr><td style="padding:7px 0;color:#78776E;font-size:13px;border-bottom:1px solid #DAD6C8;width:42%;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:7px 0;color:#012D18;font-size:13px;border-bottom:1px solid #DAD6C8;">${escapeHtml(value)}</td></tr>`).join("")}</table>`;
 }
 
-async function sendPrebookingEmails({ body, checkoutUrl, orderId, total }) {
+async function sendPrebookingEmails({ body, orderId, total }) {
   const creneau = body.creneau;
   const slot = formatSlot(creneau);
   const clientName = `${body.client.prenom} ${body.client.nom}`.trim();
@@ -385,7 +385,6 @@ async function sendPrebookingEmails({ body, checkoutUrl, orderId, total }) {
   const commentHtml = comment
     ? `<p style="margin:0 0 14px;color:#4A4A46;font-size:14px;line-height:1.55;"><strong>Informations supplémentaires :</strong><br>${escapeHtml(comment).replace(/\n/g, "<br>")}</p>`
     : "";
-  const paymentCta = `<a href="${checkoutUrl}" style="display:inline-block;background:#012D18;color:#EDEAE2;padding:15px 20px;font-size:12px;font-weight:700;letter-spacing:.05em;text-decoration:none;text-transform:uppercase;">Accéder au paiement →</a>`;
 
   const clientEmail = await resend.emails.send({
     from: "Colette <bonjour@colettelabaule.com>",
@@ -399,7 +398,7 @@ async function sendPrebookingEmails({ body, checkoutUrl, orderId, total }) {
         <div style="background:#E5E1D7;padding:18px 20px;margin-bottom:14px;"><p style="margin:0 0 5px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#005D41;">Créneau souhaité — à confirmer</p><p style="margin:0;font-size:16px;font-weight:700;">${escapeHtml(slot)}</p></div>
         <div style="background:#F6F5F0;padding:18px 20px;margin-bottom:14px;"><p style="margin:0 0 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#98968B;">Prestation estimée</p>${prestationDetailsHtml}<p style="margin:16px 0 0;font-size:18px;font-weight:700;color:#005D41;">${total}€</p></div>
         ${commentHtml}
-        <div style="border:1px solid #DAD6C8;padding:18px 20px;margin-bottom:20px;"><p style="margin:0 0 12px;font-size:13px;line-height:1.55;"><strong>Votre lien de paiement est prêt.</strong> Merci de l'utiliser uniquement après notre confirmation par téléphone ou SMS.</p>${paymentCta}</div>
+        <div style="border:1px solid #DAD6C8;padding:18px 20px;margin-bottom:20px;"><p style="margin:0;font-size:13px;line-height:1.55;"><strong>Nous confirmons d'abord le créneau avec vous.</strong> Après validation par SMS, téléphone ou email, nous vous enverrons votre lien de paiement.</p></div>
         <p style="margin:0;color:#4A4A46;font-size:13px;line-height:1.6;">Une question ou une urgence ? Appelez-nous au <a href="tel:0776232034" style="color:#005D41;font-weight:700;">07 76 23 20 34</a>.</p>
         <p style="margin:24px 0 0;color:#98968B;font-size:11px;">Référence : ${escapeHtml(orderId)}</p>
       </div>
@@ -606,7 +605,6 @@ export default async function handler(req, res) {
 
     await sendPrebookingEmails({
       body,
-      checkoutUrl: session.url,
       orderId,
       total,
     });

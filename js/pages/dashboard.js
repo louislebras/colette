@@ -63,7 +63,7 @@ function bookingCard(booking) {
   const details = booking.configuration || {};
   const offer = details.offre || "Prestation";
   const surface = details.surface ? `${details.surface} m²` : "";
-  return `<article class="booking-card"><div><span class="booking-status ${escapeHtml(booking.status)}">${isPaid ? "Payée" : "À confirmer"}</span><h2 class="booking-client">${escapeHtml(booking.client_name)}</h2><p class="booking-detail">${escapeHtml(booking.client_email)} · ${escapeHtml(booking.client_tel || "Téléphone non renseigné")}</p><p class="booking-detail">${escapeHtml(booking.adresse || "Adresse non renseignée")}</p>${booking.commentaire ? `<div class="booking-comment"><strong>Note :</strong> ${escapeHtml(booking.commentaire)}</div>` : ""}</div><div><p class="booking-slot">${escapeHtml(formatDate(booking.slot_start))}${booking.slot_label ? ` · ${escapeHtml(booking.slot_label)}` : ""}</p><p class="booking-meta">${escapeHtml(offer)} ${escapeHtml(surface)}</p><div class="booking-total">${Number(booking.total || 0)}€</div><p class="booking-meta">${escapeHtml(booking.order_id)}</p></div><div class="booking-actions">${isPending ? `<a class="booking-action primary" href="mailto:${encodeURIComponent(booking.client_email)}?subject=${mailSubject}&body=${mailBody}">Relancer par email</a><a class="booking-action" href="tel:${escapeHtml(booking.client_tel || "")}">Appeler</a>${booking.checkout_url ? `<a class="booking-action" href="${escapeHtml(booking.checkout_url)}" target="_blank" rel="noopener">Voir le paiement</a>` : ""}<button class="booking-action danger" data-cancel-order="${escapeHtml(booking.order_id)}" type="button">Annuler</button>` : `<span class="booking-meta">Payée le ${booking.paid_at ? escapeHtml(formatDate(booking.paid_at)) : "—"}</span>`}</div><details class="booking-details"><summary>Détail complet de la prestation <span>+</span></summary><dl>${detailRows(details)}</dl></details></article>`;
+  return `<article class="booking-card"><div><span class="booking-status ${escapeHtml(booking.status)}">${isPaid ? "Payée" : "À confirmer"}</span><h2 class="booking-client">${escapeHtml(booking.client_name)}</h2><p class="booking-detail">${escapeHtml(booking.client_email)} · ${escapeHtml(booking.client_tel || "Téléphone non renseigné")}</p><p class="booking-detail">${escapeHtml(booking.adresse || "Adresse non renseignée")}</p>${booking.commentaire ? `<div class="booking-comment"><strong>Note :</strong> ${escapeHtml(booking.commentaire)}</div>` : ""}</div><div><p class="booking-slot">${escapeHtml(formatDate(booking.slot_start))}${booking.slot_label ? ` · ${escapeHtml(booking.slot_label)}` : ""}</p><p class="booking-meta">${escapeHtml(offer)} ${escapeHtml(surface)}</p><div class="booking-total">${Number(booking.total || 0)}€</div><p class="booking-meta">${escapeHtml(booking.order_id)}</p></div><div class="booking-actions">${isPending ? `<a class="booking-action primary" href="mailto:${encodeURIComponent(booking.client_email)}?subject=${mailSubject}&body=${mailBody}">Relancer par email</a><a class="booking-action" href="tel:${escapeHtml(booking.client_tel || "")}">Appeler</a>${booking.checkout_url ? `<a class="booking-action" href="${escapeHtml(booking.checkout_url)}" target="_blank" rel="noopener">Voir le paiement</a><button class="booking-action" data-copy-payment-link="${escapeHtml(booking.checkout_url)}" type="button">Copier le lien de paiement</button>` : ""}<button class="booking-action danger" data-cancel-order="${escapeHtml(booking.order_id)}" type="button">Annuler</button>` : `<span class="booking-meta">Payée le ${booking.paid_at ? escapeHtml(formatDate(booking.paid_at)) : "—"}</span>`}</div><details class="booking-details"><summary>Détail complet de la prestation <span>+</span></summary><dl>${detailRows(details)}</dl></details></article>`;
 }
 
 function renderBookings() {
@@ -111,6 +111,19 @@ form.addEventListener("submit", async (event) => {
 
 document.getElementById("dashboard-signout").addEventListener("click", async () => { await supabase.auth.signOut(); app.hidden = true; login.hidden = false; form.reset(); });
 list.addEventListener("click", async (event) => {
+  const copyButton = event.target.closest("[data-copy-payment-link]");
+  if (copyButton) {
+    const link = copyButton.dataset.copyPaymentLink;
+    try {
+      await navigator.clipboard.writeText(link);
+      copyButton.textContent = "Lien copié ✓";
+      window.setTimeout(() => { copyButton.textContent = "Copier le lien de paiement"; }, 1800);
+    } catch {
+      window.prompt("Copiez ce lien de paiement :", link);
+    }
+    return;
+  }
+
   const button = event.target.closest("[data-cancel-order]");
   if (!button) return;
 
